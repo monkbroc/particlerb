@@ -64,10 +64,11 @@ module Particle
     # @return [Sawyer::Agent]
     def agent
       @agent ||= Sawyer::Agent.new(endpoint, sawyer_options) do |http|
-        http.headers[:accept] = default_media_type
         http.headers[:content_type] = "application/json"
         http.headers[:user_agent] = user_agent
-        http.authorization :Bearer, @access_token
+        if @access_token
+          http.authorization :Bearer, @access_token
+        end
       end
     end
 

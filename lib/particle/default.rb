@@ -6,8 +6,6 @@ module Particle
 
     USER_AGENT = "particlerb Ruby gem #{Particle::VERSION}".freeze
 
-    MEDIA_TYPE = "application/json"
-
     # TODO:
     ## # Default Faraday middleware stack
     ## MIDDLEWARE = RACK_BUILDER_CLASS.new do |builder|
@@ -38,16 +36,9 @@ module Particle
       def connection_options
         {
           :headers => {
-            :accept => media_type,
             :user_agent => user_agent
           }
         }
-      end
-
-      # Default media type {MEDIA_TYPE}
-      # @return [String]
-      def media_type
-        MEDIA_TYPE
       end
 
       # Default User-Agent header string from {USER_AGENT}

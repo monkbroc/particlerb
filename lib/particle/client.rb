@@ -17,5 +17,27 @@ module Particle
         instance_variable_set(:"@#{key}", options[key] || Particle.instance_variable_get(:"@#{key}"))
       end
     end
+
+    # Text representation of the client, masking tokens
+    #
+    # @return [String]
+    def inspect
+      inspected = super
+
+      # Only show last 4 of token, secret
+      if @access_token
+        inspected = inspected.gsub! @access_token, "#{'*'*36}#{@access_token[36..-1]}"
+      end
+
+      inspected
+    end
+
+    # Set OAuth2 access token for authentication
+    #
+    # @param value [String] 40 character Particle OAuth2 access token
+    def access_token=(value)
+      reset_agent
+      @access_token = value
+    end
   end
 end

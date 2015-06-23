@@ -8,15 +8,13 @@ module Particle
     #   @return [String] Particle access token for authentication
     # @!attribute api_endpoint
     #   @return [String] Base URL for API requests. default: https://api.particle.io
-    # @!attribute media_type
-    #   @return [String] Configure preferred media type to receive API replies
     # @!attribute connection_options
     #   @see https://github.com/lostisland/faraday
     #   @return [Hash] Configure connection options for Faraday
     # @!attribute user_agent
     #   @return [String] Configure User-Agent header for requests.
 
-    attr_accessor :access_token, :media_type, :connection_options,
+    attr_accessor :access_token, :connection_options,
       :user_agent
     attr_writer :api_endpoint
 
@@ -25,7 +23,6 @@ module Particle
         @keys ||= [
           :access_token,
           :api_endpoint,
-          :media_type,
           :connection_options,
           :user_agent
         ]
