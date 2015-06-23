@@ -3,15 +3,31 @@ module Particle
   # Configuration options for {Client}, defaulting to values in
   # {Default}
   module Configurable
+    # @!attribute [w] access_token
+    #   @see http://docs.particle.io/core/api/#introduction-authentication
+    #   @return [String] Particle access token for authentication
+    # @!attribute api_endpoint
+    #   @return [String] Base URL for API requests. default: https://api.particle.io
+    # @!attribute media_type
+    #   @return [String] Configure preferred media type to receive API replies
+    # @!attribute connection_options
+    #   @see https://github.com/lostisland/faraday
+    #   @return [Hash] Configure connection options for Faraday
+    # @!attribute user_agent
+    #   @return [String] Configure User-Agent header for requests.
 
-    attr_accessor :access_token
+    attr_accessor :access_token, :media_type, :connection_options,
+      :user_agent
     attr_writer :api_endpoint
 
     class << self
       def keys
         @keys ||= [
+          :access_token,
           :api_endpoint,
-          :access_token
+          :media_type,
+          :connection_options,
+          :user_agent
         ]
       end
     end
@@ -35,6 +51,11 @@ module Particle
     # @return [Boolean]
     def same_options?(opts)
       opts.hash == options.hash
+    end
+
+    # Clever way to add / at the end of the api_endpoint
+    def api_endpoint
+      File.join(@api_endpoint, "")
     end
 
     private

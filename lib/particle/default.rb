@@ -4,6 +4,19 @@ module Particle
   module Default
     API_ENDPOINT = "https://api.particle.io".freeze
 
+    USER_AGENT = "particlerb Ruby gem #{Particle::VERSION}".freeze
+
+    MEDIA_TYPE = "application/json"
+
+    # TODO:
+    ## # Default Faraday middleware stack
+    ## MIDDLEWARE = RACK_BUILDER_CLASS.new do |builder|
+    ##   builder.use Octokit::Middleware::FollowRedirects
+    ##   builder.use Octokit::Response::RaiseError
+    ##   builder.use Octokit::Response::FeedParser
+    ##   builder.adapter Faraday.default_adapter
+    ## end
+
     class << self
 
       # Configuration options
@@ -18,6 +31,29 @@ module Particle
 
       def access_token
         ENV['PARTICLE_ACCESS_TOKEN']
+      end
+
+      # Default options for Faraday::Connection
+      # @return [Hash]
+      def connection_options
+        {
+          :headers => {
+            :accept => media_type,
+            :user_agent => user_agent
+          }
+        }
+      end
+
+      # Default media type {MEDIA_TYPE}
+      # @return [String]
+      def media_type
+        MEDIA_TYPE
+      end
+
+      # Default User-Agent header string from {USER_AGENT}
+      # @return [String]
+      def user_agent
+        USER_AGENT
       end
     end
   end

@@ -1,3 +1,4 @@
+require 'particle/connection'
 require 'particle/client/devices'
 
 module Particle
@@ -7,6 +8,7 @@ module Particle
   # @see http://docs.particle.io/
   class Client
     include Particle::Configurable
+    include Particle::Connection
     include Particle::Client::Devices
 
     def initialize(options = {})
