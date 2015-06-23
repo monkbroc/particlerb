@@ -4,8 +4,6 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'particle/version'
 
 Gem::Specification.new do |spec|
-  spec.add_development_dependency 'bundler', '~> 1.0'
-  spec.add_dependency 'sawyer', '~> 0.6.0'
   spec.authors = ["Julien Vanier"]
   spec.description = %q{Ruby client for the Particle.io API}
   spec.email = ['jvanier@gmail.com']
@@ -19,4 +17,11 @@ Gem::Specification.new do |spec|
   spec.required_rubygems_version = '>= 1.3.5'
   spec.summary = %q{Ruby client for the Particle.io API}
   spec.version = Particle::VERSION.dup
+  spec.add_dependency 'sawyer', '~> 0.6.0'
+  spec.add_development_dependency 'bundler', '~> 1.0'
+  spec.add_development_dependency 'guard-rspec', '~> 4.5'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'rspec', '~> 3.0.0'
+  spec.add_development_dependency 'vcr', '~> 2.9.2'
+  spec.add_development_dependency 'webmock', '~> 1.2.0'
 end
