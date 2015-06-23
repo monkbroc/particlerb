@@ -1,4 +1,5 @@
 require 'particle/connection'
+require 'particle/device'
 require 'particle/client/devices'
 
 module Particle

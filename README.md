@@ -41,7 +41,7 @@ client.devices
 
 ## Thanks
 
-This gem is heavily inspired by [Octokit][]. Thanks!
+This gem is heavily inspired by [Octokit][] by GitHub. I stand on the shoulder of giants. Thanks!
 
 Octokit is copyright (c) 2009-2014 Wynn Netherland, Adam Stacoviak, Erik Michaels-Ober and licensed under the [MIT license][Octokit license].
 

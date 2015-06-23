@@ -8,10 +8,37 @@ describe Particle::Client::Devices do
     end
   end
 
-  describe ".devices" do
-    it "returns all claimed Particle devices", :vcr do
+  describe ".devices", :vcr do
+    it "returns all claimed Particle devices" do
       devices = Particle.devices
       expect(devices).to be_kind_of Array
+    end
+  end
+
+  describe ".claim", :vcr do
+    context "when the device is online" do
+      it "claims the device" do
+        # Make sure __PARTICLE_DEVICE_ID_2__ is not claimed before
+        # recording VCR cassette
+        response = Particle.claim "__PARTICLE_DEVICE_ID_2__"
+        expect(response.ok).to eq(true)
+      end
+    end
+
+    context "when the device is offline" do
+      it "returns an error" do
+        # Make sure __PARTICLE_DEVICE_ID_2__ is unclaimed and offline before
+        # recording VCR cassette
+        response = Particle.claim "__PARTICLE_DEVICE_ID_2__"
+        expect(response.ok).to eq(false)
+      end
+    end
+
+    context "when device doesn't exist" do
+      it "return an error" do
+        response = Particle.claim "123456"
+        expect(response.ok).to eq(false)
+      end
     end
   end
 end
