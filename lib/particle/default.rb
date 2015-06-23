@@ -15,6 +15,10 @@ module Particle
       def api_endpoint
         ENV['PARTICLE_API_ENDPOINT'] || API_ENDPOINT
       end
+
+      def access_token
+        ENV['PARTICLE_ACCESS_TOKEN']
+      end
     end
   end
 end

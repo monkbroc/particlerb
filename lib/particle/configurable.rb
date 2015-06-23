@@ -4,10 +4,14 @@ module Particle
   # {Default}
   module Configurable
 
+    attr_accessor :access_token
+    attr_writer :api_endpoint
+
     class << self
       def keys
         @keys ||= [
-          :api_endpoint
+          :api_endpoint,
+          :access_token
         ]
       end
     end

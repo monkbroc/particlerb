@@ -1,3 +1,5 @@
+require 'particle/client/devices'
+
 module Particle
 
   # Client for the Particle API
@@ -5,6 +7,7 @@ module Particle
   # @see http://docs.particle.io/
   class Client
     include Particle::Configurable
+    include Particle::Client::Devices
 
     def initialize(options = {})
       # Use options passed in, but fall back to module defaults
