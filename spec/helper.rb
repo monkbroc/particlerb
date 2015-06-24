@@ -6,7 +6,6 @@ WebMock.disable_net_connect!
 
 # Configure VCR web request replays
 require 'vcr'
-require 'pretty_cassette'
 
 RSpec.configure do |config|
   config.before(:each) do |example|
@@ -43,9 +42,8 @@ VCR.configure do |c|
     c.filter_sensitive_data("__PARTICLE_DEVICE_ID_#{index}__") { device_id }
   end
 
-  c.cassette_serializers[:pretty_json] = VCR::Cassette::Serializers::PrettyJSON
   c.default_cassette_options = {
-    :serialize_with             => :pretty_json,
+    :serialize_with             => :json,
     :record                     => ENV['TRAVIS'] ? :none : :once
   }
   c.cassette_library_dir = 'spec/cassettes'
