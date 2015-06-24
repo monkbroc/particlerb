@@ -6,14 +6,14 @@ V1:
 ✓ Particle.remove_device(device_id)
 ✓ Particle.remove_device(Particle::Device)
 
-Particle.device(device_id) ==> Particle::Device
+✓ Particle.device(device_id) ==> Particle::Device
   device.info
   ✓ device.claim
   ✓ device.remove
   ✓ device.rename
   ✓ device.function
   ✓ device.variable
-  device.signal
+  ✓ device.signal
 
 Particle.publish
 

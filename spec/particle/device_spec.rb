@@ -10,6 +10,12 @@ describe Particle::Device do
     end
   end
 
+  describe ".attributes", :vcr do
+    it "returns attributes" do
+      expect(device.attributes.connected).to eq true
+    end
+  end
+
   describe ".claim", :vcr do
     it "claims the device" do
       # Test device must not claimed before recording VCR cassette

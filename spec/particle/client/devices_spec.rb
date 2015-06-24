@@ -10,6 +10,33 @@ describe Particle::Client::Devices do
     end
   end
 
+  describe ".device_attributes", :vcr do
+    context "when the device is online" do
+      it "returns attributes" do
+        attr = Particle.device_attributes(id)
+        expect(attr).to include(:id, :name, :connected, :variables, :functions)
+        expect(attr[:connected]).to be true
+        expect(attr[:variables]).to be_kind_of Hash
+        expect(attr[:functions]).to be_kind_of Array
+      end
+    end
+    context "when the device is offline" do
+      it "returns attributes" do
+        attr = Particle.device_attributes(id)
+        expect(attr).to include(:id, :name, :connected, :variables, :functions)
+        expect(attr[:connected]).to be false
+        expect(attr[:variables]).to be_nil
+        expect(attr[:functions]).to be_nil
+      end
+    end
+    context "when device doesn't exist" do
+      it "raises Forbidden" do
+        expect { Particle.device_attributes("123456") }.
+          to raise_error(Particle::Forbidden)
+      end
+    end
+  end
+
   describe ".claim_device", :vcr do
     context "when the device is online" do
       it "claims the device" do

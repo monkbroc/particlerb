@@ -7,13 +7,14 @@ module Particle
 
       # Create a domain model for a Particle device
       #
-      # @param target [String, Device] A device id, name or {Device} object
+      # @param target [String, Sawyer::Resource, Device] A device id, name or {Device} object
       # @return [Device] A device object to interact with
       def device(target)
         if target.is_a? Device
           target
-        elsif target.respond_to?(:id)
-          Device.new(self, target.id, target)
+        elsif target.respond_to?(:to_attrs)
+          attrs = target.to_attrs
+          Device.new(self, attrs.id, attrs)
         else
           Device.new(self, target.to_s)
         end
@@ -30,11 +31,19 @@ module Particle
         end
       end
 
+      # Get information about a Particle device
+      #
+      # @param target [String, Device] A device id, name or {Device} object
+      # @return [Hash] The device attributes
+      def device_attributes(target)
+        result = get(device(target).path)
+        result.to_attrs
+      end
+
       # Add a Particle device to your account
       #
       # @param target [String, Device] A device id, name or {Device} object
       # @return [Device] A device object to interact with
-      # @see http://docs.particle.io/core/api/#introduction-claim-device
       def claim_device(target)
         result = post(Device.claim_path, id: device(target).id)
         device(result.id)
