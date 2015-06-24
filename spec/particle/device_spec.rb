@@ -36,5 +36,18 @@ describe Particle::Device do
       expect(device.function("get")).to eq -2
     end
   end
+
+  describe ".variable", :vcr do
+    it "gets the value of the firmware variable" do
+      # Test device must have a variable called "result" returning a String
+      expect(device.variable("result")).to eq "3600"
+    end
+  end
+
+  describe ".signal", :vcr do
+    it "starts shouting rainbows" do
+      expect(device.signal).to eq true
+    end
+  end
 end
 

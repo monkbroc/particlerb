@@ -79,6 +79,22 @@ module Particle
         result = get(device(target).variable_path(name))
         result.result
       end
+
+      # Signal the device to start blinking the RGB LED in a rainbow
+      # pattern. Useful to identify a particular device.
+      #
+      # @param target [String, Device] A device id, name or {Device} object
+      # @param enabled [String] Whether to enable or disable the rainbow signal
+      # @return [boolean] true when signaling, false when stopped
+      def signal_device(target, enabled = true)
+        result = put(device(target).path, signal: enabled ? '1' : '0')
+        # FIXME: API bug. Should return HTTP 408 so result.ok wouldn't be necessary
+        if result.ok == false
+          false
+        else
+          result.signaling
+        end
+      end
     end
   end
 end

@@ -129,4 +129,31 @@ describe Particle::Client::Devices do
       end
     end
   end
+
+  describe ".signal_device", :vcr do
+    context "when the device is online" do
+      it "starts shouting rainbows" do
+        expect(Particle.signal_device(id, true)).to eq true
+      end
+      it "stops shouting rainbows" do
+        expect(Particle.signal_device(id, false)).to eq false
+      end
+    end
+
+    context "when the device is offline" do
+      # FIXME: API bug. Should return HTTP 408 to raise TimedOut
+      it "raises TimedOut" do
+        # Test device must be offline before recording VCR cassette
+        # expect { Particle.signal_device(id, true) }.to raise_error(Particle::TimedOut)
+        expect(Particle.signal_device(id, true)).to eq false
+      end
+    end
+
+    context "when the device doesn't exist" do
+      it "raises Forbidden" do
+        expect { Particle.signal_device("1234", true) }.
+          to raise_error(Particle::Forbidden)
+      end
+    end
+  end
 end

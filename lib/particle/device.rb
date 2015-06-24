@@ -66,6 +66,15 @@ module Particle
       @client.get_variable(self, name)
     end
 
+    # Signal the device to start blinking the RGB LED in a rainbow
+    # pattern. Useful to identify a particular device.
+    #
+    # @param enabled [String] Whether to enable or disable the rainbow signal
+    # @return [boolean] true when signaling, false when stopped
+    def signal(enabled = true)
+      @client.signal_device(self, enabled)
+    end
+
     def self.list_path
       "v1/devices"
     end

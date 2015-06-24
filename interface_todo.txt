@@ -12,7 +12,7 @@ Particle.device(device_id) ==> Particle::Device
   ✓ device.remove
   ✓ device.rename
   ✓ device.function
-  device.variable
+  ✓ device.variable
   device.signal
 
 Particle.publish

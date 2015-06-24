@@ -76,6 +76,18 @@ Particle.device('coffeemaker').function('brew') # String argument optional
 Particle.devices.first.function('digitalWrite', '1')
 ```
 
+Get the value of a firmware variable (returns the result as a String or Number)
+```
+Particle.device('mycar').variable('battery') # ==> 12.33
+device = Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d')
+device.variable('version') # ==> "1.0.1"
+```
+
+
+Signal a device to start blinking the RGB LED in rainbow patterns.
+```
+Particle.device('nyan_cat').signal(true)
+```
 
 
 [API docs]: http://docs.particle.io/core/api
