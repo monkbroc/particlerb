@@ -58,6 +58,27 @@ module Particle
         result = put(device(target).path, name: name)
         result.name == name
       end
+
+      # Call a function in the firmware of a Particle device
+      #
+      # @param target [String, Device] A device id, name or {Device} object
+      # @param name [String] Function to run on firmware
+      # @param argument [String] Argument string to pass to the firmware function
+      # @return [Integer] Return value from the firmware function
+      def call_function(target, name, argument = "")
+        result = post(device(target).function_path(name), arg: argument)
+        result.return_value
+      end
+
+      # Get the value of a variable in the firmware of a Particle device
+      #
+      # @param target [String, Device] A device id, name or {Device} object
+      # @param name [String] Variable on firmware
+      # @return [String, Number] Value from the firmware variable
+      def get_variable(target, name)
+        result = get(device(target).variable_path(name))
+        result.result
+      end
     end
   end
 end

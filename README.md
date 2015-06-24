@@ -41,6 +41,8 @@ client.devices
 
 ## Device commands
 
+See the [Particle Cloud API documentation][API docs] for more details.
+
 List all devices (returns an `Array` of `Device`)
 ```
 devices = Particle.devices
@@ -49,15 +51,34 @@ devices = Particle.devices
 Get a `Device` by id or name
 ```
 device = Particle.device('blue_fire')
+device = Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d')
 ```
 
-Claim a device
+Claim a device and add it to your account (returns the `Device`)
 ```
 Particle.device('blue_fire').claim
 ```
 
+Remove a device from your account
+```
+Particle.device('blue_fire').remove
+Particle.devices.first.remove
+```
+
+Rename a device
+```
+Particle.device('red').rename('green')
+```
+
+Call a function on the firmware (returns the result of running the function)
+```
+Particle.device('coffeemaker').function('brew') # String argument optional
+Particle.devices.first.function('digitalWrite', '1')
+```
 
 
+
+[API docs]: http://docs.particle.io/core/api
 
 ### Accessing HTTP responses
 

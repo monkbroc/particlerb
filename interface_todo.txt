@@ -10,8 +10,8 @@ Particle.device(device_id) ==> Particle::Device
   device.info
   ✓ device.claim
   ✓ device.remove
-  device.rename
-  device.function
+  ✓ device.rename
+  ✓ device.function
   device.variable
   device.signal
 

@@ -1,6 +1,9 @@
 require 'helper'
 
 describe Particle::Device do
+  let(:id) { test_particle_device_ids[0] }
+  let(:device) { Particle.device(id) }
+
   describe "Particle.device" do
     it "creates a Device" do
       expect(Particle.device("123").id).to eq("123")
@@ -9,26 +12,28 @@ describe Particle::Device do
 
   describe ".claim", :vcr do
     it "claims the device" do
-      # Make sure test device 0 is not claimed before recording VCR
-      # cassette
-      device = Particle.device(test_particle_device_ids[0]).claim
-      expect(device.id).to eq(test_particle_device_ids[0])
+      # Test device must not claimed before recording VCR cassette
+      expect(device.claim.id).to eq(id)
     end
   end
 
   describe ".remove", :vcr do
     it "removes the device" do
-      # Make sure test device 0 is claimed before recording VCR
-      # cassette
-      result = Particle.device(test_particle_device_ids[0]).remove
-      expect(result).to eq true
+      # Test device must be claimed before recording VCR cassette
+      expect(device.remove).to eq true
     end
   end
 
   describe ".rename", :vcr do
     it "renames the device" do
-      result = Particle.device(test_particle_device_ids[0]).rename("fiesta")
-      expect(result).to eq true
+      expect(device.rename("fiesta")).to eq true
+    end
+  end
+
+  describe ".function", :vcr do
+    it "call the function on the device firmware" do
+      # Test device must have a method called "get" returning -2
+      expect(device.function("get")).to eq -2
     end
   end
 end
