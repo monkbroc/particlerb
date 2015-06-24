@@ -1,15 +1,15 @@
 V1:
 
-Particle.devices ==> Array<Particle::Device>
-Particle.claimDevice(device_id)
-Particle.claimDevice(Particle::Device)
-Particle.removeDevice(device_id)
-Particle.removeDevice(Particle::Device)
+✓ Particle.devices ==> Array<Particle::Device>
+✓ Particle.claim_device(device_id)
+✓ Particle.claim_device(Particle::Device)
+✓ Particle.remove_device(device_id)
+✓ Particle.remove_device(Particle::Device)
 
 Particle.device(device_id) ==> Particle::Device
   device.info
-  device.claim
-  device.remove
+  ✓ device.claim
+  ✓ device.remove
   device.rename
   device.function
   device.variable

@@ -34,4 +34,38 @@ describe Particle::Client::Devices do
       end
     end
   end
+
+  describe ".remove_device", :vcr do
+    context "when the device exists" do
+      it "removes the device" do
+        # Make sure test device 0 is claimed before recording VCR
+        # cassette
+        result = Particle.remove_device test_particle_device_ids[0]
+        expect(result).to eq true
+      end
+    end
+
+    context "when the device doesn't exist" do
+      it "returns an error" do
+        expect { Particle.remove_device "1234" }.
+          to raise_error(Particle::Forbidden)
+      end
+    end
+  end
+
+  describe ".rename_device", :vcr do
+    context "when the device exists" do
+      it "renames the device" do
+        result = Particle.rename_device test_particle_device_ids[0], "fiesta"
+        expect(result).to eq true
+      end
+    end
+
+    context "when the device doesn't exist" do
+      it "returns an error" do
+        expect { Particle.rename_device "1234", "blah" }.
+          to raise_error(Particle::Forbidden)
+      end
+    end
+  end
 end

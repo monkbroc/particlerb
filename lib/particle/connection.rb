@@ -79,6 +79,11 @@ module Particle
       end
     end
 
+    # Response for last HTTP request
+    #
+    # @return [Sawyer::Response]
+    attr_reader :last_response
+
     protected
 
     def endpoint
@@ -100,7 +105,7 @@ module Particle
         end
       end
 
-      response = agent.call(method, URI::Parser.new.escape(path.to_s), data, options)
+      @last_response = response = agent.call(method, URI::Parser.new.escape(path.to_s), data, options)
       response.data
     end
 

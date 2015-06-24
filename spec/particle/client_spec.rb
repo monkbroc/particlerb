@@ -77,5 +77,12 @@ describe Particle::Client do
       end
     end
   end
+
+  describe ".last_response" do
+    it "makes the complete HTTP response available", :vcr do
+      Particle.devices
+      expect(Particle.last_response.headers).to be_kind_of Hash
+    end
+  end
 end
 

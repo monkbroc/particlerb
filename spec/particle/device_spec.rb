@@ -15,5 +15,22 @@ describe Particle::Device do
       expect(device.id).to eq(test_particle_device_ids[0])
     end
   end
+
+  describe ".remove", :vcr do
+    it "removes the device" do
+      # Make sure test device 0 is claimed before recording VCR
+      # cassette
+      result = Particle.device(test_particle_device_ids[0]).remove
+      expect(result).to eq true
+    end
+  end
+
+  describe ".rename", :vcr do
+    it "renames the device" do
+      result = Particle.device(test_particle_device_ids[0]).rename("fiesta")
+      puts Particle.last_response.inspect
+      expect(result).to eq true
+    end
+  end
 end
 

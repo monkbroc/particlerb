@@ -1,6 +1,9 @@
 # particlerb
-Ruby client for the Particle.io API
+Ruby client for the [Particle.io] API
 
+[Particle.io]: https://www.particle.io
+
+*Note: this is not an official gem by Particle. It is maintained by Julien Vanier.*
 
 ## Quick start
 
@@ -15,7 +18,7 @@ Install via Rubygems
 
 ### Making requests
 
-[API methods][] are available as module methods (consuming module-level
+API methods are available as module methods (consuming module-level
 configuration) or as client instance methods.
 
 ```ruby
@@ -36,8 +39,37 @@ client = Particle::Client.new(access_token: "38bb7b318cc6898c80317decb34525844bc
 client.devices
 ```
 
-[API methods]: http://monkbroc.github.io/particlerb/method_list.html
+## Device commands
 
+List all devices (returns an `Array` of `Device`)
+```
+devices = Particle.devices
+```
+
+Get a `Device` by id or name
+```
+device = Particle.device('blue_fire')
+```
+
+Claim a device
+```
+Particle.device('blue_fire').claim
+```
+
+
+
+
+### Accessing HTTP responses
+
+While most methods return a domain object like `Device`, sometimes you may
+need access to the raw HTTP response headers. You can access the last HTTP
+response with `Client#last_response`:
+
+```ruby
+device   = Particle.device('123456').claim
+response = Particle.last_response
+headers  = response.headers
+```
 
 ## Thanks
 
