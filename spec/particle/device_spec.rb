@@ -28,7 +28,6 @@ describe Particle::Device do
   describe ".rename", :vcr do
     it "renames the device" do
       result = Particle.device(test_particle_device_ids[0]).rename("fiesta")
-      puts Particle.last_response.inspect
       expect(result).to eq true
     end
   end
