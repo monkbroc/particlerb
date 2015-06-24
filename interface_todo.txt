@@ -1,0 +1,42 @@
+V1:
+
+Particle.devices ==> Array<Particle::Device>
+Particle.claimDevice(device_id)
+Particle.claimDevice(Particle::Device)
+Particle.removeDevice(device_id)
+Particle.removeDevice(Particle::Device)
+
+Particle.device(device_id) ==> Particle::Device
+  device.info
+  device.claim
+  device.remove
+  device.rename
+  device.function
+  device.variable
+  device.signal
+
+Particle.publish
+
+Particle.webhooks
+Particle.createWebhook
+Particle.removeWebhook
+
+
+Particle.login(user, password, options) ==> set access_token on client
+  aliased as createToken
+Particle.tokens ==> Array<Particle::Tokens>
+Particle.deleteToken(user, password, token)
+
+
+
+V2:
+
+  device.flash(list of files)
+  device.compile(list of files)
+  device.subscribe
+
+Particle.compile(list of files, platform)
+Particle.downloadBinary
+
+
+

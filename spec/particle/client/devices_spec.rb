@@ -1,13 +1,6 @@
 require 'helper'
 
 describe Particle::Client::Devices do
-  before do
-    Particle.reset!
-    Particle.configure do |config|
-      config.access_token = test_particle_access_token
-    end
-  end
-
   describe ".devices", :vcr do
     it "returns all claimed Particle devices" do
       devices = Particle.devices
@@ -15,29 +8,29 @@ describe Particle::Client::Devices do
     end
   end
 
-  describe ".claim", :vcr do
+  describe ".claim_device", :vcr do
     context "when the device is online" do
       it "claims the device" do
-        # Make sure __PARTICLE_DEVICE_ID_2__ is not claimed before
-        # recording VCR cassette
-        response = Particle.claim "__PARTICLE_DEVICE_ID_2__"
-        expect(response.ok).to eq(true)
+        # Make sure test device 0 is not claimed before recording VCR
+        # cassette
+        device = Particle.claim_device test_particle_device_ids[0]
+        expect(device.id).to eq(test_particle_device_ids[0])
       end
     end
 
     context "when the device is offline" do
       it "returns an error" do
-        # Make sure __PARTICLE_DEVICE_ID_2__ is unclaimed and offline before
+        # Make sure test device 0 is not claimed and offline before
         # recording VCR cassette
-        response = Particle.claim "__PARTICLE_DEVICE_ID_2__"
-        expect(response.ok).to eq(false)
+        expect { Particle.claim_device test_particle_device_ids[0] }.
+          to raise_error(Particle::NotFound)
       end
     end
 
     context "when device doesn't exist" do
       it "return an error" do
-        response = Particle.claim "123456"
-        expect(response.ok).to eq(false)
+        expect { Particle.claim_device "123456" }.
+          to raise_error(Particle::NotFound)
       end
     end
   end

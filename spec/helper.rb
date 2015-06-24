@@ -7,18 +7,36 @@ WebMock.disable_net_connect!
 # Configure VCR web request replays
 require 'vcr'
 
+RSpec.configure do |config|
+  config.before(:each) do |example|
+    if example.metadata[:vcr]
+      Particle.reset!
+      Particle.configure do |config|
+        config.access_token = test_particle_access_token
+      end
+    end
+  end
+end
+
 def test_particle_access_token
   ENV.fetch('TEST_PARTICLE_ACCESS_TOKEN', 'x' * 40)
 end
 
+def test_particle_user_id
+  ENV.fetch('TEST_PARTICLE_USER_ID', 'y' * 24)
+end
+
 def test_particle_device_ids
-  ENV.fetch('TEST_PARTICLE_DEVICE_IDS', '').split(",")
+  ENV.fetch('TEST_PARTICLE_DEVICE_IDS', 'z' * 24).split(",")
 end
 
 VCR.configure do |c|
   c.configure_rspec_metadata!
   c.filter_sensitive_data("__PARTICLE_ACCESS_TOKEN__") do
     test_particle_access_token
+  end
+  c.filter_sensitive_data("__PARTICLE_USER_ID__") do
+    test_particle_user_id
   end
   test_particle_device_ids.each_with_index do |device_id, index|
     c.filter_sensitive_data("__PARTICLE_DEVICE_ID_#{index}__") { device_id }
@@ -32,29 +50,3 @@ VCR.configure do |c|
   c.hook_into :webmock
 end
 
-def fixture_path
-  File.expand_path("../fixtures", __FILE__)
-end
-
-def fixture(file)
-  File.new(fixture_path + '/' + file)
-end
-
-def json_response(file)
-  {
-    :body => fixture(file),
-    :headers => {
-      :content_type => 'application/json; charset=utf-8'
-    }
-  }
-end
-
-def particle_url(url)
-  return url if url =~ /^http/
-
-  url = File.join(Particle.api_endpoint, url)
-  uri = Addressable::URI.parse(url)
-  uri.path.gsub!("v3//", "v3/")
-
-  uri.to_s
-end

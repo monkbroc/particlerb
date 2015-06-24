@@ -1,9 +1,16 @@
 require 'sawyer'
+require 'particle/response/raise_error'
 
 module Particle
 
   # Network layer for API client
   module Connection
+
+    # Faraday middleware stack
+    MIDDLEWARE = Faraday::RackBuilder.new do |builder|
+      builder.use Particle::Response::RaiseError
+      builder.adapter Faraday.default_adapter
+    end
 
     # Make a HTTP GET request
     #
@@ -72,13 +79,6 @@ module Particle
       end
     end
 
-    # Response for last HTTP request
-    #
-    # @return [Sawyer::Response]
-    def last_response
-      @last_response if defined? @last_response
-    end
-
     protected
 
     def endpoint
@@ -100,7 +100,7 @@ module Particle
         end
       end
 
-      @last_response = response = agent.call(method, URI::Parser.new.escape(path.to_s), data, options)
+      response = agent.call(method, URI::Parser.new.escape(path.to_s), data, options)
       response.data
     end
 
@@ -109,7 +109,7 @@ module Particle
         :links_parser => Sawyer::LinkParsers::Simple.new
       }
       conn_opts = @connection_options
-      conn_opts[:builder] = @middleware if @middleware
+      conn_opts[:builder] = MIDDLEWARE
       conn_opts[:proxy] = @proxy if @proxy
       opts[:faraday] = Faraday.new(conn_opts)
 

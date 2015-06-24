@@ -1,0 +1,98 @@
+module Particle
+  # Custom error class for rescuing from all Particle errors
+  class Error < StandardError
+
+    # Returns the appropriate Particle::Error subclass based
+    # on status and response message
+    #
+    # @param [Hash] response HTTP response
+    # @return [Particle::Error]
+    def self.from_response(response)
+      status  = response[:status].to_i
+      body    = response[:body].to_s
+      headers = response[:response_headers]
+
+      if klass =  case status
+                  when 400      then Particle::BadRequest
+                  when 401      then Particle::Unauthorized
+                  when 403      then Particle::Forbidden
+                  when 404      then Particle::NotFound
+                  when 408      then Particle::TimedOut
+                  when 500..599 then Particle::ServerError
+                  end
+        klass.new(response)
+      end
+    end
+
+    def initialize(response=nil)
+      @response = response
+      super(build_error_message)
+    end
+
+    attr_reader :response
+
+    def response_errors
+      case data
+      when Hash
+        data[:errors]
+      when String
+        data
+      end
+    end
+
+    private
+
+    def data
+      @data ||=
+        if (body = @response[:body]) && !body.empty?
+          if body.is_a?(String) &&
+            @response[:response_headers] &&
+            @response[:response_headers][:content_type] =~ /json/
+
+            Sawyer::Agent.serializer.decode(body)
+          else
+            body
+          end
+        else
+          nil
+        end
+    end
+
+    def build_error_message
+      return nil if @response.nil?
+
+      message =  "#{@response[:method].to_s.upcase} "
+      message << redact_url(@response[:url].to_s) + ": "
+      message << "#{@response[:status]} - "
+      message << "#{response_errors.join("\n")}" unless response_errors.nil?
+      message
+    end
+
+    def redact_url(url_string)
+      token = "access_token"
+      url_string.gsub!(/#{token}=\S+/, "#{token}=(redacted)") if url_string.include? token
+      url_string
+    end
+  end
+
+  # Raised on errors in the 400-499 range
+  class ClientError < Error; end
+
+  # Raised when Particle returns a 400 HTTP status code
+  class BadRequest < ClientError; end
+
+  # Raised when Particle returns a 401 HTTP status code
+  class Unauthorized < ClientError; end
+
+  # Raised when Particle returns a 403 HTTP status code
+  class Forbidden < ClientError; end
+
+  # Raised when Particle returns a 404 HTTP status code
+  class NotFound < ClientError; end
+
+  # Raised when Particle returns a 408 HTTP status code
+  class TimedOut < ClientError; end
+
+  # Raised when Particle returns a 500 HTTP status code
+  class ServerError < Error; end
+end

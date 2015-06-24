@@ -12,22 +12,31 @@ module Particle
 
     attr_reader :id
 
-    def initialize(id)
+    def initialize(client, id, attributes = nil)
+      @client = client
       @id = id
+      @attributes = attributes
+    end
+
+    def attributes
+      @attributes ||= get_attributes
+    end
+
+    def get_attributes
+
+    end
+
+    # Add a Particle device to your account
+    # Delegates the implementation to the client
+    def claim
+      new_device = @client.claim_device(self)
+      @id = new_device.id
+      self
     end
 
     def path
       "/v1/devices/#{id}"
     end
   end
-
-  # Conversion function
-  def Device(value)
-    case value
-    when Device then value
-    else Device.new(value)
-    end
-  end
-  module_function :Device
 end
 
