@@ -9,5 +9,3 @@ rvm:
 
 bundler_args: --without development
 
-sudo: false
-

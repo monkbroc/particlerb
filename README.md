@@ -1,6 +1,8 @@
 # particlerb
 Ruby client for the [Particle.io] Cloud API
 
+[![Build Status](https://travis-ci.org/monkbroc/particlerb.svg)](https://travis-ci.org/monkbroc/particlerb)
+
 [Particle.io]: https://www.particle.io
 
 *Note: this is not an official gem by Particle. It is maintained by Julien Vanier.*
