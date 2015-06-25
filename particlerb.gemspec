@@ -5,6 +5,7 @@ require 'particle/version'
 
 Gem::Specification.new do |spec|
   spec.authors = ["Julien Vanier"]
+  spec.summary = %q{Ruby client for the Particle.io Cloud API}
   spec.description = %q{Ruby client for the Particle.io Cloud API}
   spec.email = ['jvanier@gmail.com']
   spec.files = %w(LICENSE.txt README.md Rakefile particlerb.gemspec)
@@ -15,15 +16,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 1.9.3'
   spec.required_rubygems_version = '>= 1.3.5'
-  spec.summary = %q{Ruby client for the Particle.io Cloud API}
   spec.version = Particle::VERSION.dup
   spec.add_dependency 'sawyer', '~> 0.6.0'
   spec.add_development_dependency 'bundler', '~> 1.0'
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'guard-rspec', '~> 4.5'
-  spec.add_development_dependency 'pry'
-  spec.add_development_dependency 'rspec', '~> 3.0.0'
-  spec.add_development_dependency 'vcr', '~> 2.9.2'
-  spec.add_development_dependency 'webmock', '~> 1.21.0'
-  spec.add_development_dependency 'multi_json', '~> 1.11.0'
+  spec.add_development_dependency 'pry', '~> 0.10'
+  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'vcr', '~> 2.9'
+  spec.add_development_dependency 'webmock', '~> 1.21'
+  spec.add_development_dependency 'multi_json', '~> 1.11'
 end
