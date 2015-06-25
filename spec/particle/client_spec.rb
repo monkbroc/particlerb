@@ -44,36 +44,27 @@ describe Particle::Client do
     end
   end
 
-  describe "authentication" do
-    def authenticated_request
-      @authenticated_request ||= 
-        stub_request(:get, "https://api.particle.io/").
-          with(headers: { authorization: "Bearer #{TOKEN}" })
-    end
-    def unauthenticated_request
-      @unauthenticated_request ||= 
-        stub_request(:get, "https://api.particle.io/")
-    end
-
-    context "when token provided", :vcr do
+  describe "authentication", :vcr do
+    context "when token provided" do
       it "makes authenticated calls" do
-        client = Particle.client
-        client.access_token = TOKEN
+        client = Particle::Client.new(access_token: TOKEN)
 
-        authenticated_request
+        authenticated_request =
+          stub_request(:get, "https://api.particle.io/").
+          with(headers: { authorization: "Bearer #{TOKEN}" })
         client.get("/")
         assert_requested authenticated_request
       end
     end
     context "when no token is provided" do
-      it "make unauthenticated calls" do
+      it "raises MissingTokenError" do
+        Particle.configure do |config|
+          config.access_token = nil
+        end
         client = Particle.client
 
-        unauthenticated_request
-        authenticated_request
-        client.get("/")
-        assert_requested unauthenticated_request
-        assert_not_requested authenticated_request
+        expect { client.get("/v1/devices") }.
+          to raise_error Particle::MissingTokenError
       end
     end
   end

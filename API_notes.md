@@ -35,3 +35,10 @@ When device is offline, turning on the signal (rainbow mode) returns a
 200 OK status with `{:ok=>false, :errors=>[{:error=>"Timed out, didn't
 hear back from device service"}]}`
 
+Inconsistent error messages:
+  - 403 Forbidden for wrong device name or id: `{ "error": "...", "info": "..." }`
+  - 400 BadRequest for function call when device is offline: `{ "ok": false, "error": "Timed out" }`
+  - 408 TimedOut for get variable when device is offline: `{ "error": "Timed out." }`
+  - 200 OK (!!!) when signaling when device is offline: `{ "ok": false, "errors": [ { "error": "Timed out, didn't hear back from device service" } ] }`
+  - 404 NotFound when claiming and device doesn't exist: `{ "ok": false, "errors": ["device doesn't exist"] }`
+  - 404 NotFound when claiming and device is offline: `{ "ok": false, "errors": [ [ "Core isn't online", 404 ] ] }`

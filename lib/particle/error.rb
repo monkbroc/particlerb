@@ -10,10 +10,9 @@ module Particle
     def self.from_response(response)
       status  = response[:status].to_i
       body    = response[:body].to_s
-      headers = response[:response_headers]
 
       if klass =  case status
-                  when 400      then Particle::BadRequest
+                  when 400      then bad_request_error(body)
                   when 401      then Particle::Unauthorized
                   when 403      then Particle::Forbidden
                   when 404      then Particle::NotFound
@@ -31,31 +30,14 @@ module Particle
 
     attr_reader :response
 
-    def response_errors
-      case data
-      when Hash
-        data[:errors]
-      when String
-        data
-      end
-    end
-
     private
 
-    def data
-      @data ||=
-        if (body = @response[:body]) && !body.empty?
-          if body.is_a?(String) &&
-            @response[:response_headers] &&
-            @response[:response_headers][:content_type] =~ /json/
-
-            Sawyer::Agent.serializer.decode(body)
-          else
-            body
-          end
-        else
-          nil
-        end
+    def self.bad_request_error(body)
+      if body =~ /access token was not found/i
+        MissingTokenError
+      else
+        BadRequest
+      end
     end
 
     def build_error_message
@@ -64,7 +46,7 @@ module Particle
       message =  "#{@response[:method].to_s.upcase} "
       message << redact_url(@response[:url].to_s) + ": "
       message << "#{@response[:status]} - "
-      message << "#{response_errors.join("\n")}" unless response_errors.nil?
+      message << "#{@response[:body]}"
       message
     end
 
@@ -77,6 +59,9 @@ module Particle
 
   # Raised on errors in the 400-499 range
   class ClientError < Error; end
+
+  # Raised when no authentication token is provided
+  class MissingTokenError < Error; end
 
   # Raised when Particle returns a 400 HTTP status code
   class BadRequest < ClientError; end
