@@ -1,7 +1,6 @@
-# particlerb
-Ruby client for the [Particle.io] Cloud API
+# particlerb [![Build Status](https://travis-ci.org/monkbroc/particlerb.svg)](https://travis-ci.org/monkbroc/particlerb)
 
-[![Build Status](https://travis-ci.org/monkbroc/particlerb.svg)](https://travis-ci.org/monkbroc/particlerb)
+Ruby client for the [Particle.io] Cloud API
 
 [Particle.io]: https://www.particle.io
 

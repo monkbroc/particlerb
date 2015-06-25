@@ -32,9 +32,9 @@ module Particle
       @attributes[:id] || @attributes[:name]
     end
 
-    %i(connected functions variables product_id last_heard).each do |key|
+    %w(connected functions variables product_id last_heard).each do |key|
       define_method key do
-        attributes[key]
+        attributes[key.to_sym]
       end
     end
     alias_method :connected?, :connected
