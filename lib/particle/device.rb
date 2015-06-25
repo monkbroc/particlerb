@@ -2,20 +2,51 @@ module Particle
 
   # Domain model for one Particle device
   class Device
-    attr_reader :id
+    ID_REGEX = /\h{24}/
 
-    def initialize(client, id, attributes = nil)
+    def initialize(client, attributes)
       @client = client
-      @id = id
-      @attributes = attributes
+      @attributes =
+      if attributes.is_a? String
+        if attributes =~ ID_REGEX
+          { id: attributes }
+        else
+          { name: attributes }
+        end
+      else
+        attributes
+      end
     end
 
+    def id
+      get_attributes unless @attributes[:id]
+      @attributes[:id]
+    end
+
+    def name
+      get_attributes unless @attributes[:name]
+      @attributes[:name]
+    end
+
+    def id_or_name
+      @attributes[:id] || @attributes[:name]
+    end
+
+    %i(connected functions variables product_id last_heard).each do |key|
+      define_method key do
+        attributes[key]
+      end
+    end
+    alias_method :connected?, :connected
+
     def attributes
-      @attributes ||= get_attributes
+      get_attributes unless @loaded
+      @attributes
     end
 
     def get_attributes
-
+      @loaded = true
+      @attributes = @client.device_attributes(self)
     end
 
     # Add a Particle device to your account
@@ -24,7 +55,6 @@ module Particle
     #   Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').claim
     def claim
       new_device = @client.claim_device(self)
-      @id = new_device.id
       self
     end
 
@@ -84,7 +114,7 @@ module Particle
     end
 
     def path
-      "/v1/devices/#{id}"
+      "/v1/devices/#{id_or_name}"
     end
 
     def function_path(name)

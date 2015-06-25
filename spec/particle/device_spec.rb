@@ -6,13 +6,13 @@ describe Particle::Device do
 
   describe "Particle.device" do
     it "creates a Device" do
-      expect(Particle.device("123").id).to eq("123")
+      expect(Particle.device("abc").name).to eq("abc")
     end
   end
 
   describe ".attributes", :vcr do
     it "returns attributes" do
-      expect(device.attributes.connected).to eq true
+      expect(device.attributes).to be_kind_of Hash
     end
   end
 

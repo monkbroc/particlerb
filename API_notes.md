@@ -34,3 +34,4 @@ Variable get JSON contains `{ :cmd=>"VarReturn" }` as well as the whole `coreInf
 When device is offline, turning on the signal (rainbow mode) returns a
 200 OK status with `{:ok=>false, :errors=>[{:error=>"Timed out, didn't
 hear back from device service"}]}`
+

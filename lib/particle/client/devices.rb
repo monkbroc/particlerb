@@ -13,8 +13,7 @@ module Particle
         if target.is_a? Device
           target
         elsif target.respond_to?(:to_attrs)
-          attrs = target.to_attrs
-          Device.new(self, attrs.id, attrs)
+          Device.new(self, target.to_attrs)
         else
           Device.new(self, target.to_s)
         end
@@ -42,10 +41,11 @@ module Particle
 
       # Add a Particle device to your account
       #
-      # @param target [String, Device] A device id, name or {Device} object
+      # @param target [String, Device] A device id or {Device} object.
+      #                                You can't claim a device by name
       # @return [Device] A device object to interact with
       def claim_device(target)
-        result = post(Device.claim_path, id: device(target).id)
+        result = post(Device.claim_path, id: device(target).id_or_name)
         device(result.id)
       end
 
