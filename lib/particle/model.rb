@@ -5,13 +5,13 @@ module Particle
     def initialize(client, attributes)
       @client = client
       @attributes =
-      if attributes.is_a? String
-        { id: attributes }
-      else
-        # Consider attributes loaded when passed in through constructor
-        @loaded = true
-        attributes
-      end
+        if attributes.is_a? String
+          { id: attributes }
+        else
+          # Consider attributes loaded when passed in through constructor
+          @loaded = true
+          attributes
+        end
     end
 
     # Display the attributes when inspecting the object in the console

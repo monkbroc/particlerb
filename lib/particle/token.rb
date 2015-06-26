@@ -2,6 +2,26 @@ module Particle
 
   # Domain model for one Particle token
   class Token < Model
+    def initialize(client, attributes)
+      @client = client
+      @attributes =
+        if attributes.is_a? String
+          { token: attributes }
+        else
+          # Consider attributes loaded when passed in through constructor
+          @loaded = true
+          attributes
+        end
+    end
+
+    # The id of the token
+    def token
+      @attributes[:token]
+    end
+    alias_method :id, :token
+
+    attribute_reader :expires_at, :client
+
     # Tokens can't be loaded. What you see is what you get...
     def get_attributes
       @loaded = true
@@ -24,6 +44,10 @@ module Particle
 
     def self.list_path
       "v1/access_tokens"
+    end
+
+    def self.create_path
+      "/oauth/token"
     end
 
     # # Add a Particle webhook

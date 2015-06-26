@@ -9,6 +9,7 @@ describe Particle::Client::Tokens do
       it "returns all Particle tokens" do
         tokens = Particle.tokens(username, password)
         expect(tokens).to be_kind_of Array
+        tokens.each { |t| expect(t).to be_kind_of Particle::Token }
       end
     end
     context "with invalid username" do
@@ -24,6 +25,28 @@ describe Particle::Client::Tokens do
       end
     end
   end
+
+  describe ".create_token", :vcr do
+    context "with valid username and password" do
+      it "returns a new token" do
+        token = Particle.create_token(username, password)
+        expect(token).to be_kind_of Particle::Token
+      end
+    end
+    context "with invalid username" do
+      it "raises BadRequest" do
+        expect { Particle.create_token("invalid", "invalid") }.
+          to raise_error Particle::BadRequest
+      end
+    end
+    context "with invalid password" do
+      it "raises BadRequest" do
+        expect { Particle.create_token(username, "invalid") }.
+          to raise_error Particle::BadRequest
+      end
+    end
+  end
+
 
   # describe ".webhook_attributes", :vcr do
   #   context "when the webhook exists" do

@@ -89,18 +89,19 @@ module Particle
 
     def request(method, path, data, options = {})
       if data.is_a?(Hash)
-        options[:query]   = data.delete(:query) || {}
-        options[:headers] = data.delete(:headers) || {}
+        options[:query]   ||= data.delete(:query) || {}
+        options[:headers] ||= data.delete(:headers) || {}
         if accept = data.delete(:accept)
           options[:headers][:accept] = accept
         end
+      end
 
-        username = data.delete(:username)
-        password = data.delete(:password)
-        if username && password
-          options[:headers][:authorization] =
-            basic_auth_header(username, password)
-        end
+      username = options.delete(:username)
+      password = options.delete(:password)
+      if username && password
+        options[:headers] ||= {}
+        options[:headers][:authorization] =
+          basic_auth_header(username, password)
       end
 
       @last_response = response = agent.call(method, URI::Parser.new.escape(path.to_s), data, options)

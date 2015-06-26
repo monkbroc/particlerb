@@ -1,4 +1,5 @@
 require 'particle/token'
+require 'uri'
 
 module Particle
   class Client
@@ -30,34 +31,36 @@ module Particle
       #                          the Particle Cloud API
       # @return [Array<Token>] List of Particle tokens
       def tokens(username, password)
-        get(Token.list_path,
-            username: username,
-            password: password).map do |resource|
+        http_options = {
+          username: username,
+          password: password
+        }
+        request(:get, Token.list_path, "", http_options).map do |resource|
           token(resource)
         end
       end
 
-      ## Get information about a Particle webhook
-      ##
-      ## The Particle cloud will send a test message to the webhook URL
-      ## when this is called
-      ##
-      ## @param target [String, Webhook] A webhook id or {Webhook} object
-      ## @return [Hash] The webhook attributes and test message response
-      #def webhook_attributes(target)
-      #  result = get(webhook(target).path)
-      #  result.to_attrs
-      #end
-
-      ## Creates a new Particle webhook
-      ##
-      ## @param options [Hash] Options to configure the webhook
-      ## @return [Webhook] The webhook object
-      ## @see http://docs.particle.io/core/webhooks/#Webhook-options
-      #def create_webhook(options)
-      #  result = post(Webhook.create_path, options)
-      #  webhook(result)
-      #end
+      # Authenticate with Particle and create a new token
+      #
+      # @param username [String] The username (email) used to log in to
+      #                          the Particle Cloud API
+      # @param password [String] The password used to log in to
+      #                          the Particle Cloud API
+      # @return [Token] The token object
+      def create_token(username, password, options = {})
+        data = URI.encode_www_form({
+          grant_type: 'password',     # specified by docs
+          username: username,
+          password: password
+        }.merge(options))
+        http_options = {
+          headers: { content_type: "application/x-www-form-urlencoded" },
+          username: 'particle', # specified by docs
+          password: 'particle'  # specified by docs
+        }
+        result = request(:post, Token.create_path, data, http_options)
+        token(result)
+      end
 
       ## Remove a Particle webhook
       ##

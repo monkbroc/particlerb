@@ -60,8 +60,6 @@ client.devices
 
 ## Interacting with devices
 
-See the [Particle Cloud API documentation][API docs] for more details.
-
 List all devices. Rreturns an `Array` of `Particle::Device`.
 
 ```ruby
@@ -137,8 +135,9 @@ Signal a device to start blinking the RGB LED in rainbow patterns. Returns wheth
 ```ruby
 Particle.device('nyan_cat').signal(true)
 ```
+See the [Particle Cloud API documentation about devices][device docs] for more details.
 
-[API docs]: http://docs.particle.io/core/api
+[device docs]: http://docs.particle.io/core/api/#introduction-device-information
 
 ## Interacting with events
 
@@ -153,6 +152,10 @@ Data, ttl and private are optional.
 
 Data is converted to JSON if it is a Hash or an Array, otherwise it is converted to a String.
 
+See the [Particle Cloud API documentation about publishing events][publish docs] for more details.
+
+[publish docs]: http://docs.particle.io/core/api/#publishing-events
+
 ### Limitation: Subscribe not supported
 
 This gem does not support subscribing (listening) to events from devices.
@@ -162,8 +165,6 @@ This would require an HTTP client that supports streaming responses which is not
 For web server applications, webhooks are better suited to process incoming events.
 
 ## Interacting with webhooks
-
-See the [Particle webhook documentation][webhook docs] for more details.
 
 List existing webhooks. Returns an `Array` of `Particle::Webhook`
 
@@ -198,9 +199,54 @@ Create a new webhook. Pass a hash of [any options accepted by the Particle Cloud
 ```ruby
 Particle.webhook(event: "weather", url: "http://myserver.com/report").create
 ```
+See the [Particle Cloud API documentation about webhooks][webhook docs] for more details.
 
 [webhook docs]: http://docs.particle.io/core/webhooks/
 [webhook options]: http://docs.particle.io/core/webhooks/#webhook-options
+
+## Authentication
+
+Replace the access token on a client
+
+```ruby
+Particle.access_token = 'f1d52ea0de921fad300027763d8c5ebd03b1934d'
+
+# On client instance
+client = Particle::Client.new
+client.access_token = 'f1d52ea0de921fad300027763d8c5ebd03b1934d'
+```
+
+**All these following methods requires the account username (email) and password.**
+
+List all tokens that can be used to access an account. Returns an `Array` of `Particle::Token`
+
+```ruby
+Particle.tokens("me@example.com", "pa$$w0rd")
+```
+
+Log in and create a new token. Returns a `Particle::Token`. This will also set the token on the client for future calls.
+
+```ruby
+Particle.login("me@example.com", "pa$$w0rd")
+```
+
+Create a token but don't set it on the client. Returns a `Particle::Token`
+
+```ruby
+Particle.token.create("me@example.com", "pa$$w0rd")
+```
+
+Invalidate and delete a token. Returns true on success.
+
+```ruby
+Particle.token('f1d52ea0de921fad300027763d8c5ebd03b1934d').remove("me@example.com", "pa$$w0rd")
+Particle.tokens.first.remove("me@example.com", "pa$$w0rd")
+```
+
+See the [Particle Cloud API documentation about authentication and token][authentication docs] for more details.
+
+[authentication docs]: http://docs.particle.io/core/api/#introduction-authentication
+
 
 ## Errors
 
