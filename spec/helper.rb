@@ -30,6 +30,10 @@ def test_particle_device_ids
   ENV.fetch('TEST_PARTICLE_DEVICE_IDS', 'z' * 24).split(",")
 end
 
+def test_particle_webhook_id
+  ENV.fetch('TEST_PARTICLE_WEBHOOK_ID', 'w' * 24)
+end
+
 VCR.configure do |c|
   c.configure_rspec_metadata!
   c.filter_sensitive_data("__PARTICLE_ACCESS_TOKEN__") do

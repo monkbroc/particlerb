@@ -1,4 +1,4 @@
-V1:
+V0.0.1:
 
 ✓ Particle.devices ==> Array<Particle::Device>
 ✓ Particle.claim_device(device_id)
@@ -7,7 +7,7 @@ V1:
 ✓ Particle.remove_device(Particle::Device)
 
 ✓ Particle.device(device_id) ==> Particle::Device
-  device.info
+  ✓ device.attributes
   ✓ device.claim
   ✓ device.remove
   ✓ device.rename
@@ -15,7 +15,9 @@ V1:
   ✓ device.variable
   ✓ device.signal
 
-Particle.publish
+V0.0.2:
+
+✓ Particle.publish
 
 Particle.webhooks
 Particle.createWebhook
@@ -29,14 +31,15 @@ Particle.deleteToken(user, password, token)
 
 
 
-V2:
+V0.0.3:
 
   device.flash(list of files)
   device.compile(list of files)
-  device.subscribe
 
 Particle.compile(list of files, platform)
 Particle.downloadBinary
 
 
+Not done:
+  device.subscribe
 

@@ -1,13 +1,14 @@
 module Particle
   class Client
 
-    # Methods for the Particle device API
+    # Client methods for the Particle device API
+    #
     # @see http://docs.particle.io/core/api/#introduction-list-devices
     module Devices
 
       # Create a domain model for a Particle device
       #
-      # @param target [String, Sawyer::Resource, Device] A device id, name or {Device} object
+      # @param target [String, Sawyer::Resource, Device] A device id, name, Sawyer::Resource or {Device} object
       # @return [Device] A device object to interact with
       def device(target)
         if target.is_a? Device
@@ -21,12 +22,10 @@ module Particle
 
       # List all Particle devices on the account
       #
-      # @see http://docs.particle.io/core/api/#introduction-list-devices
-      #
       # @return [Array<Device>] List of Particle devices to interact with
       def devices
         get(Device.list_path).map do |resource|
-          Device.new(self, resource)
+          device(resource)
         end
       end
 

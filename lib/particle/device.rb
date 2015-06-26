@@ -14,8 +14,14 @@ module Particle
           { name: attributes }
         end
       else
+        # Consider attributes loaded when passed in through constructor
+        @loaded = true
         attributes
       end
+    end
+
+    def inspect
+      "#<#{self.class} #{@attributes}>"
     end
 
     def id
@@ -32,7 +38,8 @@ module Particle
       @attributes[:id] || @attributes[:name]
     end
 
-    %w(connected functions variables product_id last_heard).each do |key|
+    %w(connected functions variables product_id last_heard
+       last_app last_ip_address).each do |key|
       define_method key do
         attributes[key.to_sym]
       end

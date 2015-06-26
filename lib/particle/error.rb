@@ -1,5 +1,7 @@
 module Particle
   # Custom error class for rescuing from all Particle errors
+  #
+  # @see http://docs.particle.io/core/api/#introduction-errors
   class Error < StandardError
 
     # Returns the appropriate Particle::Error subclass based
