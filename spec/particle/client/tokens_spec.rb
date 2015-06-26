@@ -4,12 +4,26 @@ describe Particle::Client::Tokens do
   let(:username) { test_particle_username }
   let(:password) { test_particle_password }
 
-  # describe ".tokens", :vcr do
-  #   it "returns all Particle tokens" do
-  #     tokens = Particle.tokens(username, password)
-  #     expect(tokens).to be_kind_of Array
-  #   end
-  # end
+  describe ".tokens", :vcr do
+    context "with valid username and password" do
+      it "returns all Particle tokens" do
+        tokens = Particle.tokens(username, password)
+        expect(tokens).to be_kind_of Array
+      end
+    end
+    context "with invalid username" do
+      it "raises BadRequest" do
+        expect { Particle.tokens("invalid", "invalid") }.
+          to raise_error Particle::BadRequest
+      end
+    end
+    context "with invalid password" do
+      it "raises Unauthorized" do
+        expect { Particle.tokens(username, "invalid") }.
+          to raise_error Particle::Unauthorized
+      end
+    end
+  end
 
   # describe ".webhook_attributes", :vcr do
   #   context "when the webhook exists" do

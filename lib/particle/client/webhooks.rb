@@ -1,3 +1,5 @@
+require 'particle/webhook'
+
 module Particle
   class Client
 

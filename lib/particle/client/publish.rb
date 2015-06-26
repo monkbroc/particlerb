@@ -1,3 +1,5 @@
+require 'particle/event'
+
 module Particle
   class Client
 

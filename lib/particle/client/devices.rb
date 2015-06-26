@@ -1,3 +1,5 @@
+require 'particle/device'
+
 module Particle
   class Client
 

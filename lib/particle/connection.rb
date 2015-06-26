@@ -57,15 +57,6 @@ module Particle
       request :delete, url, options
     end
 
-    # Make a HTTP HEAD request
-    #
-    # @param url [String] The path, relative to {#api_endpoint}
-    # @param options [Hash] Query and header params for request
-    # @return [Sawyer::Resource]
-    def head(url, options = {})
-      request :head, url, parse_query_and_convenience_headers(options)
-    end
-
     # Hypermedia agent for the Particle API
     #
     # @return [Sawyer::Agent]
@@ -103,6 +94,13 @@ module Particle
         if accept = data.delete(:accept)
           options[:headers][:accept] = accept
         end
+
+        username = data.delete(:username)
+        password = data.delete(:password)
+        if username && password
+          options[:headers][:authorization] =
+            basic_auth_header(username, password)
+        end
       end
 
       @last_response = response = agent.call(method, URI::Parser.new.escape(path.to_s), data, options)
@@ -119,6 +117,12 @@ module Particle
       opts[:faraday] = Faraday.new(conn_opts)
 
       opts
+    end
+
+    # Temporarily set the Authorization to use basic auth
+    def basic_auth_header(username, password)
+      Faraday::Request.lookup_middleware(:basic_auth).
+        header(username, password)
     end
   end
 end

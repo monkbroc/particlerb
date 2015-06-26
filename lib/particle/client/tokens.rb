@@ -1,3 +1,5 @@
+require 'particle/token'
+
 module Particle
   class Client
 
@@ -5,6 +7,20 @@ module Particle
     #
     # @see http://docs.particle.io/core/api/#introduction-authentication
     module Tokens
+
+      # Create a domain model for a Particle token
+      #
+      # @param target [String, Sawyer::Resource, Token] A token id, Sawyer::Resource or {Token} object
+      # @return [Token] A token object to interact with
+      def token(target)
+        if target.is_a? Token
+          target
+        elsif target.respond_to?(:to_attrs)
+          Token.new(self, target.to_attrs)
+        else
+          Token.new(self, target)
+        end
+      end
 
       # List all Particle tokens for the account
       #
@@ -14,25 +30,12 @@ module Particle
       #                          the Particle Cloud API
       # @return [Array<Token>] List of Particle tokens
       def tokens(username, password)
-        get(Token.list_path).map do |resource|
+        get(Token.list_path,
+            username: username,
+            password: password).map do |resource|
           token(resource)
         end
       end
-
-
-      ## Create a domain model for a Particle webhook
-      ##
-      ## @param target [String, Sawyer::Resource, Webhook] A webhook id, Sawyer::Resource or {Device} object
-      ## @return [Webhook] A webhook object to interact with
-      #def webhook(target)
-      #  if target.is_a? Webhook
-      #    target
-      #  elsif target.respond_to?(:to_attrs)
-      #    Webhook.new(self, target.to_attrs)
-      #  else
-      #    Webhook.new(self, target)
-      #  end
-      #end
 
       ## Get information about a Particle webhook
       ##

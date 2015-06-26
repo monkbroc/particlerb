@@ -1,7 +1,4 @@
 require 'particle/connection'
-require 'particle/device'
-require 'particle/event'
-require 'particle/webhook'
 require 'particle/client/devices'
 require 'particle/client/publish'
 require 'particle/client/webhooks'
