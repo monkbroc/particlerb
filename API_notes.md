@@ -34,3 +34,38 @@ Docs say:
 
 Variable get JSON contains `{ :cmd=>"VarReturn" }` as well as the whole `coreInfo` struct.
 
+Webhook test message doesn't use authentication settings (sent when doing a GET to a webhook url)
+Webhook:
+{
+  "webook": {
+    "id": "558d5710fc98c66474dfac1a",
+    "url": "http://m3.munirent.co:8888/",
+    "deviceID": null,
+    "event": "68c57e6752d5e0a5",
+    "created_at": "2015-06-26T13:43:44.116Z",
+    "mydevices": null,
+    "requestType": null,
+    "headers": null,
+    "json": null,
+    "query": null,
+    "auth": {
+      "username": "test",
+      "password": "test2"
+    }
+  },
+  "error": "Error: socket hang up"
+}
+
+HTTP request for test message:
+$ nc -l -p 8888
+POST / HTTP/1.1
+host: m3.munirent.co:8888
+content-type: application/x-www-form-urlencoded
+accept: application/json
+content-length: 42
+Connection: keep-alive
+
+event=68c57e6752d5e0a5&data=Test%20Message
+
+
+When there are too many hooks, the response is 200 OK with {"ok": false, "error": "Too many web hooks for this device"}. It should be 400 Bad Request

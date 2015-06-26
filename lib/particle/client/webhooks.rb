@@ -31,11 +31,33 @@ module Particle
 
       # Get information about a Particle webhook
       #
+      # The Particle cloud will send a test message to the webhook URL
+      # when this is called
+      #
       # @param target [String, Webhook] A webhook id or {Webhook} object
-      # @return [Hash] The webhook attributes
+      # @return [Hash] The webhook attributes and test message response
       def webhook_attributes(target)
         result = get(webhook(target).path)
         result.to_attrs
+      end
+
+      # Creates a new Particle webhook
+      #
+      # @param options [Hash] Options to configure the webhook
+      # @return [Webhook] The webhook object
+      # @see http://docs.particle.io/core/webhooks/#Webhook-options
+      def create_webhook(options)
+        result = post(Webhook.create_path, options)
+        webhook(result)
+      end
+
+      # Remove a Particle webhook
+      #
+      # @param target [String, Webhook] A webhook id or {Webhook} object
+      # @return [boolean] true for success
+      def remove_webhook(target)
+        result = delete(webhook(target).path)
+        result.ok
       end
     end
   end

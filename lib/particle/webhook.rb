@@ -18,24 +18,37 @@ module Particle
       "#<#{self.class} #{@attributes}>"
     end
 
+    # The webhook id
     def id
       @attributes[:id]
     end
 
+    # Url, authentication, etc
     def attributes
       get_attributes unless @loaded
       @attributes
     end
 
+    # The response of the web server to a test message
+    # If nil, check error
     def response
       get_attributes unless @loaded
       @response
     end
 
+    # The error from the web server to a test message
+    # If nil, check response
+    def error
+      get_attributes unless @loaded
+      @error
+    end
+
+    # Force reloading the attributes for the webhook
     def get_attributes
       @loaded = true
       result = @client.webhook_attributes(self)
       @response = result[:response]
+      @error = result[:error]
       @attributes = result[:webhook]
     end
 
@@ -96,6 +109,10 @@ module Particle
     #end
 
     def self.list_path
+      "v1/webhooks"
+    end
+
+    def self.create_path
       "v1/webhooks"
     end
 

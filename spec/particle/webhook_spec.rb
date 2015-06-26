@@ -1,7 +1,7 @@
 require 'helper'
 
 describe Particle::Webhook do
-  let(:id) { test_particle_webhook_id }
+  let(:id) { test_particle_webhook_ids[0] }
   let(:webhook) { Particle.webhook(id) }
 
   describe "Particle.webhook" do
