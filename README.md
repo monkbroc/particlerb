@@ -25,29 +25,32 @@ Install via Rubygems
 
 **A Particle cloud API access token is necessary for most requests.** You can use the one from the [Web IDE][] for testing, but it's recommended to generate a new token with this gem using `Particle.login` or with the [Particle CLI][] using `particle token new`
 
+```ruby
+# Provide acess token as an environment variable
+# ENV['PARTICLE_ACCESS_TOKEN']
+
+# Or configure global authentication credentials
+# If you use Rails, you can put this in config/initializers/particle.rb
+Particle.configure do |c|
+  c.access_token = "38bb7b318cc6898c80317decb34525844bc9db55"
+end
+
+# Or pass access token when creating a client
+# If no token is passed to Particle::Client.new, the global or environment one is used
+client = Particle::Client.new(access_token: "38bb7b318cc6898c80317decb34525844bc9db55")
+```
+
 ### Making requests
 
 API methods are available as module methods (consuming module-level
 configuration) or as client instance methods.
 
 ```ruby
-# Provide authentication credentials
-# If you use Rails, you can put this in config/initializers/particle.rb
-Particle.configure do |c|
-  c.access_token = "38bb7b318cc6898c80317decb34525844bc9db55"
-  # Default value of access_token comes from the environment variable
-  # PARTICLE_ACCESS_TOKEN
-end
-
-# Fetch the list of devices
+# Fetch the list of devices using the global client
 Particle.devices
-```
-or
 
-```ruby
-# Provide authentication credentials
-# Either provide the access_token on Client#new or omit to use the globally configured token
-client = Particle::Client.new(access_token: "38bb7b318cc6898c80317decb34525844bc9db55")
+# Or used a newly created client
+client = Particle::Client.new
 # Fetch the list of devices
 client.devices
 ```

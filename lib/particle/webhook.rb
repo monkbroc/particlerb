@@ -71,45 +71,6 @@ module Particle
       @client.remove_webhook(self)
     end
 
-    ## Rename a Particle device on your account
-    ##
-    ## @param name [String] New name for the device
-    ## @example Change the name of a Photon
-    ##   Particle.device('blue').rename('red')
-    #def rename(name)
-    #  @client.rename_device(self, name)
-    #end
-
-    ## Call a function in the firmware of a Particle device
-    ##
-    ## @param name [String] Function to run on firmware
-    ## @param argument [String] Argument string to pass to the firmware function
-    ## @example Call the thinker digitalWrite function
-    ##   Particle.device('white_whale').function('digitalWrite', '0')
-    #def function(name, argument = "")
-    #  @client.call_function(self, name, argument)
-    #end
-
-    ## Get the value of a variable in the firmware of a Particle device
-    ##
-    ## @param target [String, Device] A device id, name or {Device} object
-    ## @param name [String] Variable on firmware
-    ## @return [String, Number] Value from the firmware variable
-    ## @example Get the battery voltage
-    ##   Particle.device('mycar').variable('battery') == 12.5
-    #def variable(name)
-    #  @client.get_variable(self, name)
-    #end
-
-    ## Signal the device to start blinking the RGB LED in a rainbow
-    ## pattern. Useful to identify a particular device.
-    ##
-    ## @param enabled [String] Whether to enable or disable the rainbow signal
-    ## @return [boolean] true when signaling, false when stopped
-    #def signal(enabled = true)
-    #  @client.signal_device(self, enabled)
-    #end
-
     def self.list_path
       "v1/webhooks"
     end
@@ -118,21 +79,9 @@ module Particle
       "v1/webhooks"
     end
 
-    #def self.claim_path
-    #  "v1/devices"
-    #end
-
     def path
       "/v1/webhooks/#{id}"
     end
-
-    #def function_path(name)
-    #  path + "/#{name}"
-    #end
-
-    #def variable_path(name)
-    #  path + "/#{name}"
-    #end
   end
 end
 

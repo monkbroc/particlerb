@@ -36,31 +36,4 @@ describe Particle::Webhook do
       expect(webhook.remove).to eq true
     end
   end
-
-  #describe ".rename", :vcr do
-  #  it "renames the device" do
-  #    expect(device.rename("fiesta")).to eq true
-  #  end
-  #end
-
-  #describe ".function", :vcr do
-  #  it "call the function on the device firmware" do
-  #    # Test device must have a method called "get" returning -2
-  #    expect(device.function("get")).to eq -2
-  #  end
-  #end
-
-  #describe ".variable", :vcr do
-  #  it "gets the value of the firmware variable" do
-  #    # Test device must have a variable called "result" returning a String
-  #    expect(device.variable("result")).to eq "3600"
-  #  end
-  #end
-
-  #describe ".signal", :vcr do
-  #  it "starts shouting rainbows" do
-  #    expect(device.signal).to eq true
-  #  end
-  #end
 end
-
