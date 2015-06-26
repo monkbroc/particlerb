@@ -7,6 +7,7 @@ describe Particle::Client::Webhooks do
     it "returns all Particle webhooks" do
       webhooks = Particle.webhooks
       expect(webhooks).to be_kind_of Array
+      webhooks.each { |w| expect(w).to be_kind_of Particle::Webhook }
     end
   end
 

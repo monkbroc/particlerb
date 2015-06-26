@@ -7,6 +7,7 @@ describe Particle::Client::Devices do
     it "returns all claimed Particle devices" do
       devices = Particle.devices
       expect(devices).to be_kind_of Array
+      devices.each { |d| expect(d).to be_kind_of Particle::Device }
     end
   end
 

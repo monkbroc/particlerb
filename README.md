@@ -27,7 +27,7 @@ Install via Rubygems
 
 ```ruby
 # Provide acess token as an environment variable
-# ENV['PARTICLE_ACCESS_TOKEN']
+ENV['PARTICLE_ACCESS_TOKEN']
 
 # Or configure global authentication credentials
 # If you use Rails, you can put this in config/initializers/particle.rb

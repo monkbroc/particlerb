@@ -20,6 +20,14 @@ RSpec.configure do |config|
   end
 end
 
+def test_particle_username
+  ENV.fetch('TEST_PARTICLE_USERNAME', 'tester@example.com')
+end
+
+def test_particle_password
+  ENV.fetch('TEST_PARTICLE_PASSWORD', 'pa$$w0rd')
+end
+
 def test_particle_access_token
   ENV.fetch('TEST_PARTICLE_ACCESS_TOKEN', 'x' * 40)
 end
@@ -42,6 +50,12 @@ end
 
 VCR.configure do |c|
   c.configure_rspec_metadata!
+  c.filter_sensitive_data("__PARTICLE_USERNAME__") do
+    test_particle_username
+  end
+  c.filter_sensitive_data("__PARTICLE_PASSWORD__") do
+    test_particle_password
+  end
   c.filter_sensitive_data("__PARTICLE_ACCESS_TOKEN__") do
     test_particle_access_token
   end

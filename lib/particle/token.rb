@@ -1,15 +1,40 @@
-require 'particle/model'
-
 module Particle
 
-  # Domain model for one Particle device
-  class Webhook < Model
+  # Domain model for one Particle token
+  class Token
     def initialize(client, attributes)
-      super(client, attributes)
+      @client = client
+      @attributes =
+      if attributes.is_a? String
+        { id: attributes }
+      else
+        # Consider attributes loaded when passed in through constructor
+        @loaded = true
+        attributes
+      end
     end
 
-    attribute_reader :url, :deviceID, :event, :created_at, :mydevices,
-      :requestType, :headers, :json, :query, :auth
+    def inspect
+      "#<#{self.class} #{@attributes}>"
+    end
+
+    # The webhook id
+    def id
+      @attributes[:id]
+    end
+
+    %w(url deviceID event created_at mydevices requestType
+       headers json query auth).each do |key|
+      define_method key do
+        attributes[key.to_sym]
+      end
+    end
+
+    # Url, authentication, etc
+    def attributes
+      get_attributes unless @loaded
+      @attributes
+    end
 
     # The response of the web server to a test message
     # If nil, check error

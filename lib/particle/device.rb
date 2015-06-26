@@ -1,27 +1,21 @@
+require 'particle/model'
+
 module Particle
 
   # Domain model for one Particle device
-  class Device
+  class Device < Model
     ID_REGEX = /\h{24}/
 
     def initialize(client, attributes)
-      @client = client
-      @attributes =
+      super(client, attributes)
+
       if attributes.is_a? String
         if attributes =~ ID_REGEX
-          { id: attributes }
+          @attributes = { id: attributes }
         else
-          { name: attributes }
+          @attributes = { name: attributes }
         end
-      else
-        # Consider attributes loaded when passed in through constructor
-        @loaded = true
-        attributes
       end
-    end
-
-    def inspect
-      "#<#{self.class} #{@attributes}>"
     end
 
     def id
@@ -38,18 +32,10 @@ module Particle
       @attributes[:id] || @attributes[:name]
     end
 
-    %w(connected functions variables product_id last_heard
-       last_app last_ip_address).each do |key|
-      define_method key do
-        attributes[key.to_sym]
-      end
-    end
-    alias_method :connected?, :connected
+    attribute_reader :connected, :functions, :variables, :product_id,
+      :last_heard, :last_app, :last_ip_address
 
-    def attributes
-      get_attributes unless @loaded
-      @attributes
-    end
+    alias_method :connected?, :connected
 
     def get_attributes
       @loaded = true
