@@ -16,7 +16,7 @@ module Particle
         elsif target.respond_to?(:to_attrs)
           Webhook.new(self, target.to_attrs)
         else
-          Webhook.new(self, target.to_s)
+          Webhook.new(self, target)
         end
       end
 

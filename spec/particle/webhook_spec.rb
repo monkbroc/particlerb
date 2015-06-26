@@ -16,19 +16,26 @@ describe Particle::Webhook do
     end
   end
 
-  #describe ".claim", :vcr do
-  #  it "claims the device" do
-  #    # Test device must not claimed before recording VCR cassette
-  #    expect(device.claim.id).to eq(id)
-  #  end
-  #end
+  def create_webhook(options = {})
+    params = {
+      url: "https://example.com",
+      event: "68c57e6752d5e0a5" # bogus event name that should never match
+    }.merge(options)
+    Particle.webhook(params).create
+  end
 
-  #describe ".remove", :vcr do
-  #  it "removes the device" do
-  #    # Test device must be claimed before recording VCR cassette
-  #    expect(device.remove).to eq true
-  #  end
-  #end
+  describe ".create", :vcr do
+    it "creates the webhook" do
+      expect(create_webhook).to be_kind_of Particle::Webhook
+    end
+  end
+
+  describe ".remove", :vcr do
+    it "removes the webhook" do
+      webhook = create_webhook
+      expect(webhook.remove).to eq true
+    end
+  end
 
   #describe ".rename", :vcr do
   #  it "renames the device" do

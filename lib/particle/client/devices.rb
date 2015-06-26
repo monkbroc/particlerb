@@ -16,7 +16,7 @@ module Particle
         elsif target.respond_to?(:to_attrs)
           Device.new(self, target.to_attrs)
         else
-          Device.new(self, target.to_s)
+          Device.new(self, target)
         end
       end
 

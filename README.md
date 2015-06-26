@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/monkbroc/particlerb.svg)](https://travis-ci.org/monkbroc/particlerb)
 [![Code Climate](https://codeclimate.com/github/monkbroc/particlerb/badges/gpa.svg)](https://codeclimate.com/github/monkbroc/particlerb)
 
-Ruby client for the [Particle.io] Cloud API
+Ruby client for the [Particle.io] Cloud API with an object-oriented interface
 
 [Particle.io]: https://www.particle.io
 
@@ -59,13 +59,13 @@ client.devices
 
 See the [Particle Cloud API documentation][API docs] for more details.
 
-List all devices. Rreturns an `Array` of `Device`.
+List all devices. Rreturns an `Array` of `Particle::Device`.
 
 ```ruby
 devices = Particle.devices
 ```
 
-Get a `Device` by id or name.
+Get a `Particle::Device` by id or name.
 
 ```ruby
 device = Particle.device('blue_fire')
@@ -76,16 +76,25 @@ Get information about a device.
 
 ```ruby
 device = Particle.device('blue_fire')
-device.id
-device.name
-device.connected?
-device.variables
-device.functions
 device.attributes     # Hash of all attributes
+device.id             # ==> 'f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d'
+device.name           # ==> 'blue_fire'
+device.connected?     # true
+device.variables      # {:myvar => "double" } or nil if not connected
+device.functions      # ["myfunction"] or nil if not connected
 device.get_attributes # forces refresh of all attributes from the cloud
+
+# If you get a Device from the Particle.devices call, you will need to call
+# get_attributes to get the list of functions and variables since that's not
+# returned by the cloud when calling Particle.devices
+device = Particle.devices.first
+device.connected?     # ==> true
+device.functions      # ==> nil
+device.get_attributes
+device.functions      # ==> ["myfunction"]
 ```
 
-Claim a device by id and add it to your account. Returns a `Device`.
+Claim a device by id and add it to your account. Returns a `Particle::Device`.
 
 ```ruby
 Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').claim
@@ -104,14 +113,14 @@ Rename a device. Returns true on success.
 Particle.device('red').rename('green')
 ```
 
-Call a function on the firmware with an optional String argument. Returns the result of running the function as as Number.
+Call a function on the firmware with an optional `String` argument. Returns the result of running the function as as `Number`.
 
 ```ruby
 Particle.device('coffeemaker').function('brew')
 Particle.devices.first.function('digitalWrite', '1')
 ```
 
-Get the value of a firmware variable. Returns the result as a String or Number.
+Get the value of a firmware variable. Returns the result as a `String` or `Number`.
 
 ```ruby
 Particle.device('mycar').variable('battery') # ==> 12.33
@@ -151,10 +160,66 @@ For web server applications, webhooks are better suited to process incoming even
 
 ## Interacting with webhooks
 
+See the [Particle webhook documentation][webhook docs] for more details.
 
+List existing webhooks. Returns an `Array` of `Particle::Webhook`
+
+```ruby
+Particle.webhooks
+```
+
+Get info about an existing webhook by id. Returns a `Particle::Webhook`
+
+```ruby
+webhook = Particle.webhook('ffcddbd30b860ea3cadd22db')
+webhook.attributes
+webhook.event
+webhook.url
+```
+
+Calling `attributes` will also send a test message to your webhook url and report the `response` or `error`.
+
+```ruby
+webhook.response
+webhook.error
+
+webhook = Particle.webhooks.first
+webhook.get_attributes # force reloading attributes from the cloud
+# get_attributes necessary to get the response when Webhook was returned from the
+# Particle.webhooks() method as it doesn't do a test message on each webhook
+webhook.response
+```
+
+Create a new webhook. Pass a hash of [any options accepted by the Particle Cloud API][webhook options]. Returns a `Particle::Webhook`
+
+```ruby
+Particle.webhook(event: "weather", url: "http://myserver.com/report").create
+```
+
+[webhook docs]: http://docs.particle.io/core/webhooks/
+[webhook options]: http://docs.particle.io/core/webhooks/#webhook-options
+
+## Errors
+
+When any API error occurs, a subclass of `Particle::Error` will be raised.
+
+The actual error classes are
+
+- `MissingTokenError`
+- `BadRequest`
+- `Unauthorized`
+- `Forbidden` 
+- `NotFound`
+- `TimedOut`
+- `ServerError`
+
+See [a description of each error on the Particle API docs][error docs].
+
+[error docs]: http://docs.particle.io/core/api/#introduction-errors
 
 ## Advanced
 
+All API endpoints are availble directly on the client object as method calls like `Particle.claim_device(id)` but the preferred usage is to call methods on domain objects like `Particle.device(id).claim`. See the various `Particle::Client` subclasses for more details.
 
 ### Accessing HTTP responses
 

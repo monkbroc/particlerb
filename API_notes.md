@@ -69,3 +69,6 @@ event=68c57e6752d5e0a5&data=Test%20Message
 
 
 When there are too many hooks, the response is 200 OK with {"ok": false, "error": "Too many web hooks for this device"}. It should be 400 Bad Request
+
+Device "last_app" only shows up in the /v1/devices endpoint, not the /v1/devices/{id} endpoint
+

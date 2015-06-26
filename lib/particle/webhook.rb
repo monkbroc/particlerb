@@ -23,6 +23,13 @@ module Particle
       @attributes[:id]
     end
 
+    %w(url deviceID event created_at mydevices requestType
+       headers json query auth).each do |key|
+      define_method key do
+        attributes[key.to_sym]
+      end
+    end
+
     # Url, authentication, etc
     def attributes
       get_attributes unless @loaded
@@ -52,22 +59,17 @@ module Particle
       @attributes = result[:webhook]
     end
 
-    ## Add a Particle device to your account
-    ##
-    ## @example Add a Photon by its id
-    ##   Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').claim
-    #def claim
-    #  new_device = @client.claim_device(self)
-    #  self
-    #end
+    # Add a Particle webhook
+    def create
+      new_webhook = @client.create_webhook(@attributes)
+      @attributes = new_webhook.attributes
+      self
+    end
 
-    ## Remove a Particle device from your account
-    ##
-    ## @example Add a Photon by its id
-    ##   Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').claim
-    #def remove
-    #  @client.remove_device(self)
-    #end
+    # Remove a Particle webhook
+    def remove
+      @client.remove_webhook(self)
+    end
 
     ## Rename a Particle device on your account
     ##

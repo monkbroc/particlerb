@@ -19,9 +19,9 @@ V0.0.2:
 
 ✓ Particle.publish
 
-Particle.webhooks
-Particle.createWebhook
-Particle.removeWebhook
+✓ Particle.webhooks
+✓ Particle.createWebhook
+✓ Particle.removeWebhook
 
 
 Particle.login(user, password, options) ==> set access_token on client

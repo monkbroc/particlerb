@@ -35,7 +35,7 @@ describe Particle::Client::Webhooks do
 
 
   describe ".create_webhook", :vcr do
-    xit "creates a webhook with minimum parameters" do
+    it "creates a webhook with minimum parameters" do
       webhook = create_webhook
       expect(webhook).to be_kind_of Particle::Webhook
     end
