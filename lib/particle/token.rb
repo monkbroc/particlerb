@@ -43,6 +43,15 @@ module Particle
       inspected
     end
 
+    # Create a Particle token
+    # @param username [String] The username (email) used to log in to
+    #                          the Particle Cloud API
+    # @param password [String] The password used to log in to
+    #                          the Particle Cloud API
+    def create(username, password)
+      @client.create_token(username, password)
+    end
+
     # Remove a Particle token
     # @param username [String] The username (email) used to log in to
     #                          the Particle Cloud API

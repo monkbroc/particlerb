@@ -13,7 +13,7 @@ module Particle
       #
       # @param target [String, Sawyer::Resource, Token] A token id, Sawyer::Resource or {Token} object
       # @return [Token] A token object to interact with
-      def token(target)
+      def token(target = {})
         if target.is_a? Token
           target
         elsif target.respond_to?(:to_attrs)
@@ -77,7 +77,6 @@ module Particle
       def login(username, password, options = {})
         token = create_token(username, password, options)
         self.access_token = token
-        puts "In login " << self.inspect
         token
       end
 

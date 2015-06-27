@@ -53,11 +53,15 @@ describe Particle::Client::Tokens, :vcr do
       expect(token).to be_kind_of Particle::Token
     end
 
-    it "sets the new token on the client" do
-      #puts Particle.client.inspect
+    it "sets the new token on the module" do
       token = Particle.login(username, password)
-      puts Particle.client.inspect
-      expect(Particle.client.access_token).to eq token.access_token
+      expect(Particle.access_token).to eq token.access_token
+    end
+
+    it "sets the new token on the client" do
+      client = Particle::Client.new
+      token = client.login(username, password)
+      expect(client.access_token).to eq token.access_token
     end
   end
 

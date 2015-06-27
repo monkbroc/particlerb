@@ -49,8 +49,6 @@ module Particle
         else
           value
         end
-      puts "New token: #{@access_token}"
-      puts "Agent: #{agent}"
     end
   end
 end
