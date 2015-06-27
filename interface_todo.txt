@@ -27,7 +27,7 @@ V0.0.2:
 ✓ Particle.login(user, password, options) ==> set access_token on client
 ✓ Particle.create_token(user, password, options)
 ✓ Particle.tokens(user, password) ==> Array<Particle::Tokens>
-Particle.remove_token(user, password, token)
+✓ Particle.remove_token(user, password, token)
 
 
 
