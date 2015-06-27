@@ -1,9 +1,9 @@
 require 'helper'
 
-describe Particle::Client::Devices do
+describe Particle::Client::Devices, :vcr do
   let(:id) { test_particle_device_ids[0] }
 
-  describe ".devices", :vcr do
+  describe ".devices" do
     it "returns all claimed Particle devices" do
       devices = Particle.devices
       expect(devices).to be_kind_of Array
@@ -11,7 +11,7 @@ describe Particle::Client::Devices do
     end
   end
 
-  describe ".device_attributes", :vcr do
+  describe ".device_attributes" do
     context "when the device is online" do
       it "returns attributes" do
         attr = Particle.device_attributes(id)
@@ -38,7 +38,7 @@ describe Particle::Client::Devices do
     end
   end
 
-  describe ".claim_device", :vcr do
+  describe ".claim_device" do
     context "when the device is online" do
       it "claims the device" do
         # Make sure test device 0 is not claimed before recording VCR cassette
@@ -61,7 +61,7 @@ describe Particle::Client::Devices do
     end
   end
 
-  describe ".remove_device", :vcr do
+  describe ".remove_device" do
     context "when the device exists" do
       it "removes the device" do
         # Make sure test device 0 is claimed before recording VCR cassette
@@ -76,7 +76,7 @@ describe Particle::Client::Devices do
     end
   end
 
-  describe ".rename_device", :vcr do
+  describe ".rename_device" do
     context "when the device exists" do
       it "renames the device" do
         expect(Particle.rename_device(id, "fiesta")).to eq true
@@ -91,7 +91,7 @@ describe Particle::Client::Devices do
     end
   end
 
-  describe ".call_function", :vcr do
+  describe ".call_function" do
     context "when the device is online" do
       context "when the function exists" do
         it "calls the function on the device firmware" do
@@ -125,7 +125,7 @@ describe Particle::Client::Devices do
     end
   end
 
-  describe ".get_variable", :vcr do
+  describe ".get_variable" do
     context "when the device is online" do
       context "when the variable exists" do
         it "returns the value on the firmware variable" do
@@ -158,7 +158,7 @@ describe Particle::Client::Devices do
     end
   end
 
-  describe ".signal_device", :vcr do
+  describe ".signal_device" do
     context "when the device is online" do
       it "starts shouting rainbows" do
         expect(Particle.signal_device(id, true)).to eq true

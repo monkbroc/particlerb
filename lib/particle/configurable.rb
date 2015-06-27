@@ -3,7 +3,7 @@ module Particle
   # Configuration options for {Client}, defaulting to values in
   # {Default}
   module Configurable
-    # @!attribute [w] access_token
+    # @!attribute [String] access_token
     #   @see http://docs.particle.io/core/api/#introduction-authentication
     #   @return [String] Particle access token for authentication
     # @!attribute api_endpoint

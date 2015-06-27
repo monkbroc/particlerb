@@ -20,14 +20,14 @@ V0.0.2:
 ✓ Particle.publish
 
 ✓ Particle.webhooks
-✓ Particle.createWebhook
-✓ Particle.removeWebhook
+✓ Particle.create_webhook
+✓ Particle.remove_webhook
 
 
-Particle.login(user, password, options) ==> set access_token on client
-  aliased as createToken
-Particle.tokens ==> Array<Particle::Tokens>
-Particle.deleteToken(user, password, token)
+✓ Particle.login(user, password, options) ==> set access_token on client
+✓ Particle.create_token(user, password, options)
+✓ Particle.tokens(user, password) ==> Array<Particle::Tokens>
+Particle.remove_token(user, password, token)
 
 
 

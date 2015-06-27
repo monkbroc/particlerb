@@ -19,6 +19,7 @@ module Particle
       @attributes[:token]
     end
     alias_method :id, :token
+    alias_method :access_token, :token
 
     attribute_reader :expires_at, :client
 
@@ -42,6 +43,15 @@ module Particle
       inspected
     end
 
+    # Remove a Particle token
+    # @param username [String] The username (email) used to log in to
+    #                          the Particle Cloud API
+    # @param password [String] The password used to log in to
+    #                          the Particle Cloud API
+    def remove(username, password)
+      @client.remove_token(username, password, self)
+    end
+
     def self.list_path
       "v1/access_tokens"
     end
@@ -50,25 +60,8 @@ module Particle
       "/oauth/token"
     end
 
-    # # Add a Particle webhook
-    # def create
-    #   new_webhook = @client.create_webhook(@attributes)
-    #   @attributes = new_webhook.attributes
-    #   self
-    # end
-
-    # # Remove a Particle webhook
-    # def remove
-    #   @client.remove_webhook(self)
-    # end
-
-    # def self.create_path
-    #   "v1/webhooks"
-    # end
-
-    # def path
-    #   "/v1/webhooks/#{id}"
-    # end
+    def path
+      "/v1/access_tokens/#{access_token}"
+    end
   end
 end
-

@@ -1,9 +1,9 @@
 require 'helper'
 
-describe Particle::Client::Webhooks do
+describe Particle::Client::Webhooks, :vcr do
   let(:id) { test_particle_webhook_ids[0] }
 
-  describe ".webhooks", :vcr do
+  describe ".webhooks" do
     it "returns all Particle webhooks" do
       webhooks = Particle.webhooks
       expect(webhooks).to be_kind_of Array
@@ -11,7 +11,7 @@ describe Particle::Client::Webhooks do
     end
   end
 
-  describe ".webhook_attributes", :vcr do
+  describe ".webhook_attributes" do
     context "when the webhook exists" do
       it "returns attributes" do
         attr = Particle.webhook_attributes(id)
@@ -35,7 +35,7 @@ describe Particle::Client::Webhooks do
   end
 
 
-  describe ".create_webhook", :vcr do
+  describe ".create_webhook" do
     it "creates a webhook with minimum parameters" do
       webhook = create_webhook
       expect(webhook).to be_kind_of Particle::Webhook
@@ -52,7 +52,7 @@ describe Particle::Client::Webhooks do
     end
   end
 
-  describe ".remove_webhook", :vcr do
+  describe ".remove_webhook" do
     context "when the webhook exists" do
       it "removes the webhook" do
         webhook = create_webhook

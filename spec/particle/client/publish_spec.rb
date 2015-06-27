@@ -1,9 +1,9 @@
 require 'helper'
 
-describe Particle::Client::Publish do
+describe Particle::Client::Publish, :vcr do
   # Make sure you have at least 1 device on your particle account to be
   # able to publish events
-  describe ".publish", :vcr do
+  describe ".publish" do
     it "publishes a public event with only a name" do
       result = Particle.publish(
         name: "test"

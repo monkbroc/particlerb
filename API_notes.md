@@ -72,3 +72,5 @@ When there are too many hooks, the response is 200 OK with {"ok": false, "error"
 
 Device "last_app" only shows up in the /v1/devices endpoint, not the /v1/devices/{id} endpoint
 
+No error when deleting a non-existent token? 200 OK with { "ok": true }
+
