@@ -103,12 +103,14 @@ module Particle
     #
     # @param file_paths [Array<String>] File paths to send to cloud
     #                                   and flash
+    # @param options [Hash] Flashing options
+    #                       :binary => true to skip the compile stage
     # @return [OpenStruct] Result of flashing.
     #                :ok => true on success
     #                :errors => String with compile errors
     #                
-    def flash(file_paths)
-      @client.flash(self, file_paths)
+    def flash(file_paths, options = {})
+      @client.flash_device(self, file_paths, options)
     end
 
     def self.list_path

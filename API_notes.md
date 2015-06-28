@@ -7,6 +7,7 @@ Inconsistent error messages:
   - 200 OK (!) when signaling when device is offline: `{ "ok": false, "errors": [ { "error": "Timed out, didn't hear back from device service" } ] }`
   - 404 NotFound when claiming and device doesn't exist: `{ "ok": false, "errors": ["device doesn't exist"] }`
   - 404 NotFound when claiming and device is offline: `{ "ok": false, "errors": [ [ "Core isn't online", 404 ] ] }`
+  - 200 OK when flashing and device is offline `{ "ok": false, "errors": [ "Request Timed Out" ] }`
 
     POST /v1/devices without id
     {
@@ -76,4 +77,7 @@ No error when deleting a non-existent token? 200 OK with { "ok": true }
 
 Output of flash with compile errors is weirdly nested:
 { "ok": false, "errors": [ { "ok": false, errors: [ "compiler errors\netc...", { "killed": false, ... } ] } ] }
+
+
+When flashing a binary, the response is 200 OK with `{"id": "__PARTICLE_DEVICE_ID__", "status:: "Update started"}` but missing "ok": true. Also other endpoints don't return the id like this.
 
