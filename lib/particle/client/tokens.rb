@@ -44,8 +44,11 @@ module Particle
       #                          the Particle Cloud API
       # @param password [String] The password used to log in to
       #                          the Particle Cloud API
-      # @param options [Hash] Additional Particle Cloud API options to
+      # @param options [Hash] Optional Particle Cloud API options to
       #                       create the token.
+      #                       :expires_in => How many seconds should the token last for?
+      #                                      0 means a token that never expires
+      #                       :expires_at => Date and time when should the token expire
       # @return [Token] The token object
       def create_token(username, password, options = {})
         data = URI.encode_www_form({
@@ -59,7 +62,8 @@ module Particle
           password: 'particle'  # specified by docs
         }
         result = request(:post, Token.create_path, data, http_options)
-        token(result[:access_token])
+        result[:token] = result.delete(:access_token)
+        token(result)
       end
 
       # Authenticate with Particle and start using the token on the

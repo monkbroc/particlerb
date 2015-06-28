@@ -59,5 +59,14 @@ describe Particle::Device do
       expect(device.signal).to eq true
     end
   end
+
+  describe ".flash", :vcr do
+    let(:source_files) { [fixture("good_code.ino")] }
+
+    it "starts flashing succesfully" do
+      result = device.flash(source_files)
+      expect(result.ok).to eq true
+    end
+  end
 end
 

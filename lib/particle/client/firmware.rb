@@ -14,8 +14,11 @@ module Particle
       #
       # @param target [String, Device] A device id, name or {Device} object that will
       #                                receive the new firmware
+      # @param file_paths [Array<String>] File paths to send to cloud
+      #                                   and flash
       # @return [OpenStruct] Result of flashing.
       #                :ok => true on success
+      #                :errors => String with compile errors
       #                
       def flash(target, file_paths)
         params = {}

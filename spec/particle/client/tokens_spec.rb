@@ -32,6 +32,17 @@ describe Particle::Client::Tokens, :vcr do
         token = Particle.create_token(username, password)
         expect(token).to be_kind_of Particle::Token
       end
+      it "creates a token with a specific expiration duration" do
+        token = Particle.create_token(username, password, expires_in: 3600)
+        expect(token.attributes[:expires_in]).to eq 3600
+      end
+      it "creates a token with a specific expiration date" do
+        date = Date.today + 90
+        day_in_seconds = 24 * 60 * 60
+        token = Particle.create_token(username, password, expires_at: date)
+        expect(token.attributes[:expires_in]).
+          to be_within(day_in_seconds).of(90 * day_in_seconds)
+      end
     end
     context "with invalid username" do
       it "raises BadRequest" do
@@ -66,7 +77,7 @@ describe Particle::Client::Tokens, :vcr do
   end
 
   describe ".remove_token", :vcr do
-    context "when the webhook exists" do
+    context "when the token exists" do
       it "removes the token" do
         token = Particle.create_token(username, password)
         expect(Particle.remove_token(username, password, token)).to eq true

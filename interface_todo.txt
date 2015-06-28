@@ -33,7 +33,8 @@ V0.0.2:
 
 V0.0.3:
 
-  device.flash(list of files)
+✓ Particle.flash
+✓ device.flash(list of files)
   device.compile(list of files)
 
 Particle.compile(list of files, platform)
