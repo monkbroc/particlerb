@@ -44,4 +44,48 @@ describe Particle::Client::Firmware, :vcr do
       end
     end
   end
+
+  describe ".compile_firmware", :vcr do
+    context "with valid code" do
+      it "compiles succesfully" do
+        result = Particle.compile_code(source_file)
+        expect(result.ok).to eq true
+      end
+      it "provides a download url" do
+        result = Particle.compile_code(source_file)
+        expect(result.binary_url).to start_with "/v1/binaries"
+      end
+      it "compiles multiple files succesfully" do
+        result = Particle.compile_code(multiple_source_files)
+        expect(result.ok).to eq true
+      end
+      it "compiles for a specific device" do
+        result = Particle.compile_code(source_file, device_id: id)
+        expect(result.ok).to eq true
+      end
+      # FIXME: Doesn't work yet
+      # it "compiles for a specific platform", :vcr => { :record => :all } do
+      #   result = Particle.compile_code(source_file, platform: :photon)
+      #   expect(result.ok).to eq true
+      # end
+    end
+
+    context "with bad code" do
+      it "doesn't compile" do
+        result = Particle.compile_code(bad_source_file)
+        expect(result.ok).to eq false
+      end
+      it "returns the compiler errors" do
+        result = Particle.compile_code(bad_source_file)
+        expect(result.errors).to be_kind_of String
+      end
+    end
+  end
+  describe ".download_binary", vcr: { preserve_exact_body_bytes: true } do
+    it "downloads the binary" do
+      result = Particle.compile_code(source_file)
+      binary = Particle.download_binary(result.binary_id)
+      expect(binary.length).to be > 1000
+    end
+  end
 end

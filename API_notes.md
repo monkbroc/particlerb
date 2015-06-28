@@ -81,3 +81,5 @@ Output of flash with compile errors is weirdly nested:
 
 When flashing a binary, the response is 200 OK with `{"id": "__PARTICLE_DEVICE_ID__", "status:: "Update started"}` but missing "ok": true. Also other endpoints don't return the id like this.
 
+Compile with platform_id = 1 fails with 406 Not Acceptable and "Something went wrong getting that workspace"
+

@@ -1,5 +1,3 @@
-require 'particle/event'
-
 module Particle
   class Client
 
@@ -7,6 +5,7 @@ module Particle
     #
     # @see http://docs.particle.io/core/api/#publishing-events
     module Publish
+      PUBLISH_PATH = "v1/devices/events"
 
       # Publish an event to your devices
       #
@@ -30,7 +29,7 @@ module Particle
         params[:ttl] = options[:ttl] if options[:ttl]
         params[:private] = true if options[:private]
 
-        result = post(Event.publish_path, params)
+        result = post(PUBLISH_PATH, params)
         result[:ok]
       end
     end

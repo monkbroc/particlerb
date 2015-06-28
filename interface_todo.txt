@@ -35,9 +35,9 @@ V0.0.3:
 
 ✓ Particle.flash
 ✓ device.flash(list of files)
-  device.compile(list of files)
+✓ device.compile(list of files)
 
-Particle.compile(list of files, platform)
+✓ Particle.compile(list of files, platform)
 Particle.downloadBinary
 
 

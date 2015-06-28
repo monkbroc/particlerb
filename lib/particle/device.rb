@@ -98,7 +98,7 @@ module Particle
       @client.signal_device(self, enabled)
     end
 
-    # Flash new firmware to a Particle device from source code or
+    # Flash new firmware to this device from source code or
     # binary
     #
     # @param file_paths [Array<String>] File paths to send to cloud
@@ -111,6 +111,18 @@ module Particle
     #                
     def flash(file_paths, options = {})
       @client.flash_device(self, file_paths, options)
+    end
+
+    # Compile firmware from source code for this device
+    #
+    # @param file_paths [Array<String>] File paths to send to cloud
+    #                                   and flash
+    # @return [OpenStruct] Result of flashing.
+    #                :ok => true on success
+    #                :errors => String with compile errors
+    #                
+    def compile(file_paths)
+      @client.compile_code(file_paths, device_id: id)
     end
 
     def self.list_path

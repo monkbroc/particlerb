@@ -68,5 +68,14 @@ describe Particle::Device do
       expect(result.ok).to eq true
     end
   end
+
+  describe ".compile", :vcr do
+    let(:source_file) { fixture("good_code.ino") }
+
+    it "compiles succesfully" do
+      result = device.compile(source_file)
+      expect(result.ok).to eq true
+    end
+  end
 end
 
