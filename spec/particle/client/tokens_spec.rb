@@ -92,4 +92,14 @@ describe Particle::Client::Tokens, :vcr do
       # end
     end
   end
+
+  describe "when using an expired token", :vcr do
+    it "raises Unauthorized" do
+      Particle.login(username, password, expires_in: 5)
+      # Uncomment when recording VCR cassette
+      # sleep(10)
+      expect { Particle.devices}.
+        to raise_error(Particle::Unauthorized)
+    end
+  end
 end

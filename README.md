@@ -17,7 +17,7 @@ Ruby client for the [Particle.io] Cloud API with an object-oriented interface
 $ gem install particlerb
 
 # or add to your Gemfile
-gem "particlerb", "~> 0.0.2"
+gem "particlerb", "~> 0.0.3"
 
 # Require the gem
 require 'particle'
@@ -208,6 +208,21 @@ Create a new webhook. Pass a hash of [any options accepted by the Particle Cloud
 ```ruby
 Particle.webhook(event: "weather", url: "http://myserver.com/report").create
 ```
+
+Currently the available options are:
+
+* event
+* url
+* deviceid
+* requestType
+* headers
+* json
+* query
+* auth
+* mydevices
+* rejectUnauthorized
+
+
 See the [Particle Cloud API documentation about webhooks][webhook docs] for more details.
 
 [webhook docs]: http://docs.particle.io/core/webhooks/
@@ -244,6 +259,11 @@ Create a token but don't set it on the client. Returns a `Particle::Token`
 ```ruby
 Particle.token.create("me@example.com", "pa$$w0rd")
 ```
+
+`login` and `token.create` take an optional hash of options.
+
+* `expires_in`: number of seconds that the token will be valid
+* `expires_at`: `Date` when the token will become invalid
 
 Invalidate and delete a token. Returns true on success.
 
