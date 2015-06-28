@@ -1,5 +1,7 @@
-require 'sawyer'
+require 'faraday'
+require 'faraday_middleware'
 require 'particle/response/raise_error'
+require 'particle/response/parse_json_symbols'
 
 module Particle
 
@@ -11,6 +13,9 @@ module Particle
       builder.use Particle::Response::RaiseError
       # For file upload
       builder.request :multipart
+
+      builder.request :json
+      builder.use Particle::Response::ParseJsonSymbols, :content_type => /\bjson$/
       builder.adapter Faraday.default_adapter
     end
 
@@ -18,7 +23,7 @@ module Particle
     #
     # @param url [String] The path, relative to {#api_endpoint}
     # @param options [Hash] Query and header params for request
-    # @return [Sawyer::Resource]
+    # @return [Hash] JSON response as a hash
     def get(url, options = {})
       request :get, url, options
     end
@@ -27,7 +32,7 @@ module Particle
     #
     # @param url [String] The path, relative to {#api_endpoint}
     # @param options [Hash] Body and header params for request
-    # @return [Sawyer::Resource]
+    # @return [Hash] JSON response as a hash
     def post(url, options = {})
       request :post, url, options
     end
@@ -36,7 +41,7 @@ module Particle
     #
     # @param url [String] The path, relative to {#api_endpoint}
     # @param options [Hash] Body and header params for request
-    # @return [Sawyer::Resource]
+    # @return [Hash] JSON response as a hash
     def put(url, options = {})
       request :put, url, options
     end
@@ -45,7 +50,7 @@ module Particle
     #
     # @param url [String] The path, relative to {#api_endpoint}
     # @param options [Hash] Body and header params for request
-    # @return [Sawyer::Resource]
+    # @return [Hash] JSON response as a hash
     def patch(url, options = {})
       request :patch, url, options
     end
@@ -54,18 +59,17 @@ module Particle
     #
     # @param url [String] The path, relative to {#api_endpoint}
     # @param options [Hash] Query and header params for request
-    # @return [Sawyer::Resource]
+    # @return [Hash] JSON response as a hash
     def delete(url, options = {})
       request :delete, url, options
     end
 
-    # Hypermedia agent for the Particle API
+    # HTTP connection for the Particle API
     #
-    # @return [Sawyer::Agent]
-    def agent
-      @agent ||= Sawyer::Agent.new(endpoint, sawyer_options) do |http|
-        http.headers[:content_type] = "application/json"
-        http.headers[:user_agent] = user_agent
+    # @return [Faraday::Connection]
+    def connection
+      @connection ||= Faraday.new(conn_opts) do |http|
+        http.url_prefix = endpoint
         if @access_token
           http.authorization :Bearer, @access_token
         end
@@ -74,7 +78,7 @@ module Particle
 
     # Response for last HTTP request
     #
-    # @return [Sawyer::Response]
+    # @return [Faraday::Response]
     attr_reader :last_response
 
     protected
@@ -85,8 +89,8 @@ module Particle
 
     private
 
-    def reset_agent
-      @agent = nil
+    def reset_connection
+      @connection = nil
     end
 
     def request(method, path, data, options = {})
@@ -106,17 +110,24 @@ module Particle
           basic_auth_header(username, password)
       end
 
-      @last_response = response = agent.call(method, URI::Parser.new.escape(path.to_s), data, options)
-      response.data
+      @last_response = response = connection.send(method, URI::Parser.new.escape(path.to_s)) do |req|
+        if data && method != :get
+          req.body = data
+        end
+        if params = options[:query]
+          req.params.update params
+        end
+        if headers = options[:headers]
+          req.headers.update headers
+        end
+      end
+      response.body
     end
 
-    def sawyer_options
+    def conn_opts
       conn_opts = @connection_options.dup
       conn_opts[:builder] = MIDDLEWARE
-      conn_opts[:proxy] = @proxy if @proxy
-      {
-        faraday: Faraday.new(conn_opts)
-      }
+      conn_opts
     end
 
     # Temporarily set the Authorization to use basic auth

@@ -11,13 +11,11 @@ module Particle
 
       # Create a domain model for a Particle token
       #
-      # @param target [String, Sawyer::Resource, Token] A token id, Sawyer::Resource or {Token} object
+      # @param target [String, Hash, Token] A token id, hash of attributes or {Token} object
       # @return [Token] A token object to interact with
       def token(target = {})
         if target.is_a? Token
           target
-        elsif target.respond_to?(:to_attrs)
-          Token.new(self, target.to_attrs)
         else
           Token.new(self, target)
         end
@@ -35,8 +33,8 @@ module Particle
           username: username,
           password: password
         }
-        request(:get, Token.list_path, "", http_options).map do |resource|
-          token(resource)
+        request(:get, Token.list_path, "", http_options).map do |attributes|
+          token(attributes)
         end
       end
 
@@ -61,7 +59,7 @@ module Particle
           password: 'particle'  # specified by docs
         }
         result = request(:post, Token.create_path, data, http_options)
-        token(result.access_token)
+        token(result[:access_token])
       end
 
       # Authenticate with Particle and start using the token on the
@@ -94,7 +92,7 @@ module Particle
           password: password
         }
         result = request(:delete, token(target).path, "", http_options)
-        result.ok
+        result[:ok]
       end
     end
   end

@@ -10,13 +10,11 @@ module Particle
 
       # Create a domain model for a Particle device
       #
-      # @param target [String, Sawyer::Resource, Device] A device id, name, Sawyer::Resource or {Device} object
+      # @param target [String, Hash, Device] A device id, name, hash of attributes or {Device} object
       # @return [Device] A device object to interact with
       def device(target)
         if target.is_a? Device
           target
-        elsif target.respond_to?(:to_attrs)
-          Device.new(self, target.to_attrs)
         else
           Device.new(self, target)
         end
@@ -26,8 +24,8 @@ module Particle
       #
       # @return [Array<Device>] List of Particle devices to interact with
       def devices
-        get(Device.list_path).map do |resource|
-          device(resource)
+        get(Device.list_path).map do |attributes|
+          device(attributes)
         end
       end
 
@@ -36,8 +34,7 @@ module Particle
       # @param target [String, Device] A device id, name or {Device} object
       # @return [Hash] The device attributes
       def device_attributes(target)
-        result = get(device(target).path)
-        result.to_attrs
+        get(device(target).path)
       end
 
       # Add a Particle device to your account
@@ -47,7 +44,7 @@ module Particle
       # @return [Device] A device object to interact with
       def claim_device(target)
         result = post(Device.claim_path, id: device(target).id_or_name)
-        device(result.id)
+        device(result[:id])
       end
 
       # Remove a Particle device from your account
@@ -56,7 +53,7 @@ module Particle
       # @return [boolean] true for success
       def remove_device(target)
         result = delete(device(target).path)
-        result.ok
+        result[:ok]
       end
 
       # Rename a Particle device in your account
@@ -66,7 +63,7 @@ module Particle
       # @return [boolean] true for success
       def rename_device(target, name)
         result = put(device(target).path, name: name)
-        result.name == name
+        result[:name] == name
       end
 
       # Call a function in the firmware of a Particle device
@@ -77,7 +74,7 @@ module Particle
       # @return [Integer] Return value from the firmware function
       def call_function(target, name, argument = "")
         result = post(device(target).function_path(name), arg: argument)
-        result.return_value
+        result[:return_value]
       end
 
       # Get the value of a variable in the firmware of a Particle device
@@ -87,7 +84,7 @@ module Particle
       # @return [String, Number] Value from the firmware variable
       def get_variable(target, name)
         result = get(device(target).variable_path(name))
-        result.result
+        result[:result]
       end
 
       # Signal the device to start blinking the RGB LED in a rainbow
@@ -99,10 +96,10 @@ module Particle
       def signal_device(target, enabled = true)
         result = put(device(target).path, signal: enabled ? '1' : '0')
         # FIXME: API bug. Should return HTTP 408 so result.ok wouldn't be necessary
-        if result.ok == false
+        if result[:ok] == false
           false
         else
-          result.signaling
+          result[:signaling]
         end
       end
     end

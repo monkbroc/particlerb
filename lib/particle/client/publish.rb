@@ -31,7 +31,7 @@ module Particle
         params[:private] = true if options[:private]
 
         result = post(Event.publish_path, params)
-        result.ok
+        result[:ok]
       end
     end
   end

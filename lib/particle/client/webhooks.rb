@@ -10,13 +10,11 @@ module Particle
 
       # Create a domain model for a Particle webhook
       #
-      # @param target [String, Sawyer::Resource, Webhook] A webhook id, Sawyer::Resource or {Device} object
+      # @param target [String, Hash, Webhook] A webhook id, hash of attributes or {Device} object
       # @return [Webhook] A webhook object to interact with
       def webhook(target)
         if target.is_a? Webhook
           target
-        elsif target.respond_to?(:to_attrs)
-          Webhook.new(self, target.to_attrs)
         else
           Webhook.new(self, target)
         end
@@ -26,8 +24,8 @@ module Particle
       #
       # @return [Array<Webhook>] List of Particle webhooks to interact with
       def webhooks
-        get(Webhook.list_path).map do |resource|
-          webhook(resource)
+        get(Webhook.list_path).map do |attributes|
+          webhook(attributes)
         end
       end
 
@@ -39,8 +37,7 @@ module Particle
       # @param target [String, Webhook] A webhook id or {Webhook} object
       # @return [Hash] The webhook attributes and test message response
       def webhook_attributes(target)
-        result = get(webhook(target).path)
-        result.to_attrs
+        get(webhook(target).path)
       end
 
       # Creates a new Particle webhook
@@ -59,7 +56,7 @@ module Particle
       # @return [boolean] true for success
       def remove_webhook(target)
         result = delete(webhook(target).path)
-        result.ok
+        result[:ok]
       end
     end
   end

@@ -44,7 +44,7 @@ module Particle
     #
     # @param value [String] 40 character Particle OAuth2 access token
     def access_token=(value)
-      reset_agent
+      reset_connection
       @access_token = 
         if value.respond_to? :access_token
           value.access_token
