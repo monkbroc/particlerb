@@ -125,6 +125,18 @@ module Particle
       @client.compile_code(file_paths, device_id: id)
     end
 
+    # Change the product_id on the device.
+    # Use this carefully, it will impact what updates you receive, and
+    # can only be used for products that have given their permission
+    #
+    # @param product_id [String] New product id
+    # @param should_update [String] if the device should be
+    #                   immediately updated after changing the product_id
+    # @return [boolean] true on success
+    def change_product(product_id, should_update = false)
+      @client.change_device_product(self, product_id, should_update)
+    end
+
     def self.list_path
       "v1/devices"
     end

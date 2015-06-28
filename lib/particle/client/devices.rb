@@ -102,6 +102,27 @@ module Particle
           result[:signaling]
         end
       end
+
+      # Change the product_id on the device.
+      # Use this carefully, it will impact what updates you receive, and
+      # can only be used for products that have given their permission
+      #
+      # @param target [String, Device] A device id, name or {Device} object
+      # @param product_id [String] New product id
+      # @param should_update [String] if the device should be
+      #                   immediately updated after changing the product_id
+      # @return [boolean] true on success
+      def change_device_product(target, product_id, should_update = false)
+        params = {
+          product_id: product_id,
+          update_after_claim: should_update
+        }
+        result = put(device(target).path, params)
+        if result[:error] == "Nothing to do?"
+          result[:ok] = false
+        end
+        result[:ok]
+      end
     end
   end
 end

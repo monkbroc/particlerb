@@ -132,12 +132,18 @@ device = Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d')
 device.variable('version') # ==> "1.0.1"
 ```
 
-
 Signal a device to start blinking the RGB LED in rainbow patterns. Returns whether the device is signaling.
 
 ```ruby
 Particle.device('nyan_cat').signal(true)
 ```
+
+Change the product id. The meaning of the product id is specific to your application and account.
+
+```ruby
+Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').change_product(3)
+```
+
 See the [Particle Cloud API documentation about devices][device docs] for more details.
 
 [device docs]: http://docs.particle.io/core/api/#introduction-device-information
@@ -249,6 +255,45 @@ Particle.tokens.first.remove("me@example.com", "pa$$w0rd")
 See the [Particle Cloud API documentation about authentication and token][authentication docs] for more details.
 
 [authentication docs]: http://docs.particle.io/core/api/#introduction-authentication
+
+## Compiling and flashing
+
+Flash new firmware from source. Returns a result struct
+
+```ruby
+result = device.flash('blink_led.ino')
+result.ok # ==> true
+
+result = device.flash('bad_code.ino')
+result.ok # ==> false
+result.errors # ==> "Compiler errors\n...\n"
+
+device.flash(Dir.glob('firmware/*') # all files in a directory
+device.flash('application.bin', binary: true)
+```
+
+Compile firmware for a specific device, platform or product. Returns a result struct
+
+```ruby
+result = device.compile('blink_led.ino')
+result.ok # ==> true
+result.binary_id # ==> "559061e16b4ba27e4602c5c8"
+
+Particle.compile_code(Dir.glob('firmware/*', platform: :core) # or :photon
+Particle.compile_code(Dir.glob('firmware/*', product_id: 1) # meaning depends on your account
+```
+
+Download a compiled binary. Returns the result bytes
+
+```ruby
+result = device.compile('blink_led.ino')
+binary = Particle.download_binary(result.binary_id)
+File.new('application.bin', 'w') { |f| f.write(binary) }
+```
+
+See the [Particle Cloud API documentation about firmware][firmware docs] for more details.
+
+[firmware docs]: http://docs.particle.io/core/api/#basic-functions-verifying-and-flashing-new-firmware
 
 
 ## Errors

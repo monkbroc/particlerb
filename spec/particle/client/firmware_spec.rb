@@ -1,4 +1,5 @@
 require 'helper'
+require 'tempfile'
 
 describe Particle::Client::Firmware, :vcr do
   let(:id) { test_particle_device_ids[0] }
@@ -81,11 +82,25 @@ describe Particle::Client::Firmware, :vcr do
       end
     end
   end
+
   describe ".download_binary", vcr: { preserve_exact_body_bytes: true } do
     it "downloads the binary" do
       result = Particle.compile_code(source_file)
       binary = Particle.download_binary(result.binary_id)
       expect(binary.length).to be > 1000
+    end
+  end
+
+  it "compiles, downloads and flashes the binary", vcr: { preserve_exact_body_bytes: true } do
+    result = Particle.compile_code(source_file)
+    binary = Particle.download_binary(result.binary_id)
+    file = Tempfile.new('binary')
+    begin
+      file.write(binary)
+      Particle.flash_device(id, file.path, binary: true)
+    ensure
+      file.close
+      file.unlink
     end
   end
 end

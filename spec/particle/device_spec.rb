@@ -77,5 +77,12 @@ describe Particle::Device do
       expect(result.ok).to eq true
     end
   end
+
+  describe ".change_product", :vcr do
+    # FIXME: don't want to try this before figuring out what changing product_id does
+    #it "works" do
+    #  expect(device.change_product(id, 0)).to eq true
+    #end
+  end
 end
 
