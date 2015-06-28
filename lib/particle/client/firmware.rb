@@ -1,4 +1,5 @@
 require 'particle/device'
+require 'ostruct'
 
 module Particle
   class Client
@@ -13,16 +14,21 @@ module Particle
       #
       # @param target [String, Device] A device id, name or {Device} object that will
       #                                receive the new firmware
-      # @return [Device] A device object to interact with
+      # @return [OpenStruct] Result of flashing.
+      #                :ok => true on success
+      #                
       def flash(target, file_paths)
         params = {}
         file_paths.each_with_index do |file, index|
           params[:"file#{index > 0 ? index : ""}"] =
             Faraday::UploadIO.new(file, "text/plain")
         end
-        puts device(target).path
         result = request(:put, device(target).path, params)
-        result.ok
+        # Normalize the weird output structure
+        if result[:ok] == false
+          result[:errors] = result[:errors][0][:errors][0]
+        end
+        OpenStruct.new(result)
       end
 
       # # Remove a Particle device from your account

@@ -5,16 +5,22 @@ describe Particle::Client::Firmware, :vcr do
   let(:source_files) { [fixture("good_code.ino")] }
   let(:bad_source_files) { [fixture("bad_code.ino")] }
 
-  # describe ".flash", :vcr => { record: :all } do
-  #   context "with valid code" do
-  #     it "starts flashing succesfully" do
-  #       expect(Particle.flash(id, source_files)).to eq true
-  #     end
-  #   end
-  #   context "with bad code" do
-  #     it "returns the compiler errors" do
-  #       expect(Particle.flash(id, bad_source_files)).to eq true
-  #     end
-  #   end
-  # end
+  describe ".flash", :vcr do
+    context "with valid code" do
+      it "starts flashing succesfully" do
+        result = Particle.flash(id, source_files)
+        expect(result.ok).to eq true
+      end
+    end
+    context "with bad code" do
+      it "doesn't flash" do
+        result = Particle.flash(id, bad_source_files)
+        expect(result.ok).to eq false
+      end
+      it "returns the compiler errors" do
+        result = Particle.flash(id, bad_source_files)
+        expect(result.errors).to be_kind_of String
+      end
+    end
+  end
 end

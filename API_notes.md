@@ -74,3 +74,6 @@ Device "last_app" only shows up in the /v1/devices endpoint, not the /v1/devices
 
 No error when deleting a non-existent token? 200 OK with { "ok": true }
 
+Output of flash with compile errors is weirdly nested:
+{ "ok": false, "errors": [ { "ok": false, errors: [ "compiler errors\netc...", { "killed": false, ... } ] } ] }
+
