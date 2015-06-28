@@ -94,6 +94,22 @@ module Particle
     end
 
     def request(method, path, data, options = {})
+      prepare_request_options(data, options)
+      @last_response = response = connection.send(method, URI::Parser.new.escape(path.to_s)) do |req|
+        if data && method != :get
+          req.body = data
+        end
+        if params = options[:query]
+          req.params.update params
+        end
+        if headers = options[:headers]
+          req.headers.update headers
+        end
+      end
+      response.body
+    end
+
+    def prepare_request_options(data, options)
       if data.is_a?(Hash)
         options[:query]   ||= data.delete(:query) || {}
         options[:headers] ||= data.delete(:headers) || {}
@@ -109,19 +125,6 @@ module Particle
         options[:headers][:authorization] =
           basic_auth_header(username, password)
       end
-
-      @last_response = response = connection.send(method, URI::Parser.new.escape(path.to_s)) do |req|
-        if data && method != :get
-          req.body = data
-        end
-        if params = options[:query]
-          req.params.update params
-        end
-        if headers = options[:headers]
-          req.headers.update headers
-        end
-      end
-      response.body
     end
 
     def conn_opts
