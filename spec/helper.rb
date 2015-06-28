@@ -80,3 +80,11 @@ VCR.configure do |c|
   c.hook_into :webmock
 end
 
+def fixture_path
+  File.expand_path("../fixtures", __FILE__)
+end
+
+def fixture(file)
+  File.join(fixture_path, file)
+end
+

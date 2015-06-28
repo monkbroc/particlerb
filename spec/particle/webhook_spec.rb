@@ -14,6 +14,9 @@ describe Particle::Webhook do
     it "returns attributes" do
       expect(webhook.attributes).to be_kind_of Hash
     end
+    it "includes details like url" do
+      expect(webhook.attributes[:url]).to be_kind_of String
+    end
   end
 
   def create_webhook(options = {})

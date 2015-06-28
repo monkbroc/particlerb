@@ -9,6 +9,8 @@ module Particle
     # Faraday middleware stack
     MIDDLEWARE = Faraday::RackBuilder.new do |builder|
       builder.use Particle::Response::RaiseError
+      # For file upload
+      builder.request :multipart
       builder.adapter Faraday.default_adapter
     end
 
@@ -109,15 +111,12 @@ module Particle
     end
 
     def sawyer_options
-      opts = {
-        :links_parser => Sawyer::LinkParsers::Simple.new
-      }
       conn_opts = @connection_options.dup
       conn_opts[:builder] = MIDDLEWARE
       conn_opts[:proxy] = @proxy if @proxy
-      opts[:faraday] = Faraday.new(conn_opts)
-
-      opts
+      {
+        faraday: Faraday.new(conn_opts)
+      }
     end
 
     # Temporarily set the Authorization to use basic auth

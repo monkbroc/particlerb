@@ -12,13 +12,16 @@ Ruby client for the [Particle.io] Cloud API with an object-oriented interface
 
 ## Installation
 
-Install via Rubygems
+```
+# Install via Rubygems
+$ gem install particlerb
 
-    gem install particlerb
+# or add to your Gemfile
+gem "particlerb", "~> 0.0.2"
 
-... or add to your Gemfile
-
-    gem "particlerb", "~> 0.0.2"
+# Require the gem
+require 'particle'
+```
 
 
 ### Providing credentials
@@ -263,6 +266,8 @@ The actual error classes are
 - `ServerError`
 
 See [a description of each error on the Particle API docs][error docs].
+
+This gem uses the Faraday HTTP client library, so API call may raise `Faraday::ClientError` for things like SSL errors, DNS errors, HTTP connection timed out.
 
 [error docs]: http://docs.particle.io/core/api/#introduction-errors
 

@@ -3,6 +3,7 @@ require 'particle/client/devices'
 require 'particle/client/publish'
 require 'particle/client/webhooks'
 require 'particle/client/tokens'
+require 'particle/client/firmware'
 
 module Particle
 
@@ -16,6 +17,7 @@ module Particle
     include Particle::Client::Publish
     include Particle::Client::Webhooks
     include Particle::Client::Tokens
+    include Particle::Client::Firmware
 
     def initialize(options = {})
       # Use options passed in, but fall back to module defaults

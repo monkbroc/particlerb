@@ -14,6 +14,10 @@ describe Particle::Device do
     it "returns attributes" do
       expect(device.attributes).to be_kind_of Hash
     end
+
+    it "includes details like functions" do
+      expect(device.attributes[:functions]).to be_kind_of Array
+    end
   end
 
   describe ".claim", :vcr do
