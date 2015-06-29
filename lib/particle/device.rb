@@ -5,6 +5,10 @@ module Particle
   # Domain model for one Particle device
   class Device < Model
     ID_REGEX = /\h{24}/
+    PRODUCT_IDS = {
+      0 => "Core".freeze,
+      6 => "Photon".freeze
+    }
 
     def initialize(client, attributes)
       super(client, attributes)
@@ -36,6 +40,10 @@ module Particle
       :last_heard, :last_app, :last_ip_address
 
     alias_method :connected?, :connected
+
+    def product
+      PRODUCT_IDS[product_id]
+    end
 
     def get_attributes
       @loaded = true

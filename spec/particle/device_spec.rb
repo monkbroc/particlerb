@@ -16,7 +16,11 @@ describe Particle::Device do
     end
 
     it "includes details like functions" do
-      expect(device.attributes[:functions]).to be_kind_of Array
+      expect(device.functions).to be_kind_of Array
+    end
+
+    it "sets the product string" do
+      expect(["Core", "Photon"]).to include(device.product)
     end
   end
 

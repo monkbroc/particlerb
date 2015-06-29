@@ -88,6 +88,7 @@ device.attributes     # Hash of all attributes
 device.id             # ==> 'f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d'
 device.name           # ==> 'blue_fire'
 device.connected?     # true
+device.product        # "Core" or "Photon"
 device.variables      # {:myvar => "double" } or nil if not connected
 device.functions      # ["myfunction"] or nil if not connected
 device.get_attributes # forces refresh of all attributes from the cloud
