@@ -76,7 +76,7 @@ describe Particle::Client::Devices, :vcr do
     end
   end
 
-  describe ".rename_device", :vcr => { :record => :all} do
+  describe ".rename_device" do
     context "when the device exists" do
       it "renames the device" do
         expect(Particle.rename_device(id, "fiesta")).to eq true

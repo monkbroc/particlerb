@@ -51,12 +51,16 @@ configuration) or as client instance methods.
 ```ruby
 # Fetch the list of devices using the global client
 Particle.devices
+# This is equivalent to
+Particle.client.devices
 
 # Or used a newly created client
 client = Particle::Client.new
 # Fetch the list of devices
 client.devices
 ```
+
+When using this gem in a multi-threaded program like a Rails application running on the puma server, it's safer to use `Particle::Client.new` in each thread rather than using the global  `Particle.client`.
 
 [Web IDE]: http://docs.particle.io/core/build/#flash-apps-with-particle-build-account-information
 [Particle CLI]: http://docs.particle.io/core/cli
