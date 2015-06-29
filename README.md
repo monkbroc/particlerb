@@ -218,15 +218,23 @@ Currently the available options are:
 
 * event
 * url
+* requestType (HTTP method)
 * deviceid
-* requestType
 * headers
+* form
 * json
 * query
 * auth
 * mydevices
 * rejectUnauthorized
 
+Remove a webhook. Returns true on success.
+
+```ruby
+webhook = Particle.webhooks.first
+webhook.remove
+Particle.webhooks.each(&:remove) # remove all
+```
 
 See the [Particle Cloud API documentation about webhooks][webhook docs] for more details.
 
