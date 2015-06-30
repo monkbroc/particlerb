@@ -127,6 +127,7 @@ Call a function on the firmware with an optional `String` argument. Returns the 
 ```ruby
 Particle.device('coffeemaker').function('brew')
 Particle.devices.first.function('digitalWrite', '1')
+device.call('brew') # aliased as call
 ```
 
 Get the value of a firmware variable. Returns the result as a `String` or `Number`.
@@ -135,6 +136,7 @@ Get the value of a firmware variable. Returns the result as a `String` or `Numbe
 Particle.device('mycar').variable('battery') # ==> 12.33
 device = Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d')
 device.variable('version') # ==> "1.0.1"
+device.get('version') # aliased as get
 ```
 
 Signal a device to start blinking the RGB LED in rainbow patterns. Returns whether the device is signaling.

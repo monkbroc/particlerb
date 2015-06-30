@@ -85,6 +85,7 @@ module Particle
     def function(name, argument = "")
       @client.call_function(self, name, argument)
     end
+    alias_method :call, :function
 
     # Get the value of a variable in the firmware of a Particle device
     #
@@ -96,6 +97,7 @@ module Particle
     def variable(name)
       @client.get_variable(self, name)
     end
+    alias_method :get, :variable
 
     # Signal the device to start blinking the RGB LED in a rainbow
     # pattern. Useful to identify a particular device.
