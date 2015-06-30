@@ -394,6 +394,6 @@ Octokit is copyright (c) 2009-2014 Wynn Netherland, Adam Stacoviak, Erik Michael
 
 Copyright (c) 2015 Julien Vanier
 
-This gem is available under the [GNU General Public License version 3][GPL-v3]
+This gem is available under the [GNU Lesser General Public License, version 3.0][license]
 
-[GPL-v3]: https://github.com/monkbroc/particlerb/blob/master/LICENSE.txt
+[license]: https://github.com/monkbroc/particlerb/blob/master/LICENSE.txt
