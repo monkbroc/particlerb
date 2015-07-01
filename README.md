@@ -3,6 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/particlerb.svg)](http://badge.fury.io/rb/particlerb)
 [![Build Status](https://travis-ci.org/monkbroc/particlerb.svg)](https://travis-ci.org/monkbroc/particlerb)
 [![Code Climate](https://codeclimate.com/github/monkbroc/particlerb/badges/gpa.svg)](https://codeclimate.com/github/monkbroc/particlerb)
+[![RubyDoc](https://img.shields.io/badge/RubyDoc-documentation-blue.svg)](http://www.rubydoc.info/github/monkbroc/particlerb)
 
 Ruby client for the [Particle.io] Cloud API with an object-oriented interface
 
@@ -22,7 +23,6 @@ gem "particlerb", "~> 0.0.3"
 # Require the gem
 require 'particle'
 ```
-
 
 ### Providing credentials
 
