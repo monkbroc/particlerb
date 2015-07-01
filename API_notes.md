@@ -1,6 +1,14 @@
 # Observations about the Particle cloud API
 
+Discussion points:
+
+  - How to set name of token
+  - Mismatch between limit to publish (max every second) and webhook (max every 6 seconds)
+  - What is product_id? Is it related to the hardware or firmware? Related to teams?
+  - Which platform_id are for public use? 0 for Core, 6 for Photon, 8 for P1.
+
 Inconsistent error messages:
+
   - 403 Forbidden for wrong device name or id: `{ "error": "...", "info": "..." }`
   - 400 BadRequest for function call when device is offline: `{ "ok": false, "error": "Timed out" }`
   - 408 TimedOut for get variable when device is offline: `{ "error": "Timed out." }`
@@ -36,7 +44,9 @@ Docs say:
 Variable get JSON contains `{ :cmd=>"VarReturn" }` as well as the whole `coreInfo` struct.
 
 Webhook test message doesn't use authentication settings (sent when doing a GET to a webhook url)
+
 Webhook:
+
 {
   "webook": {
     "id": "558d5710fc98c66474dfac1a",
@@ -81,5 +91,4 @@ Output of flash with compile errors is weirdly nested:
 
 When flashing a binary, the response is 200 OK with `{"id": "__PARTICLE_DEVICE_ID__", "status:: "Update started"}` but missing "ok": true. Also other endpoints don't return the id like this.
 
-Compile with platform_id = 1 fails with 406 Not Acceptable and "Something went wrong getting that workspace"
 

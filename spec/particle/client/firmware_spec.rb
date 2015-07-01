@@ -64,11 +64,10 @@ describe Particle::Client::Firmware, :vcr do
         result = Particle.compile_code(source_file, device_id: id)
         expect(result.ok).to eq true
       end
-      # FIXME: Doesn't work yet
-      # it "compiles for a specific platform", :vcr => { :record => :all } do
-      #   result = Particle.compile_code(source_file, platform: :photon)
-      #   expect(result.ok).to eq true
-      # end
+      it "compiles for a specific platform" do
+        result = Particle.compile_code(source_file, platform: :photon)
+        expect(result.ok).to eq true
+      end
     end
 
     context "with bad code" do
