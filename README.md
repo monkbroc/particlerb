@@ -314,8 +314,8 @@ result = device.compile('blink_led.ino')
 result.ok # ==> true
 result.binary_id # ==> "559061e16b4ba27e4602c5c8"
 
-Particle.compile_code(Dir.glob('firmware/*', platform: :core) # or :photon
-Particle.compile_code(Dir.glob('firmware/*', product_id: 1) # meaning depends on your account
+Particle.compile(Dir.glob('firmware/*', platform: :core) # or :photon
+Particle.compile(Dir.glob('firmware/*', product_id: 1) # meaning depends on your account
 ```
 
 Download a compiled binary. Returns the result bytes
@@ -365,6 +365,33 @@ response with `Client#last_response`:
 device   = Particle.device('123456').claim
 response = Particle.last_response
 headers  = response.headers
+```
+
+## Tests
+
+This gem uses the VCR gem to record and replay HTTP requests.
+
+To run the tests using pre-recorded HTTP requests:
+
+```
+$ bundle install
+$ bundle exec rake spec
+```
+
+To run the test against the real API, you will need an account with Particle and a device added to your account.
+
+Set the following environment variables:
+
+- `TEST_PARTICLE_USERNAME`: your Particle user email
+- `TEST_PARTICLE_PASSWORD`: your Particle password
+- `TEST_PARTICLE_ACCESS_TOKEN`: a Particle access token. You can get this from the web IDE
+- `TEST_PARTICLE_DEVICE_IDS`: a comma separated list of your device ids. You can get this from the Particle CLI `particle list`
+
+Make sure **the first Particle device in `TEST_PARTICLE_DEVICE_IDS` is online** and run
+
+```
+$ bundle install
+$ bundle exec rake spec:rerecord
 ```
 
 ## Support

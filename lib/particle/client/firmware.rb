@@ -31,15 +31,7 @@ module Particle
       def flash_device(target, file_paths, options = {})
         params = file_upload_params(file_paths, options)
         result = put(device(target).path, params)
-        # Normalize the weird output structure
-        if result[:ok] == false
-          errors = result[:errors][0]
-          result[:errors] = if errors.is_a? Hash
-                              errors[:errors][0]
-                            else
-                              result
-                            end
-        elsif result[:status] == "Update started"
+        if result[:status] == "Update started"
           result[:ok] = true
         end
         OpenStruct.new(result)
@@ -58,14 +50,10 @@ module Particle
       #                :ok => true on success
       #                :errors => String with compile errors
       #                
-      def compile_code(file_paths, options = {})
+      def compile(file_paths, options = {})
         normalize_platform_id(options)
         params = file_upload_params(file_paths, options)
         result = post(COMPILE_PATH, params)
-        # Normalize the weird output structure
-        if result[:ok] == false
-          result[:errors] = result[:errors][0]
-        end
         OpenStruct.new(result)
       end
 

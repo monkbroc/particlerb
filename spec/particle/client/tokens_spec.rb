@@ -31,10 +31,12 @@ describe Particle::Client::Tokens, :vcr do
       it "returns a new token" do
         token = Particle.create_token(username, password)
         expect(token).to be_kind_of Particle::Token
+        Particle.remove_token(username, password, token)
       end
       it "creates a token with a specific expiration duration" do
         token = Particle.create_token(username, password, expires_in: 3600)
         expect(token.attributes[:expires_in]).to eq 3600
+        Particle.remove_token(username, password, token)
       end
       it "creates a token with a specific expiration date" do
         date = Date.today + 90
@@ -42,6 +44,7 @@ describe Particle::Client::Tokens, :vcr do
         token = Particle.create_token(username, password, expires_at: date)
         expect(token.attributes[:expires_in]).
           to be_within(day_in_seconds).of(90 * day_in_seconds)
+        Particle.remove_token(username, password, token)
       end
     end
     context "with invalid username" do
@@ -62,17 +65,20 @@ describe Particle::Client::Tokens, :vcr do
     it "returns a new token" do
       token = Particle.login(username, password)
       expect(token).to be_kind_of Particle::Token
+      Particle.remove_token(username, password, token)
     end
 
     it "sets the new token on the module" do
       token = Particle.login(username, password)
       expect(Particle.access_token).to eq token.access_token
+      Particle.remove_token(username, password, token)
     end
 
     it "sets the new token on the client" do
       client = Particle::Client.new
       token = client.login(username, password)
       expect(client.access_token).to eq token.access_token
+      client.remove_token(username, password, token)
     end
   end
 
@@ -95,11 +101,15 @@ describe Particle::Client::Tokens, :vcr do
 
   describe "when using an expired token", :vcr do
     it "raises Unauthorized" do
-      Particle.login(username, password, expires_in: 5)
-      # Uncomment when recording VCR cassette
-      # sleep(10)
+      token = Particle.login(username, password, expires_in: 5)
+
+      # Let token expire
+      sleep(10) if VCR.current_cassette.recording?
+
       expect { Particle.devices}.
         to raise_error(Particle::Unauthorized)
+
+      Particle.remove_token(username, password, token)
     end
   end
 end

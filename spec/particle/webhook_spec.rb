@@ -1,21 +1,9 @@
 require 'helper'
 
 describe Particle::Webhook do
-  let(:id) { test_particle_webhook_ids[0] }
-  let(:webhook) { Particle.webhook(id) }
-
   describe "Particle.webhook" do
     it "creates a Webhook" do
       expect(Particle.webhook("abc").id).to eq("abc")
-    end
-  end
-
-  describe ".attributes", :vcr do
-    it "returns attributes" do
-      expect(webhook.attributes).to be_kind_of Hash
-    end
-    it "includes details like url" do
-      expect(webhook.attributes[:url]).to be_kind_of String
     end
   end
 
@@ -27,9 +15,25 @@ describe Particle::Webhook do
     Particle.webhook(params).create
   end
 
+  describe ".attributes", :vcr do
+    let(:webhook) { Particle.webhook(create_webhook.id) }
+    after do
+      webhook.remove
+    end
+
+    it "returns attributes" do
+      expect(webhook.attributes).to be_kind_of Hash
+    end
+    it "includes details like url" do
+      expect(webhook.attributes[:url]).to be_kind_of String
+    end
+  end
+
   describe ".create", :vcr do
     it "creates the webhook" do
-      expect(create_webhook).to be_kind_of Particle::Webhook
+      webhook = create_webhook
+      expect(webhook).to be_kind_of Particle::Webhook
+      webhook.remove
     end
   end
 

@@ -19,8 +19,9 @@ describe Particle::Token do
 
   describe ".create", :vcr do
     it "creates a token" do
-      expect(Particle.token.create(username, password)).
-        to be_kind_of Particle::Token
+      token = Particle.token.create(username, password)
+      expect(token).to be_kind_of Particle::Token
+      token.remove(username, password)
     end
   end
 

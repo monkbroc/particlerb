@@ -1,6 +1,7 @@
 require 'particle'
 require 'rspec'
 require 'webmock/rspec'
+require 'uri'
 
 WebMock.disable_net_connect!
 
@@ -25,27 +26,19 @@ def test_particle_username
 end
 
 def test_particle_password
-  ENV.fetch('TEST_PARTICLE_PASSWORD', 'pa$$w0rd')
+  ENV.fetch('TEST_PARTICLE_PASSWORD', 'password')
 end
 
 def test_particle_access_token
-  ENV.fetch('TEST_PARTICLE_ACCESS_TOKEN', 'x' * 40)
+  ENV.fetch('TEST_PARTICLE_ACCESS_TOKEN', '9' * 40)
 end
 
-def test_particle_user_id
-  ENV.fetch('TEST_PARTICLE_USER_ID', 'y' * 24)
+def dev_id
+  test_particle_device_ids[0]
 end
 
 def test_particle_device_ids
-  ENV.fetch('TEST_PARTICLE_DEVICE_IDS', 'z' * 24).split(",")
-end
-
-def test_particle_webhook_ids
-  ENV.fetch('TEST_PARTICLE_WEBHOOK_IDS', 'w' * 24).split(",")
-end
-
-def test_particle_webhook_password
-  ENV.fetch('TEST_PARTICLE_WEBHOOK_PASSWORD', 'v' * 24)
+  ENV.fetch('TEST_PARTICLE_DEVICE_IDS', 'a' * 24).split(",")
 end
 
 VCR.configure do |c|
@@ -53,23 +46,18 @@ VCR.configure do |c|
   c.filter_sensitive_data("__PARTICLE_USERNAME__") do
     test_particle_username
   end
+  # Also filter the url-encoded username
+  c.filter_sensitive_data("__PARTICLE_USERNAME_URL_ENCODED__") do
+    URI.encode_www_form_component test_particle_username
+  end
   c.filter_sensitive_data("__PARTICLE_PASSWORD__") do
     test_particle_password
   end
   c.filter_sensitive_data("__PARTICLE_ACCESS_TOKEN__") do
     test_particle_access_token
   end
-  c.filter_sensitive_data("__PARTICLE_USER_ID__") do
-    test_particle_user_id
-  end
   test_particle_device_ids.each_with_index do |device_id, index|
     c.filter_sensitive_data("__PARTICLE_DEVICE_ID_#{index}__") { device_id }
-  end
-  test_particle_webhook_ids.each_with_index do |webhook_id, index|
-    c.filter_sensitive_data("__PARTICLE_WEBHOOK_ID_#{index}__") { webhook_id }
-  end
-  c.filter_sensitive_data("__PARTICLE_WEBHOOK_PASSWORD__") do
-    test_particle_webhook_password
   end
 
   c.default_cassette_options = {
@@ -88,3 +76,8 @@ def fixture(file)
   File.join(fixture_path, file)
 end
 
+def wait_for_end_of_flash
+  # Sleep for 60 seconds to give time for the flash to finish and device
+  # to go back online
+  sleep(60) if VCR.current_cassette.recording?
+end

@@ -1,8 +1,7 @@
 require 'helper'
 
 describe Particle::Device do
-  let(:id) { test_particle_device_ids[0] }
-  let(:device) { Particle.device(id) }
+  let(:device) { Particle.device(dev_id) }
 
   describe "Particle.device" do
     it "creates a Device" do
@@ -26,41 +25,48 @@ describe Particle::Device do
 
   describe ".claim", :vcr do
     it "claims the device" do
-      # Test device must not claimed before recording VCR cassette
-      expect(device.claim.id).to eq(id)
+      # Remove device before test
+      device.remove
+
+      expect(device.claim.id).to eq(dev_id)
     end
   end
 
   describe ".remove", :vcr do
     it "removes the device" do
-      # Test device must be claimed before recording VCR cassette
       expect(device.remove).to eq true
+
+      # Claim device back after test
+      device.claim
     end
   end
 
   describe ".rename", :vcr do
     it "renames the device" do
-      expect(device.rename("fiesta")).to eq true
+      expect(device.rename("fried")).to eq true
     end
   end
 
   describe ".function", :vcr do
     it "call the function on the device firmware" do
-      # Test device must have a method called "get" returning -2
-      expect(device.function("get")).to eq -2
+      # Test device must have a method called "toggle" returning 1
+      expect(device.function("toggle")).to eq 1
     end
   end
 
   describe ".variable", :vcr do
     it "gets the value of the firmware variable" do
-      # Test device must have a variable called "result" returning a String
-      expect(device.variable("result")).to eq "3600"
+      # Test device must have a variable called "answer" returning an integer
+      expect(device.variable("answer")).to eq 42
     end
   end
 
   describe ".signal", :vcr do
     it "starts shouting rainbows" do
       expect(device.signal).to eq true
+
+      # Stop shouting
+      device.signal(false)
     end
   end
 
@@ -70,6 +76,7 @@ describe Particle::Device do
     it "starts flashing succesfully" do
       result = device.flash(source_file)
       expect(result.ok).to eq true
+      wait_for_end_of_flash
     end
   end
 
@@ -85,7 +92,7 @@ describe Particle::Device do
   describe ".change_product", :vcr do
     # FIXME: don't want to try this before figuring out what changing product_id does
     #it "works" do
-    #  expect(device.change_product(id, 0)).to eq true
+    #  expect(device.change_product(0)).to eq true
     #end
   end
 end

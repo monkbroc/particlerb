@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.files = %w(LICENSE.txt README.md Rakefile particlerb.gemspec)
   spec.files += Dir.glob("lib/**/*.rb")
   spec.homepage = 'https://github.com/monkbroc/particlerb'
-  spec.licenses = ['GPL-3.0']
+  spec.licenses = ['LGPL-3.0']
   spec.name = 'particlerb'
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 1.9.3'
@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'vcr', '~> 2.9'
   spec.add_development_dependency 'webmock', '~> 1.21'
   spec.add_development_dependency 'multi_json', '~> 1.11'
+  spec.add_development_dependency 'highline', '~> 1.7'
 end

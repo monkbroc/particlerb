@@ -95,12 +95,7 @@ module Particle
       # @return [boolean] true when signaling, false when stopped
       def signal_device(target, enabled = true)
         result = put(device(target).path, signal: enabled ? '1' : '0')
-        # FIXME: API bug. Should return HTTP 408 so result.ok wouldn't be necessary
-        if result[:ok] == false
-          false
-        else
-          result[:signaling]
-        end
+        result[:signaling]
       end
 
       # Change the product_id on the device.

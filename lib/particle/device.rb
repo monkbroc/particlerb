@@ -132,7 +132,7 @@ module Particle
     #                :errors => String with compile errors
     #                
     def compile(file_paths)
-      @client.compile_code(file_paths, device_id: id)
+      @client.compile(file_paths, device_id: id)
     end
 
     # Change the product_id on the device.

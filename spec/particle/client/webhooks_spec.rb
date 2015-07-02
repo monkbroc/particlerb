@@ -1,21 +1,33 @@
 require 'helper'
 
 describe Particle::Client::Webhooks, :vcr do
-  let(:id) { test_particle_webhook_ids[0] }
+  def create_webhook(options = {})
+    params = {
+      url: "https://example.com",
+      event: "68c57e6752d5e0a5" # bogus event name that should never match
+    }.merge(options)
+    Particle.create_webhook(params)
+  end
 
   describe ".webhooks" do
     it "returns all Particle webhooks" do
+      id = create_webhook.id
+
       webhooks = Particle.webhooks
       expect(webhooks).to be_kind_of Array
       webhooks.each { |w| expect(w).to be_kind_of Particle::Webhook }
+
+      Particle.remove_webhook(id)
     end
   end
 
   describe ".webhook_attributes" do
     context "when the webhook exists" do
       it "returns attributes" do
+        id = create_webhook.id
         attr = Particle.webhook_attributes(id)
         expect(attr[:webhook]).to include(:id, :url)
+        Particle.remove_webhook(id)
       end
     end
     context "when webhook doesn't exist" do
@@ -26,19 +38,11 @@ describe Particle::Client::Webhooks, :vcr do
     end
   end
 
-  def create_webhook(options = {})
-    params = {
-      url: "https://example.com",
-      event: "68c57e6752d5e0a5" # bogus event name that should never match
-    }.merge(options)
-    Particle.create_webhook(params)
-  end
-
-
   describe ".create_webhook" do
     it "creates a webhook with minimum parameters" do
       webhook = create_webhook
       expect(webhook).to be_kind_of Particle::Webhook
+      Particle.remove_webhook(webhook)
     end
 
     context "when there are too many hooks" do
