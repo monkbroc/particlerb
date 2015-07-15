@@ -7,6 +7,11 @@ describe Particle::Client::Devices, :vcr do
       expect(devices).to be_kind_of Array
       devices.each { |d| expect(d).to be_kind_of Particle::Device }
     end
+
+    it "loads missing attributes from a partially loaded device" do
+      device = Particle.devices.first
+      expect(device.functions).to be_kind_of Array
+    end
   end
 
   describe ".device_attributes" do

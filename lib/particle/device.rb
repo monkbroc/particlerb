@@ -19,6 +19,10 @@ module Particle
         else
           @attributes = { name: attributes }
         end
+      else
+        # Listing all devices returns partial attributes so check if the
+        # device was fully loaded or not
+        @fully_loaded = true if attributes.key?(:variables)
       end
     end
 
@@ -36,17 +40,27 @@ module Particle
       @attributes[:id] || @attributes[:name]
     end
 
-    attribute_reader :connected, :functions, :variables, :product_id,
-      :last_heard, :last_app, :last_ip_address
+    attribute_reader :connected, :product_id, :last_heard, :last_app,
+      :last_ip_address
 
     alias_method :connected?, :connected
+
+    def functions
+      get_attributes unless @fully_loaded
+      @attributes[:functions]
+    end
+
+    def variables
+      get_attributes unless @fully_loaded
+      @attributes[:variables]
+    end
 
     def product
       PRODUCT_IDS[product_id]
     end
 
     def get_attributes
-      @loaded = true
+      @loaded = @fully_loaded = true
       @attributes = @client.device_attributes(self)
     end
 
