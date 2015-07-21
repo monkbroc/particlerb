@@ -5,6 +5,7 @@ require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
 
 require 'highline'
+require 'particle/version'
 
 # Run all tests using recorded HTTP responses
 task :test => :spec
@@ -43,3 +44,12 @@ namespace :clean do
     FileUtils.rm_rf 'spec/cassettes'
   end
 end
+
+task :build do
+  system "gem build particlerb.gemspec"
+end
+
+task :release => :build do
+  system "gem push particlerb-#{Particle::VERSION}.gem"
+end
+
