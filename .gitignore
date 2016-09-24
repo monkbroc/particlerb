@@ -24,3 +24,4 @@ tmtags
 .test_queue_stats
 Session.vim
 .env
+.byebug_history
