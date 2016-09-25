@@ -9,8 +9,8 @@ module Particle
       #
       # @return [Array<BuildTarget>] List of Particle Build Targets you can compile sources with
       def build_targets
-        get(HTTP_PATH).map do |attributes|
-          build_target(attributes)
+        get(HTTP_PATH).map do |target_h|
+          BuildTarget.new(self, target_h)
         end
       end
 
@@ -24,4 +24,3 @@ module Particle
     end
   end
 end
-

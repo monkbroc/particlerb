@@ -21,6 +21,7 @@ module Particle
     def initialize(client, attributes)
       super(client, attributes)
     end
+    attribute_reader :platforms, :prereleases, :firmware_vendor, :version
   end
 end
 
