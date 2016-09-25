@@ -9,7 +9,7 @@ module Particle
       #
       # @return [Array<BuildTarget>] List of Particle Build Targets you can compile sources with
       def build_targets
-        get(HTTP_PATH).map do |target_h|
+        get(HTTP_PATH)[:targets].map do |target_h|
           BuildTarget.new(self, target_h)
         end
       end
