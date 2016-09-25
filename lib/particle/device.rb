@@ -7,7 +7,8 @@ module Particle
     ID_REGEX = /\h{24}/
     PRODUCT_IDS = {
       0 => "Core".freeze,
-      6 => "Photon".freeze
+      6 => "Photon".freeze,
+      8 => "Electron".freeze
     }
 
     def initialize(client, attributes)
