@@ -8,7 +8,8 @@ module Particle
     PRODUCT_IDS = {
       0 => "Core".freeze,
       6 => "Photon".freeze,
-      8 => "Electron".freeze
+      8 => "P1".freeze,
+      10 => "Electron".freeze
     }
 
     def initialize(client, attributes)
