@@ -1,0 +1,64 @@
+{
+  "http_interactions":[
+       {
+      "request": {
+        "method": "get",
+        "uri": "https://api.particle.io/v1/build_targets",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.1.0"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Server": [
+            "nginx"
+          ],
+          "Date": [
+            "Sat, 24 Sep 2016 22:17:45 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Etag": [
+            "W/\"wu/650YUM8Ma81ieEOlYkw==\""
+          ]
+        },
+        "body": {
+          "encoding": "ASCII-8BIT",
+          "string": "{\n  \"targets\": [\n    {\n      \"platforms\": [\n        0,\n        8,\n        6,\n        10\n      ],\n      \"prereleases\": [\n        0,\n        8,\n        6,\n        10\n      ],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.6.0-rc.2\"\n    },\n    {\n      \"platforms\": [\n        103\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Bluz\",\n      \"version\": \"1.1.47\"\n    },\n    {\n      \"platforms\": [\n        103\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Bluz\",\n      \"version\": \"1.0.47\"\n    },\n    {\n      \"platforms\": [\n        0,\n        6,\n        8,\n        10\n      ],\n      \"prereleases\": [\n        0,\n        6,\n        8,\n        10\n      ],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.5.3-rc.3\"\n    },\n    {\n      \"platforms\": [\n        10,\n        8,\n        6,\n        0\n      ],\n      \"prereleases\": [\n        10,\n        8,\n        6,\n        0\n      ],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.5.3-rc.2\"\n    },\n    {\n      \"platforms\": [\n        0,\n        10,\n        8,\n        6\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.5.2\"\n    },\n    {\n      \"platforms\": [\n        10,\n        8,\n        6,\n        0\n      ],\n      \"prereleases\": [\n        10,\n        8,\n        6,\n        0\n      ],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.5.3-rc.1\"\n    },\n    {\n      \"platforms\": [\n        10\n      ],\n      \"prereleases\": [\n        10\n      ],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.5.2-rc.1\"\n    },\n    {\n      \"platforms\": [\n        10,\n        8,\n        6,\n        0\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.5.1\"\n    },\n    {\n      \"platforms\": [\n        -103\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Bluz\",\n      \"version\": \"0.0.0-develop.modular\"\n    },\n    {\n      \"platforms\": [\n        10,\n        8,\n        6,\n        0\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.5.0\"\n    },\n    {\n      \"platforms\": [\n        88\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"RBLabs\",\n      \"version\": \"v0.2.4\"\n    },\n    {\n      \"platforms\": [\n        10,\n        8,\n        6,\n        0\n      ],\n      \"prereleases\": [\n        10,\n        8,\n        6,\n        0\n      ],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.6.0-rc.1\"\n    },\n    {\n      \"platforms\": [\n        88\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"RBLabs\",\n      \"version\": \"v0.2.3\"\n    },\n    {\n      \"platforms\": [\n        88\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"RBLabs\",\n      \"version\": \"v0.2.2\"\n    },\n    {\n      \"platforms\": [\n        88\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"RBLabs\",\n      \"version\": \"v0.2.1\"\n    },\n    {\n      \"platforms\": [\n        -10,\n        6,\n        0,\n        8\n      ],\n      \"prereleases\": [\n        -10\n      ],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.4.9\"\n    },\n    {\n      \"platforms\": [\n        88\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"RBLabs\",\n      \"version\": \"v0.2.0\"\n    },\n    {\n      \"platforms\": [\n        88\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"RBLabs\",\n      \"version\": \"v0.1.1\"\n    },\n    {\n      \"platforms\": [\n        6,\n        0,\n        8\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.4.7\"\n    },\n    {\n      \"platforms\": [\n        6,\n        8,\n        0\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.4.6\"\n    },\n    {\n      \"platforms\": [\n        0,\n        6,\n        8\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.4.5\"\n    },\n    {\n      \"platforms\": [\n        6,\n        8\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.4.4\"\n    },\n    {\n      \"platforms\": [\n        6,\n        8\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.4.3\"\n    },\n    {\n      \"platforms\": [\n        10\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.4.8\"\n    },\n    {\n      \"platforms\": [\n        -10\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.4.8rc2\"\n    },\n    {\n      \"platforms\": [\n        6,\n        8\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.4.1\"\n    },\n    {\n      \"platforms\": [\n        -10\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"develop\"\n    },\n    {\n      \"platforms\": [\n        0\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.3.4\"\n    },\n    {\n      \"platforms\": [\n        -10\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.0.3-rc.3\"\n    },\n    {\n      \"platforms\": [\n        -10\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.0.3-rc.2\"\n    },\n    {\n      \"platforms\": [\n        -10\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.0.3-rc.1\"\n    },\n    {\n      \"platforms\": [\n        -10\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"002\"\n    },\n    {\n      \"platforms\": [\n        103,\n        269\n      ],\n      \"prereleases\": [\n        103,\n        269\n      ],\n      \"firmware_vendor\": \"Bluz\",\n      \"version\": \"2.0.50-beta.2\"\n    },\n    {\n      \"platforms\": [\n        82\n      ],\n      \"prereleases\": [],\n      \"firmware_vendor\": \"Digistump\",\n      \"version\": \"1.0.5\"\n    },\n    {\n      \"platforms\": [\n        6,\n        8,\n        10,\n        0\n      ],\n      \"prereleases\": [\n        6,\n        8,\n        10,\n        0\n      ],\n      \"firmware_vendor\": \"Particle\",\n      \"version\": \"0.6.0-libraries.1\"\n    }\n  ],\n  \"platforms\": {\n    \"Core\": 0,\n    \"Photon\": 6,\n    \"P1\": 8,\n    \"Electron\": 10,\n    \"Raspberry Pi\": 31,\n    \"Red Bear Labs\": 88,\n    \"bluz\": 103\n  }\n}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Sat, 24 Sep 2016 22:17:45 GMT"
+    } 
+  ],
+  "recorded_with": "VCR 2.9.3"
+}
