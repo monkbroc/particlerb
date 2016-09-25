@@ -5,6 +5,7 @@ require 'particle/client/webhooks'
 require 'particle/client/tokens'
 require 'particle/client/firmware'
 require 'particle/client/build_targets'
+require 'particle/client/platforms'
 
 module Particle
 
@@ -20,6 +21,7 @@ module Particle
     include Particle::Client::Tokens
     include Particle::Client::Firmware
     include Particle::Client::BuildTargets
+    include Particle::Client::Platforms
 
     def initialize(options = {})
       # Use options passed in, but fall back to module defaults
