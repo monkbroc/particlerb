@@ -12,7 +12,8 @@ module Particle
       PLATFORMS = {
         core: 0,
         photon: 6,
-        p1: 8
+        p1: 8,
+        electron: 10
       }
 
       # Flash new firmware to a Particle device from source code or
