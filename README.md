@@ -67,7 +67,7 @@ When using this gem in a multi-threaded program like a Rails application running
 
 ## Interacting with devices
 
-List all devices. Rreturns an `Array` of `Particle::Device`.
+List all devices. Returns an `Array` of `Particle::Device`.
 
 ```ruby
 devices = Particle.devices
@@ -149,6 +149,13 @@ Change the product id. The meaning of the product id is specific to your applica
 
 ```ruby
 Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').change_product(3)
+```
+
+Update the public key for a device. The public key must be in PEM format. See <spec/fixtures/device.pub.pem> for an example.
+
+```ruby
+public_key = IO.read('device.pub.pem')
+Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').update_public_key(public_key, algorithm: 'rsa')
 ```
 
 See the [Particle Cloud API documentation about devices][device docs] for more details.

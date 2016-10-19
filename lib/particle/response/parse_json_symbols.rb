@@ -11,7 +11,10 @@ module Particle
       end
 
       define_parser do |body|
-        ::JSON.parse(body, symbolize_names: true) unless body.strip.empty?
+        body = body.strip
+        # Workaround for body returned as a quoted string
+        body = "[#{body}]" if body.match(/^".*"$/)
+        ::JSON.parse(body, symbolize_names: true) unless body.empty?
       end
     end
   end

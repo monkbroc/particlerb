@@ -95,5 +95,14 @@ describe Particle::Device do
     #  expect(device.change_product(0)).to eq true
     #end
   end
+
+  describe ".update_public_key", :vcr do
+    let(:public_key) { IO.read(fixture("device.pub.pem")) }
+
+    it "sends the key" do
+      result = device.update_public_key(public_key)
+      expect(result).to eq true
+    end
+  end
 end
 
