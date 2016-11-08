@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 (November 8, 2016)
+
+- Add device provisioning endpoint
+- Add simple_message to errors
+
 ## 1.2.0 (October 18, 2016)
 
 - Add platforms
