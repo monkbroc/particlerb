@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'listen', '~> 3.0.8'
   spec.add_development_dependency 'vcr', '~> 2.9'
   spec.add_development_dependency 'webmock', '~> 1.21'
+  spec.add_development_dependency 'addressable', '~> 2.4.0'
   spec.add_development_dependency 'multi_json', '~> 1.11'
   spec.add_development_dependency 'highline', '~> 1.7'
 end

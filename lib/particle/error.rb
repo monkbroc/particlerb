@@ -27,10 +27,12 @@ module Particle
 
     def initialize(response=nil)
       @response = response
+      @short_message = build_short_message
       super(build_error_message)
     end
 
     attr_reader :response
+    attr_reader :short_message
 
     private
 
@@ -42,13 +44,23 @@ module Particle
       end
     end
 
-    def build_error_message
-      return nil if @response.nil?
+    def build_short_message
+      if response && response[:body] && response[:body][:error]
+        response[:body][:error]
+      elsif response && response[:body] && response[:body][:errors]
+        response[:body][:errors].join ", "
+      else
+        self.class.name
+      end
+    end
 
-      message =  "#{@response[:method].to_s.upcase} "
-      message << redact_url(@response[:url].to_s) + ": "
-      message << "#{@response[:status]} - "
-      message << "#{@response[:body]}"
+    def build_error_message
+      return nil if response.nil?
+
+      message =  "#{response[:method].to_s.upcase} "
+      message << redact_url(response[:url].to_s) + ": "
+      message << "#{response[:status]} - "
+      message << "#{response[:body]}"
       message
     end
 
