@@ -145,6 +145,14 @@ Signal a device to start blinking the RGB LED in rainbow patterns. Returns wheth
 Particle.device('nyan_cat').signal(true)
 ```
 
+Create a new device for a product that allows self-provisioning. Currently only the Raspberry Pi (product id 31) allows this. Returns the new device. You can then claim the device when it is online.
+
+```ruby
+device = Particle.provision_device(product_id: 31)
+# Wait for device to be online
+device.claim
+```
+
 Change the product id. The meaning of the product id is specific to your application and account.
 
 ```ruby

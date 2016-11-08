@@ -47,6 +47,16 @@ module Particle
         device(result[:id])
       end
 
+      # Create a new Particle device
+      #
+      # @param product [String] A product id
+      # @return [Device] A device object to interact with
+      def provision_device(params)
+        product_id = params[:product_id] or raise ArgumentError.new("product_id parameter is required")
+        result = post(Device.provision_path, product_id: product_id)
+        device(result[:device_id])
+      end
+
       # Remove a Particle device from your account
       #
       # @param target [String, Device] A device id, name or {Device} object
@@ -128,7 +138,7 @@ module Particle
       #                           (default rsa)
       # @return [boolean] true when successful
       def update_device_public_key(target, public_key, algorithm = 'rsa')
-        result = post(Device.provision_path,
+        result = post(Device.update_keys_path,
                       deviceID: device(target).id,
                       publicKey: public_key,
                       algorithm: algorithm)

@@ -4,12 +4,13 @@ module Particle
 
   # Domain model for one Particle device
   class Device < Model
-    ID_REGEX = /\h{24}/
+    ID_REGEX = /^\h{24}$/
     PRODUCT_IDS = {
       0 => "Core".freeze,
       6 => "Photon".freeze,
       8 => "P1".freeze,
-      10 => "Electron".freeze
+      10 => "Electron".freeze,
+      31 => "Raspberry Pi".freeze
     }
 
     def initialize(client, attributes)
@@ -183,7 +184,11 @@ module Particle
     end
 
     def self.provision_path
-      "v1/provisioning/x"
+      "v1/devices"
+    end
+
+    def self.update_keys_path
+      "/v1/provisioning/x"
     end
 
     def path
