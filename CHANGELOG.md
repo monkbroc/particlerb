@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1 (January 26, 2017)
+
+- Send the device ID in the url of the provisioning endpoint
+
 ## 1.3.0 (November 8, 2016)
 
 - Add device provisioning endpoint
