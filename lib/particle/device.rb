@@ -187,8 +187,8 @@ module Particle
       "v1/devices"
     end
 
-    def self.update_keys_path
-      "/v1/provisioning/x"
+    def update_keys_path
+      "/v1/provisioning/#{id}"
     end
 
     def path

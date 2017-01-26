@@ -138,7 +138,7 @@ module Particle
       #                           (default rsa)
       # @return [boolean] true when successful
       def update_device_public_key(target, public_key, algorithm = 'rsa')
-        result = post(Device.update_keys_path,
+        result = post(device(target).update_keys_path,
                       deviceID: device(target).id,
                       publicKey: public_key,
                       algorithm: algorithm)
