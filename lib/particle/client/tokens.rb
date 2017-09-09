@@ -49,17 +49,25 @@ module Particle
       #                       :expires_in => How many seconds should the token last for?
       #                                      0 means a token that never expires
       #                       :expires_at => Date and time when should the token expire
+      #                       :client => Particle OAuth client to use.
+      #                                  Defaults to 'particle'
+      #                       :secret => Corresponding OAuth secret to use.
+      #                                  Defaults to 'particle'
+      #                       :grant_type => Type of OAuth authentication flow to use
+      #                                      Defaults to 'password'
       # @return [Token] The token object
       def create_token(username, password, options = {})
+        client = options.delete(:client) { 'particle' }
+        secret = options.delete(:secret) { 'particle' }
         data = URI.encode_www_form({
-          grant_type: 'password',     # specified by docs
+          grant_type: 'password',
           username: username,
           password: password
         }.merge(options))
         http_options = {
           headers: { content_type: "application/x-www-form-urlencoded" },
-          username: 'particle', # specified by docs
-          password: 'particle'  # specified by docs
+          username: client,
+          password: secret
         }
         result = request(:post, Token.create_path, data, http_options)
         result[:token] = result.delete(:access_token)

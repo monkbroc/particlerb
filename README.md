@@ -300,6 +300,9 @@ Particle.token.create("me@example.com", "pa$$w0rd")
 
 * `expires_in`: number of seconds that the token will be valid
 * `expires_at`: `Date` when the token will become invalid
+* `client`: a Particle OAuth client to use. Defaults to `particle`.
+* `secret`: the corresponding OAuth secret. Defaults to `particle`.
+* `grant_type`: Type of OAuth authentication flow to use. Defaults to 'password'
 
 Invalidate and delete a token. Returns true on success.
 
@@ -432,6 +435,8 @@ Set the following environment variables:
 - `TEST_PARTICLE_PASSWORD`: your Particle password
 - `TEST_PARTICLE_ACCESS_TOKEN`: a Particle access token. You can get this from the web IDE
 - `TEST_PARTICLE_DEVICE_IDS`: a comma separated list of your device ids. You can get this from the Particle CLI `particle list`
+- `TEST_PARTICLE_OAUTH_CLIENT`: a valid Particle OAuth client
+- `TEST_PARTICLE_OAUTH_SECRET`: the corresponding OAuth secret
 
 Make sure **the first Particle device in `TEST_PARTICLE_DEVICE_IDS` is online** and run
 

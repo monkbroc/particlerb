@@ -3,6 +3,8 @@ require 'helper'
 describe Particle::Client::Tokens, :vcr do
   let(:username) { test_particle_username }
   let(:password) { test_particle_password }
+  let(:client) { test_particle_oauth_client }
+  let(:secret) { test_particle_oauth_secret }
 
   describe ".tokens" do
     context "with valid username and password" do
@@ -62,6 +64,46 @@ describe Particle::Client::Tokens, :vcr do
       end
     end
     context "with an oauth client" do
+      context "with valid username and password" do
+        it "returns a new token" do
+          token = Particle.create_token(username, password, {
+            client: client,
+            secret: secret,
+            grant_type: 'password'
+          })
+          expect(token).to be_kind_of Particle::Token
+          Particle.remove_token(username, password, token)
+        end
+      end
+      context "with invalid username" do
+        it "raises BadRequest" do
+          expect { Particle.create_token("invalid", "invalid", {
+            client: client,
+            secret: secret,
+            grant_type: 'password'
+          }) }.to raise_error Particle::BadRequest
+        end
+      end
+      context "with invalid password" do
+        it "raises BadRequest" do
+          expect { Particle.create_token(username, "invalid", {
+            client: client,
+            secret: secret,
+            grant_type: 'password'
+          }) }.to raise_error Particle::BadRequest
+        end
+      end
+    end
+    context "with an invalid oauth secret" do
+      # Bug: It just ends up using the default OAuth particle:particle client
+      # so the request doesn't fail
+      # it "raises BadRequest" do
+      #   expect { Particle.create_token(username, password, {
+      #     client: client,
+      #     secret: 'invalid',
+      #     grant_type: 'password'
+      #   }) }.to raise_error Particle::BadRequest
+      # end
     end
   end
 

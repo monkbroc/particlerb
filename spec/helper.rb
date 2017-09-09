@@ -41,6 +41,14 @@ def test_particle_device_ids
   ENV.fetch('TEST_PARTICLE_DEVICE_IDS', 'a' * 24).split(",")
 end
 
+def test_particle_oauth_client
+  ENV.fetch('TEST_PARTICLE_OAUTH_CLIENT', 'my_oauth_client')
+end
+
+def test_particle_oauth_secret
+  ENV.fetch('TEST_PARTICLE_OAUTH_SECRET', 'my_oauth_secret')
+end
+
 VCR.configure do |c|
   c.configure_rspec_metadata!
   c.filter_sensitive_data("__PARTICLE_USERNAME__") do
@@ -60,6 +68,13 @@ VCR.configure do |c|
     c.filter_sensitive_data("__PARTICLE_DEVICE_ID_#{index}__") { device_id }
   end
 
+  c.filter_sensitive_data("__PARTICLE_OAUTH_CLIENT__") do
+    test_particle_oauth_client
+  end
+  c.filter_sensitive_data("__PARTICLE_OAUTH_SECRET__") do
+    test_particle_oauth_secret
+  end
+
   c.default_cassette_options = {
     :serialize_with             => :json,
     :record                     => ENV['TRAVIS'] ? :none : :once
@@ -67,8 +82,8 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
 
-  # Monkey-patch serializer to pretty print JSON
-  class VCR::Cassette::Serializers
+  # Monkey-patch cassette serializer to pretty print JSON
+  module VCR::Cassette::Serializers::JSON
     def serialize(hash)
       handle_encoding_errors do
         MultiJson.encode(hash, :pretty => true)

@@ -1,0 +1,129 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "post",
+        "uri": "https://__PARTICLE_OAUTH_CLIENT__:__PARTICLE_OAUTH_SECRET__@api.particle.io/oauth/token",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": "grant_type=password&username=__PARTICLE_USERNAME_URL_ENCODED__&password=__PARTICLE_PASSWORD__"
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Content-Type": [
+            "application/x-www-form-urlencoded"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Sat, 09 Sep 2017 02:02:39 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "161"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "c134ba8c-4e70-4225-a9ea-e9aa92b31844"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Cache-Control": [
+            "no-store"
+          ],
+          "Pragma": [
+            "no-cache"
+          ],
+          "X-Content-Type-Options": [
+            "nosniff"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"token_type\":\"bearer\",\"access_token\":\"90876ed251025678707ebd9a5004621431dd7e43\",\"expires_in\":7776000,\"refresh_token\":\"835f1f9ce9fcd25af3198d10604db8bad087e4b3\"}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Sat, 09 Sep 2017 02:02:39 GMT"
+    },
+    {
+      "request": {
+        "method": "delete",
+        "uri": "https://__PARTICLE_USERNAME_URL_ENCODED__:__PARTICLE_PASSWORD__@api.particle.io/v1/access_tokens/90876ed251025678707ebd9a5004621431dd7e43",
+        "body": {
+          "encoding": "UTF-8",
+          "string": ""
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Sat, 09 Sep 2017 02:02:40 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "11"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "07c9bcdb-9beb-46ab-8f74-7410a77b30ba"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"ok\":true}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Sat, 09 Sep 2017 02:02:40 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}
