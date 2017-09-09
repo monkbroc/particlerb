@@ -1,6 +1,6 @@
 {
-  "http_interactions":[
-       {
+  "http_interactions": [
+    {
       "request": {
         "method": "get",
         "uri": "https://api.particle.io/v1/build_targets",
@@ -58,7 +58,7 @@
         "http_version": null
       },
       "recorded_at": "Sat, 24 Sep 2016 22:17:45 GMT"
-    } 
+    }
   ],
   "recorded_with": "VCR 2.9.3"
 }

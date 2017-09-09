@@ -1,1 +1,64 @@
-{"http_interactions":[{"request":{"method":"get","uri":"https://__PARTICLE_USERNAME_URL_ENCODED__:__PARTICLE_PASSWORD__@api.particle.io/v1/access_tokens","body":{"encoding":"US-ASCII","string":""},"headers":{"User-Agent":["particlerb Ruby gem 0.0.4"],"Accept-Encoding":["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"],"Accept":["*/*"]}},"response":{"status":{"code":200,"message":"OK"},"headers":{"Server":["nginx/1.6.2"],"Date":["Wed, 15 Jul 2015 13:47:02 GMT"],"Content-Type":["application/json; charset=utf-8"],"Content-Length":["610"],"Connection":["keep-alive"],"X-Powered-By":["Express"],"Access-Control-Allow-Origin":["*"],"Etag":["W/\"262-392ecd46\""]},"body":{"encoding":"UTF-8","string":"[\n  {\n    \"token\": \"__PARTICLE_ACCESS_TOKEN__\",\n    \"expires_at\": null,\n    \"client\": \"__PASSWORD_ONLY__\"\n  },\n  {\n    \"token\": \"93b55fe65a5b1d64a7626f3be80163a7e4ba335e\",\n    \"expires_at\": \"2015-09-30T18:45:21.835Z\",\n    \"client\": \"__PASSWORD_ONLY__\"\n  },\n  {\n    \"token\": \"3e50cbf2c2218e1a98a43826df4ac2e23b1349ff\",\n    \"expires_at\": null,\n    \"client\": \"spark-ide\"\n  },\n  {\n    \"token\": \"245bdbb9f6f6f2d22506ffdc06b4072af98f95b3\",\n    \"expires_at\": null,\n    \"client\": \"user\"\n  },\n  {\n    \"token\": \"cf9382e1256a7f87c2b58f2bd4fac04aacbbce80\",\n    \"expires_at\": null,\n    \"client\": \"user\"\n  }\n]"},"http_version":null},"recorded_at":"Wed, 15 Jul 2015 13:47:02 GMT"}],"recorded_with":"VCR 2.9.3"}
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://__PARTICLE_USERNAME_URL_ENCODED__:__PARTICLE_PASSWORD__@api.particle.io/v1/access_tokens",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 0.0.4"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.6.2"
+          ],
+          "Date": [
+            "Wed, 15 Jul 2015 13:47:02 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "610"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "X-Powered-By": [
+            "Express"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Etag": [
+            "W/\"262-392ecd46\""
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "[\n  {\n    \"token\": \"__PARTICLE_ACCESS_TOKEN__\",\n    \"expires_at\": null,\n    \"client\": \"__PASSWORD_ONLY__\"\n  },\n  {\n    \"token\": \"93b55fe65a5b1d64a7626f3be80163a7e4ba335e\",\n    \"expires_at\": \"2015-09-30T18:45:21.835Z\",\n    \"client\": \"__PASSWORD_ONLY__\"\n  },\n  {\n    \"token\": \"3e50cbf2c2218e1a98a43826df4ac2e23b1349ff\",\n    \"expires_at\": null,\n    \"client\": \"spark-ide\"\n  },\n  {\n    \"token\": \"245bdbb9f6f6f2d22506ffdc06b4072af98f95b3\",\n    \"expires_at\": null,\n    \"client\": \"user\"\n  },\n  {\n    \"token\": \"cf9382e1256a7f87c2b58f2bd4fac04aacbbce80\",\n    \"expires_at\": null,\n    \"client\": \"user\"\n  }\n]"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Wed, 15 Jul 2015 13:47:02 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}

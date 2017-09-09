@@ -27,37 +27,41 @@ describe Particle::Client::Tokens, :vcr do
   end
 
   describe ".create_token" do
-    context "with valid username and password" do
-      it "returns a new token" do
-        token = Particle.create_token(username, password)
-        expect(token).to be_kind_of Particle::Token
-        Particle.remove_token(username, password, token)
+    context "default client" do
+      context "with valid username and password" do
+        it "returns a new token" do
+          token = Particle.create_token(username, password)
+          expect(token).to be_kind_of Particle::Token
+          Particle.remove_token(username, password, token)
+        end
+        it "creates a token with a specific expiration duration" do
+          token = Particle.create_token(username, password, expires_in: 3600)
+          expect(token.attributes[:expires_in]).to eq 3600
+          Particle.remove_token(username, password, token)
+        end
+        it "creates a token with a specific expiration date" do
+          date = Date.today + 90
+          day_in_seconds = 24 * 60 * 60
+          token = Particle.create_token(username, password, expires_at: date)
+          expect(token.attributes[:expires_in]).
+            to be_within(2 * day_in_seconds).of(90 * day_in_seconds)
+          Particle.remove_token(username, password, token)
+        end
       end
-      it "creates a token with a specific expiration duration" do
-        token = Particle.create_token(username, password, expires_in: 3600)
-        expect(token.attributes[:expires_in]).to eq 3600
-        Particle.remove_token(username, password, token)
+      context "with invalid username" do
+        it "raises BadRequest" do
+          expect { Particle.create_token("invalid", "invalid") }.
+            to raise_error Particle::BadRequest
+        end
       end
-      it "creates a token with a specific expiration date" do
-        date = Date.today + 90
-        day_in_seconds = 24 * 60 * 60
-        token = Particle.create_token(username, password, expires_at: date)
-        expect(token.attributes[:expires_in]).
-          to be_within(day_in_seconds).of(90 * day_in_seconds)
-        Particle.remove_token(username, password, token)
+      context "with invalid password" do
+        it "raises BadRequest" do
+          expect { Particle.create_token(username, "invalid") }.
+            to raise_error Particle::BadRequest
+        end
       end
     end
-    context "with invalid username" do
-      it "raises BadRequest" do
-        expect { Particle.create_token("invalid", "invalid") }.
-          to raise_error Particle::BadRequest
-      end
-    end
-    context "with invalid password" do
-      it "raises BadRequest" do
-        expect { Particle.create_token(username, "invalid") }.
-          to raise_error Particle::BadRequest
-      end
+    context "with an oauth client" do
     end
   end
 

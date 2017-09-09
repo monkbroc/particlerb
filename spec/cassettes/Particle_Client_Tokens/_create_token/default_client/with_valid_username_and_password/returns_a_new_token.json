@@ -10,7 +10,7 @@
         },
         "headers": {
           "User-Agent": [
-            "particlerb Ruby gem 0.0.4"
+            "particlerb Ruby gem 1.4.0"
           ],
           "Content-Type": [
             "application/x-www-form-urlencoded"
@@ -29,23 +29,23 @@
           "message": "OK"
         },
         "headers": {
-          "Server": [
-            "nginx/1.6.2"
-          ],
           "Date": [
-            "Wed, 15 Jul 2015 13:47:02 GMT"
+            "Sat, 09 Sep 2017 01:36:57 GMT"
           ],
           "Content-Type": [
             "application/json; charset=utf-8"
           ],
           "Content-Length": [
-            "178"
+            "161"
           ],
           "Connection": [
             "keep-alive"
           ],
-          "X-Powered-By": [
-            "Express"
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "53076e59-9076-437e-b424-8b4d4c66ce90"
           ],
           "Access-Control-Allow-Origin": [
             "*"
@@ -62,23 +62,23 @@
         },
         "body": {
           "encoding": "UTF-8",
-          "string": "{\n  \"token_type\": \"bearer\",\n  \"access_token\": \"c1685bf0c737bd5d4f6f21f4cc7c16d8049a26f0\",\n  \"expires_in\": 7776000,\n  \"refresh_token\": \"b5ca837d75b8f5eaecd8ff21db97a8696125fa82\"\n}"
+          "string": "{\"token_type\":\"bearer\",\"access_token\":\"56dc500b2b7ecdb27040d6a9a98b13cd20231bcb\",\"expires_in\":7776000,\"refresh_token\":\"9e511a59b5aa27896a04bb38af7bbae5f53a2bcf\"}"
         },
         "http_version": null
       },
-      "recorded_at": "Wed, 15 Jul 2015 13:47:02 GMT"
+      "recorded_at": "Sat, 09 Sep 2017 01:36:56 GMT"
     },
     {
       "request": {
         "method": "delete",
-        "uri": "https://__PARTICLE_USERNAME_URL_ENCODED__:__PARTICLE_PASSWORD__@api.particle.io/v1/access_tokens/c1685bf0c737bd5d4f6f21f4cc7c16d8049a26f0",
+        "uri": "https://__PARTICLE_USERNAME_URL_ENCODED__:__PARTICLE_PASSWORD__@api.particle.io/v1/access_tokens/56dc500b2b7ecdb27040d6a9a98b13cd20231bcb",
         "body": {
           "encoding": "UTF-8",
           "string": ""
         },
         "headers": {
           "User-Agent": [
-            "particlerb Ruby gem 0.0.4"
+            "particlerb Ruby gem 1.4.0"
           ],
           "Accept-Encoding": [
             "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
@@ -94,23 +94,23 @@
           "message": "OK"
         },
         "headers": {
-          "Server": [
-            "nginx/1.6.2"
-          ],
           "Date": [
-            "Wed, 15 Jul 2015 13:47:02 GMT"
+            "Sat, 09 Sep 2017 01:36:57 GMT"
           ],
           "Content-Type": [
             "application/json; charset=utf-8"
           ],
           "Content-Length": [
-            "16"
+            "11"
           ],
           "Connection": [
             "keep-alive"
           ],
-          "X-Powered-By": [
-            "Express"
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "9e18a3f9-5fde-4387-8aa8-87e43d652cdf"
           ],
           "Access-Control-Allow-Origin": [
             "*"
@@ -118,11 +118,11 @@
         },
         "body": {
           "encoding": "UTF-8",
-          "string": "{\n  \"ok\": true\n}"
+          "string": "{\"ok\":true}"
         },
         "http_version": null
       },
-      "recorded_at": "Wed, 15 Jul 2015 13:47:02 GMT"
+      "recorded_at": "Sat, 09 Sep 2017 01:36:56 GMT"
     }
   ],
   "recorded_with": "VCR 2.9.3"

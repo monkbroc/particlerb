@@ -1,1 +1,70 @@
-{"http_interactions":[{"request":{"method":"put","uri":"https://api.particle.io/v1/devices/__PARTICLE_DEVICE_ID_0__","body":{"encoding":"UTF-8","string":"-------------RubyMultipartPost\r\nContent-Disposition: form-data; name=\"file\"; filename=\"good_code.ino\"\r\nContent-Length: 304\r\nContent-Type: text/plain\r\nContent-Transfer-Encoding: binary\r\n\r\nconst int LED = D0;\nbool state = false;\nint answer = 42;\n\nvoid setup() {\n    pinMode(LED, OUTPUT);\n    Spark.function(\"toggle\", ledToggle);\n    Spark.variable(\"answer\", &answer, INT);\n}\n\nint ledToggle(String argument) {\n    state = !state;\n    digitalWrite(LED, state);\n    return 1;\n}\n\nvoid loop() {\n\n}\n\r\n-------------RubyMultipartPost--\r\n\r\n"},"headers":{"User-Agent":["particlerb Ruby gem 0.0.4"],"Authorization":["Bearer __PARTICLE_ACCESS_TOKEN__"],"Content-Type":["multipart/form-data; boundary=-----------RubyMultipartPost"],"Content-Length":["529"],"Accept-Encoding":["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"],"Accept":["*/*"]}},"response":{"status":{"code":200,"message":"OK"},"headers":{"Server":["nginx/1.6.2"],"Date":["Wed, 15 Jul 2015 13:45:52 GMT"],"Content-Type":["application/json; charset=utf-8"],"Content-Length":["47"],"Connection":["keep-alive"],"X-Powered-By":["Express"],"Access-Control-Allow-Origin":["*"]},"body":{"encoding":"UTF-8","string":"{\n  \"ok\": true,\n  \"message\": \"Update started\"\n}"},"http_version":null},"recorded_at":"Wed, 15 Jul 2015 13:45:52 GMT"}],"recorded_with":"VCR 2.9.3"}
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "put",
+        "uri": "https://api.particle.io/v1/devices/__PARTICLE_DEVICE_ID_0__",
+        "body": {
+          "encoding": "UTF-8",
+          "string": "-------------RubyMultipartPost\r\nContent-Disposition: form-data; name=\"file\"; filename=\"good_code.ino\"\r\nContent-Length: 304\r\nContent-Type: text/plain\r\nContent-Transfer-Encoding: binary\r\n\r\nconst int LED = D0;\nbool state = false;\nint answer = 42;\n\nvoid setup() {\n    pinMode(LED, OUTPUT);\n    Spark.function(\"toggle\", ledToggle);\n    Spark.variable(\"answer\", &answer, INT);\n}\n\nint ledToggle(String argument) {\n    state = !state;\n    digitalWrite(LED, state);\n    return 1;\n}\n\nvoid loop() {\n\n}\n\r\n-------------RubyMultipartPost--\r\n\r\n"
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 0.0.4"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Content-Type": [
+            "multipart/form-data; boundary=-----------RubyMultipartPost"
+          ],
+          "Content-Length": [
+            "529"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.6.2"
+          ],
+          "Date": [
+            "Wed, 15 Jul 2015 13:45:52 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "47"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "X-Powered-By": [
+            "Express"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\n  \"ok\": true,\n  \"message\": \"Update started\"\n}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Wed, 15 Jul 2015 13:45:52 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}

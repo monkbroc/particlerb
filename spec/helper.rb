@@ -66,6 +66,15 @@ VCR.configure do |c|
   }
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
+
+  # Monkey-patch serializer to pretty print JSON
+  class VCR::Cassette::Serializers
+    def serialize(hash)
+      handle_encoding_errors do
+        MultiJson.encode(hash, :pretty => true)
+      end
+    end
+  end
 end
 
 def fixture_path

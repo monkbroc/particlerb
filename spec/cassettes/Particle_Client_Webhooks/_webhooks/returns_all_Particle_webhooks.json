@@ -1,1 +1,191 @@
-{"http_interactions":[{"request":{"method":"post","uri":"https://api.particle.io/v1/webhooks","body":{"encoding":"UTF-8","string":"{\"url\":\"https://example.com\",\"event\":\"68c57e6752d5e0a5\"}"},"headers":{"User-Agent":["particlerb Ruby gem 0.0.4"],"Authorization":["Bearer __PARTICLE_ACCESS_TOKEN__"],"Content-Type":["application/json"],"Accept-Encoding":["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"],"Accept":["*/*"]}},"response":{"status":{"code":200,"message":"OK"},"headers":{"Server":["nginx/1.6.2"],"Date":["Wed, 15 Jul 2015 13:51:35 GMT"],"Content-Type":["application/json; charset=utf-8"],"Content-Length":["236"],"Connection":["keep-alive"],"X-Powered-By":["Express"],"Access-Control-Allow-Origin":["*"]},"body":{"encoding":"UTF-8","string":"{\n  \"id\": \"55a66567b27a6502512881c0\",\n  \"url\": \"https://example.com\",\n  \"event\": \"68c57e6752d5e0a5\",\n  \"created_at\": \"2015-07-15T13:51:35.172Z\",\n  \"hookUrl\": \"https://api.particle.io/v1/webhooks/55a66567b27a6502512881c0\",\n  \"ok\": true\n}"},"http_version":null},"recorded_at":"Wed, 15 Jul 2015 13:51:35 GMT"},{"request":{"method":"get","uri":"https://api.particle.io/v1/webhooks","body":{"encoding":"US-ASCII","string":""},"headers":{"User-Agent":["particlerb Ruby gem 0.0.4"],"Authorization":["Bearer __PARTICLE_ACCESS_TOKEN__"],"Accept-Encoding":["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"],"Accept":["*/*"]}},"response":{"status":{"code":200,"message":"OK"},"headers":{"Server":["nginx/1.6.2"],"Date":["Wed, 15 Jul 2015 13:51:35 GMT"],"Content-Type":["application/json; charset=utf-8"],"Content-Length":["307"],"Connection":["keep-alive"],"X-Powered-By":["Express"],"Access-Control-Allow-Origin":["*"],"Etag":["W/\"133-9e7c451d\""]},"body":{"encoding":"UTF-8","string":"[\n  {\n    \"id\": \"55a66567b27a6502512881c0\",\n    \"url\": \"https://example.com\",\n    \"deviceID\": null,\n    \"event\": \"68c57e6752d5e0a5\",\n    \"created_at\": \"2015-07-15T13:51:35.172Z\",\n    \"mydevices\": null,\n    \"requestType\": null,\n    \"headers\": null,\n    \"json\": null,\n    \"query\": null,\n    \"auth\": null\n  }\n]"},"http_version":null},"recorded_at":"Wed, 15 Jul 2015 13:51:35 GMT"},{"request":{"method":"delete","uri":"https://api.particle.io/v1/webhooks/55a66567b27a6502512881c0","body":{"encoding":"UTF-8","string":"{}"},"headers":{"User-Agent":["particlerb Ruby gem 0.0.4"],"Authorization":["Bearer __PARTICLE_ACCESS_TOKEN__"],"Content-Type":["application/json"],"Accept-Encoding":["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"],"Accept":["*/*"]}},"response":{"status":{"code":200,"message":"OK"},"headers":{"Server":["nginx/1.6.2"],"Date":["Wed, 15 Jul 2015 13:51:35 GMT"],"Content-Type":["application/json; charset=utf-8"],"Content-Length":["44"],"Connection":["keep-alive"],"X-Powered-By":["Express"],"Access-Control-Allow-Origin":["*"]},"body":{"encoding":"UTF-8","string":"{\n  \"ok\": true,\n  \"status\": \"Hook Deleted\"\n}"},"http_version":null},"recorded_at":"Wed, 15 Jul 2015 13:51:35 GMT"}],"recorded_with":"VCR 2.9.3"}
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "post",
+        "uri": "https://api.particle.io/v1/webhooks",
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"url\":\"https://example.com\",\"event\":\"68c57e6752d5e0a5\"}"
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 0.0.4"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.6.2"
+          ],
+          "Date": [
+            "Wed, 15 Jul 2015 13:51:35 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "236"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "X-Powered-By": [
+            "Express"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\n  \"id\": \"55a66567b27a6502512881c0\",\n  \"url\": \"https://example.com\",\n  \"event\": \"68c57e6752d5e0a5\",\n  \"created_at\": \"2015-07-15T13:51:35.172Z\",\n  \"hookUrl\": \"https://api.particle.io/v1/webhooks/55a66567b27a6502512881c0\",\n  \"ok\": true\n}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Wed, 15 Jul 2015 13:51:35 GMT"
+    },
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://api.particle.io/v1/webhooks",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 0.0.4"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.6.2"
+          ],
+          "Date": [
+            "Wed, 15 Jul 2015 13:51:35 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "307"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "X-Powered-By": [
+            "Express"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Etag": [
+            "W/\"133-9e7c451d\""
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "[\n  {\n    \"id\": \"55a66567b27a6502512881c0\",\n    \"url\": \"https://example.com\",\n    \"deviceID\": null,\n    \"event\": \"68c57e6752d5e0a5\",\n    \"created_at\": \"2015-07-15T13:51:35.172Z\",\n    \"mydevices\": null,\n    \"requestType\": null,\n    \"headers\": null,\n    \"json\": null,\n    \"query\": null,\n    \"auth\": null\n  }\n]"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Wed, 15 Jul 2015 13:51:35 GMT"
+    },
+    {
+      "request": {
+        "method": "delete",
+        "uri": "https://api.particle.io/v1/webhooks/55a66567b27a6502512881c0",
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{}"
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 0.0.4"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.6.2"
+          ],
+          "Date": [
+            "Wed, 15 Jul 2015 13:51:35 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "44"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "X-Powered-By": [
+            "Express"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\n  \"ok\": true,\n  \"status\": \"Hook Deleted\"\n}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Wed, 15 Jul 2015 13:51:35 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}

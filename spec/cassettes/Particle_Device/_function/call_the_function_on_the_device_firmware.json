@@ -1,1 +1,67 @@
-{"http_interactions":[{"request":{"method":"post","uri":"https://api.particle.io/v1/devices/__PARTICLE_DEVICE_ID_0__/toggle","body":{"encoding":"UTF-8","string":"{\"arg\":\"\"}"},"headers":{"User-Agent":["particlerb Ruby gem 0.0.4"],"Authorization":["Bearer __PARTICLE_ACCESS_TOKEN__"],"Content-Type":["application/json"],"Accept-Encoding":["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"],"Accept":["*/*"]}},"response":{"status":{"code":200,"message":"OK"},"headers":{"Server":["nginx/1.6.2"],"Date":["Wed, 15 Jul 2015 13:46:54 GMT"],"Content-Type":["application/json; charset=utf-8"],"Content-Length":["98"],"Connection":["keep-alive"],"X-Powered-By":["Express"],"Access-Control-Allow-Origin":["*"]},"body":{"encoding":"UTF-8","string":"{\n  \"id\": \"__PARTICLE_DEVICE_ID_0__\",\n  \"last_app\": \"\",\n  \"connected\": true,\n  \"return_value\": 1\n}"},"http_version":null},"recorded_at":"Wed, 15 Jul 2015 13:46:54 GMT"}],"recorded_with":"VCR 2.9.3"}
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "post",
+        "uri": "https://api.particle.io/v1/devices/__PARTICLE_DEVICE_ID_0__/toggle",
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"arg\":\"\"}"
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 0.0.4"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Server": [
+            "nginx/1.6.2"
+          ],
+          "Date": [
+            "Wed, 15 Jul 2015 13:46:54 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "98"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "X-Powered-By": [
+            "Express"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\n  \"id\": \"__PARTICLE_DEVICE_ID_0__\",\n  \"last_app\": \"\",\n  \"connected\": true,\n  \"return_value\": 1\n}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Wed, 15 Jul 2015 13:46:54 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}

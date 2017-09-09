@@ -1,1 +1,67 @@
-{"http_interactions":[{"request":{"method":"put","uri":"https://api.particle.io/v1/devices/__PARTICLE_DEVICE_ID_0__/ping","body":{"encoding":"UTF-8","string":"{}"},"headers":{"User-Agent":["particlerb Ruby gem 1.4.0"],"Authorization":["Bearer __PARTICLE_ACCESS_TOKEN__"],"Content-Type":["application/json"],"Accept-Encoding":["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"],"Accept":["*/*"]}},"response":{"status":{"code":200,"message":"OK"},"headers":{"Date":["Fri, 08 Sep 2017 21:38:29 GMT"],"Content-Type":["application/json; charset=utf-8"],"Content-Length":["26"],"Connection":["keep-alive"],"Server":["nginx"],"X-Request-Id":["f9aaa0f2-2b7e-4283-95b6-532386a83c6f"],"Access-Control-Allow-Origin":["*"]},"body":{"encoding":"UTF-8","string":"{\"online\":false,\"ok\":true}"},"http_version":null},"recorded_at":"Fri, 08 Sep 2017 21:38:29 GMT"}],"recorded_with":"VCR 2.9.3"}
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "put",
+        "uri": "https://api.particle.io/v1/devices/__PARTICLE_DEVICE_ID_0__/ping",
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{}"
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Fri, 08 Sep 2017 21:38:29 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "26"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "f9aaa0f2-2b7e-4283-95b6-532386a83c6f"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"online\":false,\"ok\":true}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Fri, 08 Sep 2017 21:38:29 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}
