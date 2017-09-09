@@ -61,6 +61,12 @@ describe Particle::Device do
     end
   end
 
+  describe ".ping", :vcr do
+    it "returns true for a device online" do
+      expect(device.ping).to eq true
+    end
+  end
+
   describe ".signal", :vcr do
     it "starts shouting rainbows" do
       expect(device.signal).to eq true
@@ -87,13 +93,6 @@ describe Particle::Device do
       result = device.compile(source_file)
       expect(result.ok).to eq true
     end
-  end
-
-  describe ".change_product", :vcr do
-    # FIXME: don't want to try this before figuring out what changing product_id does
-    #it "works" do
-    #  expect(device.change_product(0)).to eq true
-    #end
   end
 
   describe ".update_public_key", :vcr do

@@ -18,7 +18,7 @@ Ruby client for the [Particle.io] Cloud API with an object-oriented interface
 $ gem install particlerb
 
 # or add to your Gemfile
-gem "particlerb", "~> 0.0.3"
+gem "particlerb", "~> 1.4.0"
 
 # Require the gem
 require 'particle'
@@ -62,8 +62,8 @@ client.devices
 
 When using this gem in a multi-threaded program like a Rails application running on the puma server, it's safer to use `Particle::Client.new` in each thread rather than using the global  `Particle.client`.
 
-[Web IDE]: http://docs.particle.io/core/build/#flash-apps-with-particle-build-account-information
-[Particle CLI]: http://docs.particle.io/core/cli
+[Web IDE]: https://docs.particle.io/guide/getting-started/build
+[Particle CLI]: https://docs.particle.io/reference/cli
 
 ## Interacting with devices
 
@@ -139,6 +139,12 @@ device.variable('version') # ==> "1.0.1"
 device.get('version') # aliased as get
 ```
 
+Ping a device to see if it is online. Returns true when online.
+
+```ruby
+Particle.device('nyan_cat').ping
+```
+
 Signal a device to start blinking the RGB LED in rainbow patterns. Returns whether the device is signaling.
 
 ```ruby
@@ -153,12 +159,6 @@ device = Particle.provision_device(product_id: 31)
 device.claim
 ```
 
-Change the product id. The meaning of the product id is specific to your application and account.
-
-```ruby
-Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').change_product(3)
-```
-
 Update the public key for a device. The public key must be in PEM format. See <spec/fixtures/device.pub.pem> for an example.
 
 ```ruby
@@ -166,9 +166,15 @@ public_key = IO.read('device.pub.pem')
 Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').update_public_key(public_key, algorithm: 'rsa')
 ```
 
+### TODO
+
+List devices in a product
+
+Import devices into a product
+
 See the [Particle Cloud API documentation about devices][device docs] for more details.
 
-[device docs]: http://docs.particle.io/core/api/#introduction-device-information
+[device docs]: https://docs.particle.io/reference/api/#devices
 
 ## Interacting with events
 
@@ -185,7 +191,7 @@ Data is converted to JSON if it is a Hash or an Array, otherwise it is converted
 
 See the [Particle Cloud API documentation about publishing events][publish docs] for more details.
 
-[publish docs]: http://docs.particle.io/core/api/#publishing-events
+[publish docs]: https://docs.particle.io/reference/api/#publish-an-event
 
 ### Limitation: Subscribe not supported
 
@@ -255,8 +261,8 @@ Particle.webhooks.each(&:remove) # remove all
 
 See the [Particle Cloud API documentation about webhooks][webhook docs] for more details.
 
-[webhook docs]: http://docs.particle.io/core/webhooks/
-[webhook options]: http://docs.particle.io/core/webhooks/#webhook-options
+[webhook docs]: https://docs.particle.io/reference/webhooks
+[webhook options]: https://docs.particle.io/reference/webhooks/#webhook-properties
 
 ## Authentication
 
@@ -304,7 +310,7 @@ Particle.tokens.first.remove("me@example.com", "pa$$w0rd")
 
 See the [Particle Cloud API documentation about authentication and token][authentication docs] for more details.
 
-[authentication docs]: http://docs.particle.io/core/api/#introduction-authentication
+[authentication docs]: https://docs.particle.io/reference/api/#authentication
 
 ## Compiling and flashing
 
@@ -343,8 +349,33 @@ File.new('application.bin', 'w') { |f| f.write(binary) }
 
 See the [Particle Cloud API documentation about firmware][firmware docs] for more details.
 
-[firmware docs]: http://docs.particle.io/core/api/#basic-functions-verifying-and-flashing-new-firmware
+[firmware docs]: https://docs.particle.io/reference/api/#firmware
 
+## Libraries
+
+Interact with firmware libraries.
+
+List most popular libraries. Response array has pagination.
+
+```ruby
+libs = Particle.libraries
+libs.each { |lib| puts lib.name }
+libs.next_page if libs.has_next?
+
+libs = Particle.libraries name: "gps"
+```
+
+Get details about a library.
+
+```ruby
+lib = Particle.library("internet_button")
+puts "#{lib.name}@#{lib.version}: #{lib.sentence}"
+```
+
+
+See the [Particle Cloud API documentation about libraries][library docs] for more details.
+
+[library docs]: https://docs.particle.io/reference/api/#libraries
 
 ## Errors
 
@@ -364,7 +395,7 @@ See [a description of each error on the Particle API docs][error docs].
 
 This gem uses the Faraday HTTP client library, so API call may raise `Faraday::ClientError` for things like SSL errors, DNS errors, HTTP connection timed out.
 
-[error docs]: http://docs.particle.io/core/api/#introduction-errors
+[error docs]: https://docs.particle.io/reference/api/#errors
 
 ## Advanced
 

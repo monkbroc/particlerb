@@ -5,7 +5,7 @@ module Particle
 
     # Client methods for the Particle device API
     #
-    # @see http://docs.particle.io/core/api/#introduction-list-devices
+    # @see https://docs.particle.io/reference/api/#devices
     module Devices
 
       # Create a domain model for a Particle device
@@ -97,6 +97,15 @@ module Particle
         result[:result]
       end
 
+      # Ping a device to see if it is online
+      #
+      # @param target [String, Device] A device id, name or {Device} object
+      # @return [boolean] true when online, false when offline
+      def ping_device(target)
+        result = put(device(target).ping_path)
+        result[:online]
+      end
+
       # Signal the device to start blinking the RGB LED in a rainbow
       # pattern. Useful to identify a particular device.
       #
@@ -106,27 +115,6 @@ module Particle
       def signal_device(target, enabled = true)
         result = put(device(target).path, signal: enabled ? '1' : '0')
         result[:signaling]
-      end
-
-      # Change the product_id on the device.
-      # Use this carefully, it will impact what updates you receive, and
-      # can only be used for products that have given their permission
-      #
-      # @param target [String, Device] A device id, name or {Device} object
-      # @param product_id [String] New product id
-      # @param should_update [String] if the device should be
-      #                   immediately updated after changing the product_id
-      # @return [boolean] true on success
-      def change_device_product(target, product_id, should_update = false)
-        params = {
-          product_id: product_id,
-          update_after_claim: should_update
-        }
-        result = put(device(target).path, params)
-        if result[:error] == "Nothing to do?"
-          result[:ok] = false
-        end
-        result[:ok]
       end
 
       # Update the public key for a device you own

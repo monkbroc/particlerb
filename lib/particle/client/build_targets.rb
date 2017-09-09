@@ -4,12 +4,11 @@ require 'ostruct'
 module Particle
   class Client
     module BuildTargets
-      HTTP_PATH = "v1/build_targets"
       # List all available Particle cloud compile build targets
       #
       # @return [Array<BuildTarget>] List of Particle Build Targets you can compile sources with
       def build_targets
-        get(HTTP_PATH)[:targets].map do |target_h|
+        get(BuildTarget.path)[:targets].map do |target_h|
           BuildTarget.new(self, target_h)
         end
       end

@@ -22,6 +22,10 @@ module Particle
       super(client, attributes)
     end
     attribute_reader :platforms, :prereleases, :firmware_vendor, :version
+
+    def self.path
+      "v1/build_targets"
+    end
   end
 end
 

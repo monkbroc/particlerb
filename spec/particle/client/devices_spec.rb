@@ -159,6 +159,28 @@ describe Particle::Client::Devices, :vcr do
     end
   end
 
+  describe ".ping_device" do
+    context "when the device is online" do
+      it "returns true" do
+        expect(Particle.ping_device(dev_id)).to eq true
+      end
+    end
+
+    context "when the device is offline", :offline do
+      it "returns false" do
+        # Test device must be offline before recording VCR cassette
+        expect(Particle.ping_device(dev_id)).to eq false
+      end
+    end
+
+    context "when the device doesn't exist" do
+      it "raises Forbidden" do
+        expect { Particle.ping_device("1234") }.
+          to raise_error(Particle::Forbidden)
+      end
+    end
+  end
+
   describe ".signal_device" do
     context "when the device is online" do
       it "starts shouting rainbows" do
@@ -185,13 +207,6 @@ describe Particle::Client::Devices, :vcr do
           to raise_error(Particle::Forbidden)
       end
     end
-  end
-
-  describe ".change_device_product" do
-    # FIXME: don't want to try this before figuring out what changing product_id does
-    #it "works" do
-    #  expect(Particle.change_device_product(dev_id, 0)).to eq true
-    #end
   end
 
   describe ".update_device_public_key", :vcr do

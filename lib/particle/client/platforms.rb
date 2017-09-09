@@ -10,7 +10,7 @@ module Particle
       # @return [Array<Platform>] List of Particle Hardware platforms that have build targets you can compile sources with
       def platforms
         @platforms = []
-        get(Particle::Client::BuildTargets::HTTP_PATH)[:platforms].each_pair do |platform_name, platform_id|
+        get(BuildTarget.path)[:platforms].each_pair do |platform_name, platform_id|
           @platforms << Platform.new(self, {name: platform_name, id: platform_id})
         end
         @platforms
