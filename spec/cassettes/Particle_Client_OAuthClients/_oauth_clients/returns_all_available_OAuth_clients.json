@@ -1,0 +1,64 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://api.particle.io/v1/clients",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Sun, 10 Sep 2017 03:08:30 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "a1d63524-c316-447d-9b27-abbb4bd92b68"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "ASCII-8BIT",
+          "string": "{\"ok\":true,\"clients\":[{\"name\":\"TestClient\",\"type\":\"installed\",\"id\":\"testclient-1013\"},{\"name\":\"particlerb-removable-client\",\"type\":\"installed\",\"id\":\"particlerb-removable-client-3674\"},{\"name\":\"particlerb-installed-client\",\"type\":\"installed\",\"id\":\"particlerb-installed-client-331\"},{\"name\":\"particlerb-web-client\",\"type\":\"web\",\"redirect_uri\":\"https://example.com\",\"id\":\"particlerb-web-client-5899\"},{\"name\":\"particlerb-installed-client\",\"type\":\"installed\",\"id\":\"particlerb-installed-client-5377\"},{\"name\":\"particlerb-web-client\",\"type\":\"web\",\"redirect_uri\":\"https://example.com\",\"id\":\"particlerb-web-client-6425\"},{\"name\":\"particlerb-removable-client\",\"type\":\"installed\",\"id\":\"particlerb-removable-client-2039\"},{\"name\":\"particlerb-web-client\",\"type\":\"web\",\"redirect_uri\":\"https://example.com\",\"id\":\"particlerb-web-client-5810\"},{\"name\":\"particlerb-installed-client\",\"type\":\"installed\",\"id\":\"particlerb-installed-client-4384\"},{\"name\":\"particlerb-removable-client\",\"type\":\"installed\",\"id\":\"particlerb-removable-client-5721\"},{\"name\":\"particlerb-removable-client\",\"type\":\"installed\",\"id\":\"particlerb-removable-client-8541\"},{\"name\":\"particlerb-removable-client\",\"type\":\"installed\",\"id\":\"particlerb-removable-client-3163\"},{\"name\":\"particlerb-installed-client\",\"type\":\"installed\",\"id\":\"particlerb-installed-client-163\"},{\"name\":\"particlerb-web-client\",\"type\":\"web\",\"redirect_uri\":\"https://example.com\",\"id\":\"particlerb-web-client-5709\"}]}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Sun, 10 Sep 2017 03:08:30 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}

@@ -6,6 +6,7 @@ require 'particle/client/tokens'
 require 'particle/client/firmware'
 require 'particle/client/build_targets'
 require 'particle/client/platforms'
+require 'particle/client/oauth_clients'
 
 module Particle
 
@@ -22,6 +23,7 @@ module Particle
     include Particle::Client::Firmware
     include Particle::Client::BuildTargets
     include Particle::Client::Platforms
+    include Particle::Client::OAuthClients
 
     def initialize(options = {})
       # Use options passed in, but fall back to module defaults

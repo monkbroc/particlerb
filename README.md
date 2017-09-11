@@ -380,6 +380,17 @@ See the [Particle Cloud API documentation about libraries][library docs] for mor
 
 [library docs]: https://docs.particle.io/reference/api/#libraries
 
+## OAuth Clients
+
+Interact with OAuth clients used to authenticate requests.
+
+List clients
+
+```ruby
+clients = Particle.oauth_clients
+clients.each { |client| puts client.id }
+```
+
 ## Errors
 
 When any API error occurs, a subclass of `Particle::Error` will be raised.
