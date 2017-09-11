@@ -166,12 +166,6 @@ public_key = IO.read('device.pub.pem')
 Particle.device('f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d').update_public_key(public_key, algorithm: 'rsa')
 ```
 
-### TODO
-
-List devices in a product
-
-Import devices into a product
-
 See the [Particle Cloud API documentation about devices][device docs] for more details.
 
 [device docs]: https://docs.particle.io/reference/api/#devices
@@ -375,20 +369,36 @@ lib = Particle.library("internet_button")
 puts "#{lib.name}@#{lib.version}: #{lib.sentence}"
 ```
 
-
 See the [Particle Cloud API documentation about libraries][library docs] for more details.
 
 [library docs]: https://docs.particle.io/reference/api/#libraries
 
 ## OAuth Clients
 
-Interact with OAuth clients used to authenticate requests.
+Interact with OAuth clients used to authenticate requests with the Particle cloud. See [Authentication](#authentication).
 
-List clients
+List OAuth clients. Returns an `Array` of `Particle::OAuthClinet`.
 
 ```ruby
 clients = Particle.oauth_clients
 clients.each { |client| puts client.id }
+```
+
+Create an OAuth client. Returns a `Particle::OAuthClient`. Note that
+this is the only time that the `secret` attribute will be returned by
+the Particle API.
+
+```ruby
+client = Particle.create_oauth_client(name: "my-client", type: "installed")
+puts "OAuth client ID: #{client.id} OAuth client secret: #{client.secret}"
+```
+
+Remove an OAuth client by id. Returns `true` on success.
+
+```ruby
+Particle.remove_oauth_client("my-client-1234")
+client = Particle.oauth_clients.first
+client.remove
 ```
 
 ## Errors
@@ -410,6 +420,42 @@ See [a description of each error on the Particle API docs][error docs].
 This gem uses the Faraday HTTP client library, so API call may raise `Faraday::ClientError` for things like SSL errors, DNS errors, HTTP connection timed out.
 
 [error docs]: https://docs.particle.io/reference/api/#errors
+
+## TODO
+
+Some Particle API endpoints are not implemented yet
+
+List devices in a product
+
+Import devices into a product
+
+Remove a device from a product
+
+Update an OAuth client
+
+Add device notes
+
+Create a device claim code
+
+Request a device transfer
+
+Approve/deny a quarantined device
+
+All SIM card endpoints (list, data usage, activate, deactivate, set data limit, release from account)
+
+Integrations that are not webhooks
+
+All product firmware endpoints (list, get, upload, edit, download, release)
+
+Get library versions
+
+Upload library
+
+Publish library
+
+Main product endpoints (list, get, invite team member, remove team member)
+
+**Product functionality for many of the existing endpoints like device, firmware, etc**
 
 ## Advanced
 
