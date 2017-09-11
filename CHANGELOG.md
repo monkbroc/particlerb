@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.0 (September 11, 2017)
+
+- Support OAuth client for login
+- Add OAuth clients
+
 ## 1.3.1 (January 26, 2017)
 
 - Send the device ID in the url of the provisioning endpoint
