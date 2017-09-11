@@ -13,6 +13,17 @@ module Particle
       @attributes
     end
 
+    # Remove this OAuth client
+    #
+    # @example
+    #   client = Particle.oauth_clients.first
+    #   client.remove
+    #
+    # @return [boolean] true for success
+    def remove
+      @client.remove_oauth_client(self)
+    end
+
     def self.list_path
       "/v1/clients"
     end

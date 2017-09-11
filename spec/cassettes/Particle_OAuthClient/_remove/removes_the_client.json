@@ -1,0 +1,123 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "post",
+        "uri": "https://api.particle.io/v1/clients",
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"name\":\"particlerb-installed-client\",\"type\":\"installed\"}"
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Mon, 11 Sep 2017 14:49:55 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "170"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "9a4aec5d-9a2e-4902-9aaa-e8df2eb2d542"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"ok\":true,\"client\":{\"name\":\"particlerb-installed-client\",\"type\":\"installed\",\"secret\":\"9805375c97414856fbab427230f1ef51c60e2944\",\"id\":\"particlerb-installed-client-4423\"}}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Mon, 11 Sep 2017 14:49:55 GMT"
+    },
+    {
+      "request": {
+        "method": "delete",
+        "uri": "https://api.particle.io/v1/clients/particlerb-installed-client-4423",
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{}"
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 204,
+          "message": "No Content"
+        },
+        "headers": {
+          "Date": [
+            "Mon, 11 Sep 2017 14:50:42 GMT"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "fd03f70d-47ed-47b7-83f8-eef356c75550"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": ""
+        },
+        "http_version": null
+      },
+      "recorded_at": "Mon, 11 Sep 2017 14:50:42 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}
