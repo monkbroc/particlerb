@@ -30,7 +30,7 @@
         },
         "headers": {
           "Date": [
-            "Sat, 09 Sep 2017 01:36:57 GMT"
+            "Sat, 09 Sep 2017 01:48:56 GMT"
           ],
           "Content-Type": [
             "application/json; charset=utf-8"
@@ -45,7 +45,7 @@
             "nginx"
           ],
           "X-Request-Id": [
-            "7f2e6aaf-1066-4f09-a057-a8703e70c1e4"
+            "a89f365a-46c8-4010-872e-35654db7e8f3"
           ],
           "Access-Control-Allow-Origin": [
             "*"
@@ -62,16 +62,16 @@
         },
         "body": {
           "encoding": "UTF-8",
-          "string": "{\"token_type\":\"bearer\",\"access_token\":\"8b559d5775bb45883630ea3d5fc14d259984bae4\",\"expires_in\":3600,\"refresh_token\":\"df16ce2d429c45c3ac8af77921d074349498cb5c\"}"
+          "string": "{\"token_type\":\"bearer\",\"access_token\":\"867ff6f7aad3896d01d8d1e95b0d3d043b19c577\",\"expires_in\":3600,\"refresh_token\":\"0c88ac5a64d272d9b91924665d89102137e121cc\"}"
         },
         "http_version": null
       },
-      "recorded_at": "Sat, 09 Sep 2017 01:36:56 GMT"
+      "recorded_at": "Sat, 09 Sep 2017 01:48:55 GMT"
     },
     {
       "request": {
         "method": "delete",
-        "uri": "https://__PARTICLE_USERNAME_URL_ENCODED__:__PARTICLE_PASSWORD__@api.particle.io/v1/access_tokens/8b559d5775bb45883630ea3d5fc14d259984bae4",
+        "uri": "https://__PARTICLE_USERNAME_URL_ENCODED__:__PARTICLE_PASSWORD__@api.particle.io/v1/access_tokens/867ff6f7aad3896d01d8d1e95b0d3d043b19c577",
         "body": {
           "encoding": "UTF-8",
           "string": ""
@@ -95,7 +95,7 @@
         },
         "headers": {
           "Date": [
-            "Sat, 09 Sep 2017 01:36:58 GMT"
+            "Sat, 09 Sep 2017 01:48:56 GMT"
           ],
           "Content-Type": [
             "application/json; charset=utf-8"
@@ -110,7 +110,7 @@
             "nginx"
           ],
           "X-Request-Id": [
-            "eaa41356-01e0-4173-896c-45fe12b76178"
+            "674de68d-9eb2-4ccc-a2f2-229e810bc5f0"
           ],
           "Access-Control-Allow-Origin": [
             "*"
@@ -122,7 +122,7 @@
         },
         "http_version": null
       },
-      "recorded_at": "Sat, 09 Sep 2017 01:36:57 GMT"
+      "recorded_at": "Sat, 09 Sep 2017 01:48:55 GMT"
     }
   ],
   "recorded_with": "VCR 2.9.3"
