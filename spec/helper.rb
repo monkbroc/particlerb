@@ -14,8 +14,8 @@ RSpec.configure do |config|
   config.before(:each) do |example|
     if example.metadata[:vcr]
       Particle.reset!
-      Particle.configure do |config|
-        config.access_token = test_particle_access_token
+      Particle.configure do |particle_config|
+        particle_config.access_token = test_particle_access_token
       end
     end
   end
@@ -39,6 +39,14 @@ end
 
 def test_particle_device_ids
   ENV.fetch('TEST_PARTICLE_DEVICE_IDS', 'a' * 24).split(",")
+end
+
+def product_id
+  test_particle_product_ids[0]
+end
+
+def test_particle_product_ids
+  ENV.fetch('TEST_PARTICLE_PRODUCT_IDS', '2' * 4).split(",")
 end
 
 def test_particle_oauth_client
@@ -66,6 +74,10 @@ VCR.configure do |c|
   end
   test_particle_device_ids.each_with_index do |device_id, index|
     c.filter_sensitive_data("__PARTICLE_DEVICE_ID_#{index}__") { device_id }
+  end
+
+  test_particle_product_ids.each_with_index do |product_id, index|
+    c.filter_sensitive_data("__PARTICLE_PRODUCT_ID_#{index}__") { product_id }
   end
 
   c.filter_sensitive_data("__PARTICLE_OAUTH_CLIENT__") do

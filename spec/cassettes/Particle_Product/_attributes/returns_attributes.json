@@ -1,0 +1,64 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://api.particle.io/v1/products/__PARTICLE_PRODUCT_ID_0__",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Wed, 09 May 2018 20:11:10 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "318"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"product\":[{\"id\":__PARTICLE_PRODUCT_ID_0__,\"platform_id\":10,\"name\":\"product_name\",\"slug\":\"product_slug\",\"latest_firmware_version\":null,\"description\":\"Product Description\",\"type\":null,\"hardware_version\":\"v1.0.0\",\"config_id\":\"aaaaaaaaaaaaaaaaaaaaaaaa\",\"organization\":\"aaaaaaaaaaaaaaaaaaaaaaaa\",\"subscription_id\":99999,\"mb_limit\":null,\"groups\":[]}]}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Wed, 09 May 2018 20:11:10 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}
