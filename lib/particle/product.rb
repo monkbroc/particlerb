@@ -35,6 +35,15 @@ module Particle
       @attributes = @client.product_attributes(self)
     end
 
+    def firmware(target)
+      @client.product_firmware(self, target)
+    end
+
+    def upload_firmware(version, title, binary, desc = nil)
+      params = { version: version, title: title, binary: binary, description: desc }
+      @client.upload_product_firmware(self, params)
+    end
+
     def id
       get_attributes unless @attributes[:id]
       @attributes[:id]
@@ -55,6 +64,14 @@ module Particle
 
     def path
       "/v1/products/#{id_or_slug}"
+    end
+
+    def firmware_path(version)
+      "/v1/products/#{id_or_slug}/firmware/#{version}"
+    end
+
+    def firmware_upload_path
+      "/v1/products/#{id_or_slug}/firmware"
     end
   end
 end

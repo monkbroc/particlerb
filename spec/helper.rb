@@ -57,6 +57,18 @@ def test_particle_oauth_secret
   ENV.fetch('TEST_PARTICLE_OAUTH_SECRET', 'my_oauth_secret')
 end
 
+def test_particle_product_firmware_version
+  ENV.fetch('TEST_PARTICLE_PRODUCT_FIRMWARE_VERSION', '1')
+end
+
+def test_product_firmware_binary
+  ENV.fetch('TEST_PARTICLE_PRODUCT_FIRMWARE_BINARY', 'spec/fixtures/spark_tinker.bin')
+end
+
+def product_firmware_version
+  test_particle_product_firmware_version
+end
+
 VCR.configure do |c|
   c.configure_rspec_metadata!
   c.filter_sensitive_data("__PARTICLE_USERNAME__") do
@@ -93,6 +105,10 @@ VCR.configure do |c|
   }
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
+
+  c.preserve_exact_body_bytes do |http_message|
+    http_message.body.encoding.name == 'ASCII-8BIT' || !http_message.body.valid_encoding?
+  end
 
   # Monkey-patch cassette serializer to pretty print JSON
   module VCR::Cassette::Serializers::JSON

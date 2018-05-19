@@ -1,0 +1,70 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "post",
+        "uri": "https://api.particle.io/v1/products/__PARTICLE_PRODUCT_ID_0__/firmware",
+        "body": {
+          "encoding": "ASCII-8BIT",
+          "base64_string":"ACTUAL_BINARY"
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Content-Type": [
+            "multipart/form-data; boundary=-----------RubyMultipartPost"
+          ],
+          "Content-Length": [
+            "39917"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 201,
+          "message": "Created"
+        },
+        "headers": {
+          "Date": [
+            "Thu, 10 May 2018 00:07:27 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "642"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"updated_at\":\"2018-05-10T00:07:27.655Z\",\"uploaded_on\":\"2018-05-10T00:07:27.655Z\",\"uploaded_by\":{},\"version\":3,\"product_id\":__PARTICLE_PRODUCT_ID_0__,\"size\":39292,\"name\":\"spark_tinker.bin\",\"title\":\"Test Firmware Upload\",\"description\":\"upload description\",\"_id\":\"aaaaaaaaaaaaaaaaaaaaaaaa\",\"current\":false,\"product_default\":false,\"groups\":[]}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Thu, 10 May 2018 00:07:27 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}
