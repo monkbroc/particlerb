@@ -1,17 +1,12 @@
 require 'particle/model'
+require 'particle/platform'
 
 module Particle
 
   # Domain model for one Particle device
   class Device < Model
     ID_REGEX = /^\h{24}$/
-    PRODUCT_IDS = {
-      0 => "Core".freeze,
-      6 => "Photon".freeze,
-      8 => "P1".freeze,
-      10 => "Electron".freeze,
-      31 => "Raspberry Pi".freeze
-    }
+    PLATFORM_IDS = Platform::IDS
 
     def initialize(client, attributes)
       super(client, attributes)
@@ -44,9 +39,11 @@ module Particle
     end
 
     attribute_reader :connected, :product_id, :last_heard, :last_app,
-      :last_ip_address
+      :last_ip_address, :platform_id, :cellular, :status, :iccid,
+      :imei, :current_build_target, :default_build_target, :system_firmware_version
 
     alias_method :connected?, :connected
+    alias_method :cellular?, :cellular
 
     def functions
       get_attributes unless @fully_loaded
@@ -58,8 +55,37 @@ module Particle
       @attributes[:variables]
     end
 
+    def _product
+      @_product ||= Product.new(@client, product_id)
+    end
+
+    def platform
+      @platform ||= Platform.new(@client, platform_id)
+    end
+
+    def platform_name
+      platform.name
+    end
+
     def product
-      PRODUCT_IDS[product_id]
+      return _product if part_of_product?
+
+      puts <<~BUTT
+        DEPRECATION WARNING:
+        Using Device#product for retrieving the device's platform (i.e. 'Photon', 'Core', etc.) is deprecated; please use Device#platform_name instead (or, use Device#platform to get full platform object).
+        Behavior for Device#product will change in version 2.x.x, such that devices without a user-defined product will soon return nil.
+        (called from: #{caller(1..1).first})
+      BUTT
+
+      platform_name
+    end
+
+    # If the device isn't part of a Product that the user created,
+    # then product_id will return the platform_id. So, conversely,
+    # if product_id is not a platform_id, then it is a part of a
+    # user-created product.
+    def part_of_product?
+      !PLATFORM_IDS.include?(product_id)
     end
 
     def get_attributes
@@ -142,7 +168,7 @@ module Particle
     # @return [OpenStruct] Result of flashing.
     #                :ok => true on success
     #                :errors => String with compile errors
-    #                
+    #
     def flash(file_paths, options = {})
       @client.flash_device(self, file_paths, options)
     end
@@ -154,7 +180,7 @@ module Particle
     # @return [OpenStruct] Result of flashing.
     #                :ok => true on success
     #                :errors => String with compile errors
-    #                
+    #
     def compile(file_paths)
       @client.compile(file_paths, device_id: id)
     end
@@ -203,4 +229,3 @@ module Particle
     end
   end
 end
-
