@@ -2,9 +2,9 @@ require 'particle/model'
 
 module Particle
 
-  # Domain model for one Particle device
+  # Domain model for one Particle product
   class Product < Model
-    ID_REGEX = /^\d{1,5}$/
+    ID_REGEX = /^\d+$/
 
     def initialize(client, attributes)
       super(client, attributes)
@@ -24,9 +24,6 @@ module Particle
       end
     end
 
-    # NOTE: the key :requires_activation_codes is documented (as of 2018/05/19)
-    # but does not seem to come through in the response for product requests,
-    # so excluding it for now.
     attribute_reader :name, :description, :platform_id, :type, :hardware_version,
       :config_id, :organization
 

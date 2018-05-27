@@ -68,7 +68,7 @@ module Particle
     end
 
     def product
-      return _product if part_of_product?
+      return _product unless dev_kit?
 
       puts <<~BUTT
         DEPRECATION WARNING:
@@ -80,12 +80,10 @@ module Particle
       platform_name
     end
 
-    # If the device isn't part of a Product that the user created,
-    # then product_id will return the platform_id. So, conversely,
-    # if product_id is not a platform_id, then it is a part of a
-    # user-created product.
-    def part_of_product?
-      !PLATFORM_IDS.include?(product_id)
+    # If the device isn't part of a Product that the user created
+    # (device is for prototyping), then product_id will return the platform_id.
+    def dev_kit?
+      PLATFORM_IDS.include?(product_id)
     end
 
     def get_attributes
