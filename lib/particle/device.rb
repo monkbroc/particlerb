@@ -55,8 +55,8 @@ module Particle
       @attributes[:variables]
     end
 
-    def _product
-      @_product ||= Product.new(@client, product_id)
+    def product
+      @product ||= dev_kit? ? nil : Product.new(@client, product_id)
     end
 
     def platform
@@ -67,23 +67,8 @@ module Particle
       platform.name
     end
 
-    def product
-      return _product unless dev_kit?
-
-      puts <<~BUTT
-        DEPRECATION WARNING:
-        Using Device#product for retrieving the device's platform (i.e. 'Photon', 'Core', etc.) is deprecated; please use Device#platform_name instead (or, use Device#platform to get full platform object).
-        Behavior for Device#product will change in version 2.x.x, such that devices without a user-defined product will soon return nil.
-        (called from: #{caller(1..1).first})
-      BUTT
-
-      platform_name
-    end
-
-    # If the device isn't part of a Product that the user created
-    # (device is for prototyping), then product_id will return the platform_id.
     def dev_kit?
-      PLATFORM_IDS.include?(product_id)
+      product_id && PLATFORM_IDS.include?(product_id)
     end
 
     def get_attributes

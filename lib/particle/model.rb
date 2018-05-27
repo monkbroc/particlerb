@@ -5,7 +5,7 @@ module Particle
     def initialize(client, attributes)
       @client = client
       @attributes =
-        if attributes.is_a? String
+        if attributes.is_a?(String) || attributes.is_a?(Integer)
           { id: attributes }
         else
           # Consider attributes loaded when passed in through constructor

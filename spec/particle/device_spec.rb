@@ -28,8 +28,8 @@ describe Particle::Device do
     end
 
     context 'device is not part of user defined product' do
-      it 'sets the product string' do
-        expect(%w[Core Photon Electron]).to include(device.product)
+      it 'returns nil' do
+        expect(device.product).to be_nil
       end
     end
   end
