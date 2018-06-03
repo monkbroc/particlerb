@@ -10,7 +10,7 @@
         },
         "headers": {
           "User-Agent": [
-            "particlerb Ruby gem 0.0.4"
+            "particlerb Ruby gem 1.4.0"
           ],
           "Authorization": [
             "Bearer __PARTICLE_ACCESS_TOKEN__"
@@ -28,27 +28,27 @@
       },
       "response": {
         "status": {
-          "code": 403,
-          "message": "Forbidden"
+          "code": 404,
+          "message": "Not Found"
         },
         "headers": {
-          "Server": [
-            "nginx/1.6.2"
-          ],
           "Date": [
-            "Wed, 15 Jul 2015 13:51:36 GMT"
+            "Sun, 03 Jun 2018 20:41:25 GMT"
           ],
           "Content-Type": [
             "application/json; charset=utf-8"
           ],
           "Content-Length": [
-            "34"
+            "40"
           ],
           "Connection": [
             "keep-alive"
           ],
-          "X-Powered-By": [
-            "Express"
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "94e9e8b0-10a9-4483-865e-440dc24cc728"
           ],
           "Access-Control-Allow-Origin": [
             "*"
@@ -56,11 +56,11 @@
         },
         "body": {
           "encoding": "UTF-8",
-          "string": "{\n  \"error\": \"Permission Denied\"\n}"
+          "string": "{\"ok\":false,\"error\":\"Webhook not found\"}"
         },
         "http_version": null
       },
-      "recorded_at": "Wed, 15 Jul 2015 13:51:36 GMT"
+      "recorded_at": "Sun, 03 Jun 2018 20:41:25 GMT"
     }
   ],
   "recorded_with": "VCR 2.9.3"

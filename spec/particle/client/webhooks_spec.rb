@@ -31,9 +31,9 @@ describe Particle::Client::Webhooks, :vcr do
       end
     end
     context "when webhook doesn't exist" do
-      it "raises Forbidden" do
+      it "raises NotFound" do
         expect { Particle.webhook_attributes("1" * 24) }.
-          to raise_error(Particle::Forbidden)
+          to raise_error(Particle::NotFound)
       end
     end
   end
@@ -65,9 +65,9 @@ describe Particle::Client::Webhooks, :vcr do
     end
 
     context "when the webhook doesn't exist" do
-      it "raises Forbidden" do
+      it "raises NotFound" do
         expect { Particle.remove_webhook("1" * 24) }.
-          to raise_error(Particle::Forbidden)
+          to raise_error(Particle::NotFound)
       end
     end
   end
