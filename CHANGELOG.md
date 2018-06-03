@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0 (June 3, 2018)
+
+- Add partial support for products. Thanks @TyGuy! [PR #7](https://github.com/monkbroc/particlerb/pull/7) 
+- BREAKING CHANGE: `device.product` now returns a Product object instead of a string. Use `device.platform_name` for old behavior.
+
 ## 1.4.0 (September 11, 2017)
 
 - Support OAuth client for login
