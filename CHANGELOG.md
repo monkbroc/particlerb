@@ -4,6 +4,7 @@
 
 - Add partial support for products. Thanks @TyGuy! [PR #7](https://github.com/monkbroc/particlerb/pull/7) 
 - BREAKING CHANGE: `device.product` now returns a Product object instead of a string. Use `device.platform_name` for old behavior.
+- Fix `webhook.remove`. Thanks @gemfarmer! [PR #6](https://github.com/monkbroc/particlerb/pull/6)
 
 ## 1.4.0 (September 11, 2017)
 
