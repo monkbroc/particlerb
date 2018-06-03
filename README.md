@@ -88,7 +88,7 @@ device.attributes     # Hash of all attributes
 device.id             # ==> 'f8bbe1e6e69e05c9c405ba1ca504d438061f1b0d'
 device.name           # ==> 'blue_fire'
 device.connected?     # true
-device.product        # "Core" or "Photon"
+device.platform_name  # "Core" or "Photon"
 device.variables      # {:myvar => "double" } or nil if not connected
 device.functions      # ["myfunction"] or nil if not connected
 device.get_attributes # forces refresh of all attributes from the cloud
@@ -401,6 +401,31 @@ client = Particle.oauth_clients.first
 client.remove
 ```
 
+## Products
+
+`particlerb` has partial support for interacting with your Particle products.
+
+Returns all products that your account has access to
+
+```
+Particle.products
+```
+
+Return the Particle product associated with a device
+```
+device.product
+```
+
+Is the device a development kit (Photon, Electron, etc) or part of a custom product?
+```
+device.dev_kit?
+```
+
+Returns firmware for the given version
+```
+product.firmware(target)
+```
+
 ## Errors
 
 When any API error occurs, a subclass of `Particle::Error` will be raised.
@@ -514,6 +539,15 @@ Open a [GitHub issue][] if you find a bug.
 ## Versioning
 
 particlerb follows the [Semantic Versioning](http://semver.org/) standard.
+
+## Releasing
+
+- Bump the version in [`version.rb`](lib/particle/version.rb)
+- Describe the changes [`CHANGELOG.md`](CHANGELOG.md)
+- Commit with message `Version x.y.z`
+- Tag the commit with `vx.y.z`
+- Run final tests with `rake`
+- Publish the release to RubyGems with `rake release`
 
 ## Thanks
 
