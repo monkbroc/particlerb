@@ -14,12 +14,23 @@ describe Particle::Device do
       expect(device.attributes).to be_kind_of Hash
     end
 
-    it "includes details like functions" do
+    it "includes details like functions and platform" do
       expect(device.functions).to be_kind_of Array
+      expect(device.platform).to be_kind_of Particle::Platform
+    end
+  end
+
+  describe '.product', :vcr do
+    context 'device is part of user defined product' do
+      it 'returns a Product instance' do
+        expect(device.product).to be_kind_of Particle::Product
+      end
     end
 
-    it "sets the product string" do
-      expect(["Core", "Photon"]).to include(device.product)
+    context 'device is not part of user defined product' do
+      it 'returns nil' do
+        expect(device.product).to be_nil
+      end
     end
   end
 
@@ -104,4 +115,3 @@ describe Particle::Device do
     end
   end
 end
-

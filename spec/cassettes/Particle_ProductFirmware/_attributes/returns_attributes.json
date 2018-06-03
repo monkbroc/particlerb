@@ -3,14 +3,14 @@
     {
       "request": {
         "method": "get",
-        "uri": "https://api.particle.io/v1/devices/__PARTICLE_DEVICE_ID_0__",
+        "uri": "https://api.particle.io/v1/products/__PARTICLE_PRODUCT_ID_0__/firmware/1",
         "body": {
           "encoding": "US-ASCII",
           "string": ""
         },
         "headers": {
           "User-Agent": [
-            "particlerb Ruby gem 0.0.4"
+            "particlerb Ruby gem 1.4.0"
           ],
           "Authorization": [
             "Bearer __PARTICLE_ACCESS_TOKEN__"
@@ -29,38 +29,35 @@
           "message": "OK"
         },
         "headers": {
-          "Server": [
-            "nginx/1.6.2"
-          ],
           "Date": [
-            "Wed, 15 Jul 2015 13:46:54 GMT"
+            "Wed, 09 May 2018 23:37:39 GMT"
           ],
           "Content-Type": [
             "application/json; charset=utf-8"
           ],
           "Content-Length": [
-            "312"
+            "868"
           ],
           "Connection": [
             "keep-alive"
           ],
-          "X-Powered-By": [
-            "Express"
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
           ],
           "Access-Control-Allow-Origin": [
             "*"
-          ],
-          "Etag": [
-            "W/\"138-f6d0ae46\""
           ]
         },
         "body": {
           "encoding": "UTF-8",
-          "string": "{\n  \"id\": \"__PARTICLE_DEVICE_ID_0__\",\n  \"name\": \"fried\",\n  \"connected\": true,\n  \"variables\": {\n    \"answer\": \"int32\"\n  },\n  \"functions\": [\n    \"toggle\"\n  ],\n  \"cc3000_patch_version\": \"wl0: Nov  7 2014 16:03:45 version 5.90.230.12 FWID 01-d4813443\",\n  \"product_id\": 6,\n  \"last_heard\": \"2015-07-15T13:46:53.473Z\"\n}"
+          "string": "{\"updated_at\":\"2018-04-06T12:45:32.755Z\",\"uploaded_on\":\"2018-04-06T12:45:32.755Z\",\"uploaded_by\":{},\"version\":1,\"product_id\":__PARTICLE_PRODUCT_ID_0__,\"size\":37432,\"name\":\"particle_fw.bin\",\"title\":\"First FW Upload\",\"description\":\"upload description\",\"_id\":\"aaaaaaaaaaaaaaaaaaaaaaaa\",\"current\":false,\"product_default\":false,\"groups\":[]}"
         },
         "http_version": null
       },
-      "recorded_at": "Wed, 15 Jul 2015 13:46:54 GMT"
+      "recorded_at": "Wed, 09 May 2018 23:37:39 GMT"
     }
   ],
   "recorded_with": "VCR 2.9.3"

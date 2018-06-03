@@ -1,0 +1,64 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://api.particle.io/v1/products",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Sat, 19 May 2018 19:03:49 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "767d8199-06fa-4487-93ff-d7169bc0bc77"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "ASCII-8BIT",
+          "base64_string": "eyJwcm9kdWN0cyI6W3siaWQiOjEyMywicGxhdGZvcm1faWQiOjYsIm5hbWUi\nOiJQcm9kdWN0IDEiLCJzbHVnIjoicHJvZHVjdDEiLCJsYXRlc3RfZmlybXdh\ncmVfdmVyc2lvbiI6bnVsbCwiZGVzY3JpcHRpb24iOiJUaGUgY29vbGVzdCBw\ncm9kdWN0IGZvciB0aGUgY29vbGVzdCBraWRzIGluIHRvd24uIiwidHlwZSI6\nIkNvbnN1bWVyIiwiaGFyZHdhcmVfdmVyc2lvbiI6InYxLjAuMCIsImNvbmZp\nZ19pZCI6IjExMTExMTExMTExMTExMTExMTExMTExMSIsIm9yZ2FuaXphdGlv\nbiI6IjExMTExMTExMTExMTExMTExMTExMTExMSIsInJlcXVpcmVzX2FjdGl2\nYXRpb25fY29kZXMiOmZhbHNlLCJzdWJzY3JpcHRpb25faWQiOjExMTEsIm1i\nX2xpbWl0IjpudWxsLCJncm91cHMiOltdfSx7ImlkIjoyMzQsInBsYXRmb3Jt\nX2lkIjoxMCwibmFtZSI6IlByb2R1Y3QgMiIsInNsdWciOiJwcm9kdWN0MiIs\nImxhdGVzdF9maXJtd2FyZV92ZXJzaW9uIjpudWxsLCJkZXNjcmlwdGlvbiI6\nIkFsc28gbm90IGEgYmFkIHByb2R1Y3QuIiwidHlwZSI6IkNvbnN1bWVyIiwi\naGFyZHdhcmVfdmVyc2lvbiI6InYwLjEuMCIsImNvbmZpZ19pZCI6IjExMTEx\nMTExMTExMTExMTExMTExMTExMSIsIm9yZ2FuaXphdGlvbiI6IjExMTExMTEx\nMTExMTExMTExMTExMTExMSIsInJlcXVpcmVzX2FjdGl2YXRpb25fY29kZXMi\nOnRydWUsInN1YnNjcmlwdGlvbl9pZCI6MTExMSwibWJfbGltaXQiOm51bGws\nImdyb3VwcyI6W119XX0=\n"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Sat, 19 May 2018 19:03:49 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}

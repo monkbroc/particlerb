@@ -14,8 +14,8 @@ RSpec.configure do |config|
   config.before(:each) do |example|
     if example.metadata[:vcr]
       Particle.reset!
-      Particle.configure do |config|
-        config.access_token = test_particle_access_token
+      Particle.configure do |particle_config|
+        particle_config.access_token = test_particle_access_token
       end
     end
   end
@@ -41,12 +41,32 @@ def test_particle_device_ids
   ENV.fetch('TEST_PARTICLE_DEVICE_IDS', 'a' * 24).split(",")
 end
 
+def product_id
+  test_particle_product_ids[0]
+end
+
+def test_particle_product_ids
+  ENV.fetch('TEST_PARTICLE_PRODUCT_IDS', '2' * 4).split(",")
+end
+
 def test_particle_oauth_client
   ENV.fetch('TEST_PARTICLE_OAUTH_CLIENT', 'my_oauth_client')
 end
 
 def test_particle_oauth_secret
   ENV.fetch('TEST_PARTICLE_OAUTH_SECRET', 'my_oauth_secret')
+end
+
+def test_particle_product_firmware_version
+  ENV.fetch('TEST_PARTICLE_PRODUCT_FIRMWARE_VERSION', '1')
+end
+
+def test_product_firmware_binary
+  ENV.fetch('TEST_PARTICLE_PRODUCT_FIRMWARE_BINARY', 'spec/fixtures/spark_tinker.bin')
+end
+
+def product_firmware_version
+  test_particle_product_firmware_version
 end
 
 VCR.configure do |c|
@@ -68,6 +88,10 @@ VCR.configure do |c|
     c.filter_sensitive_data("__PARTICLE_DEVICE_ID_#{index}__") { device_id }
   end
 
+  test_particle_product_ids.each_with_index do |product_id, index|
+    c.filter_sensitive_data("__PARTICLE_PRODUCT_ID_#{index}__") { product_id }
+  end
+
   c.filter_sensitive_data("__PARTICLE_OAUTH_CLIENT__") do
     test_particle_oauth_client
   end
@@ -81,6 +105,10 @@ VCR.configure do |c|
   }
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
+
+  c.preserve_exact_body_bytes do |http_message|
+    http_message.body.encoding.name == 'ASCII-8BIT' || !http_message.body.valid_encoding?
+  end
 
   # Monkey-patch cassette serializer to pretty print JSON
   module VCR::Cassette::Serializers::JSON

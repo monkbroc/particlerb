@@ -1,5 +1,6 @@
 require 'particle/connection'
 require 'particle/client/devices'
+require 'particle/client/products'
 require 'particle/client/publish'
 require 'particle/client/webhooks'
 require 'particle/client/tokens'
@@ -7,6 +8,7 @@ require 'particle/client/firmware'
 require 'particle/client/build_targets'
 require 'particle/client/platforms'
 require 'particle/client/oauth_clients'
+require 'particle/client/product_firmwares'
 
 module Particle
 
@@ -17,6 +19,7 @@ module Particle
     include Particle::Configurable
     include Particle::Connection
     include Particle::Client::Devices
+    include Particle::Client::Products
     include Particle::Client::Publish
     include Particle::Client::Webhooks
     include Particle::Client::Tokens
@@ -24,6 +27,7 @@ module Particle
     include Particle::Client::BuildTargets
     include Particle::Client::Platforms
     include Particle::Client::OAuthClients
+    include Particle::Client::ProductFirmwares
 
     def initialize(options = {})
       # Use options passed in, but fall back to module defaults
@@ -51,7 +55,7 @@ module Particle
     # @param value [String] 40 character Particle OAuth2 access token
     def access_token=(value)
       reset_connection
-      @access_token = 
+      @access_token =
         if value.respond_to? :access_token
           value.access_token
         else

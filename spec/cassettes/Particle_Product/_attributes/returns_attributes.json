@@ -3,7 +3,7 @@
     {
       "request": {
         "method": "get",
-        "uri": "https://api.particle.io/v1/devices/__PARTICLE_DEVICE_ID_0__",
+        "uri": "https://api.particle.io/v1/products/__PARTICLE_PRODUCT_ID_0__",
         "body": {
           "encoding": "US-ASCII",
           "string": ""
@@ -30,13 +30,13 @@
         },
         "headers": {
           "Date": [
-            "Sat, 19 May 2018 18:01:23 GMT"
+            "Wed, 09 May 2018 20:11:10 GMT"
           ],
           "Content-Type": [
             "application/json; charset=utf-8"
           ],
           "Content-Length": [
-            "610"
+            "318"
           ],
           "Connection": [
             "keep-alive"
@@ -53,11 +53,11 @@
         },
         "body": {
           "encoding": "UTF-8",
-          "string": "{\"id\":\"__PARTICLE_DEVICE_ID_0__\",\"name\":\"mydevice\",\"last_app\":null,\"last_ip_address\":\"00.00.000.000\",\"last_heard\":\"2018-03-28T03:08:10.380Z\",\"product_id\":10,\"connected\":false,\"platform_id\":10,\"cellular\":true,\"notes\":null,\"status\":\"normal\",\"iccid\":\"1111111111111111111\",\"last_iccid\":\"1111111111111111111\",\"imei\":\"111111111111111\",\"current_build_target\":\"0.6.4\",\"system_firmware_version\":\"0.6.4\",\"default_build_target\":\"0.6.4\",\"variables\":{},\"functions\":[\"reset\"]}"
+          "string": "{\"product\":[{\"id\":__PARTICLE_PRODUCT_ID_0__,\"platform_id\":10,\"name\":\"product_name\",\"slug\":\"product_slug\",\"latest_firmware_version\":null,\"description\":\"Product Description\",\"type\":null,\"hardware_version\":\"v1.0.0\",\"config_id\":\"aaaaaaaaaaaaaaaaaaaaaaaa\",\"organization\":\"aaaaaaaaaaaaaaaaaaaaaaaa\",\"subscription_id\":99999,\"mb_limit\":null,\"groups\":[]}]}"
         },
         "http_version": null
       },
-      "recorded_at": "Sat, 19 May 2018 18:01:21 GMT"
+      "recorded_at": "Wed, 09 May 2018 20:11:10 GMT"
     }
   ],
   "recorded_with": "VCR 2.9.3"

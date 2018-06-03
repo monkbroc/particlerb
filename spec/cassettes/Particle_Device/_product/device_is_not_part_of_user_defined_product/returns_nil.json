@@ -10,7 +10,7 @@
         },
         "headers": {
           "User-Agent": [
-            "particlerb Ruby gem 0.0.4"
+            "particlerb Ruby gem 1.4.0"
           ],
           "Authorization": [
             "Bearer __PARTICLE_ACCESS_TOKEN__"
@@ -29,38 +29,35 @@
           "message": "OK"
         },
         "headers": {
-          "Server": [
-            "nginx/1.6.2"
-          ],
           "Date": [
-            "Wed, 15 Jul 2015 13:46:54 GMT"
+            "Sat, 19 May 2018 18:03:11 GMT"
           ],
           "Content-Type": [
             "application/json; charset=utf-8"
           ],
           "Content-Length": [
-            "312"
+            "716"
           ],
           "Connection": [
             "keep-alive"
           ],
-          "X-Powered-By": [
-            "Express"
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
           ],
           "Access-Control-Allow-Origin": [
             "*"
-          ],
-          "Etag": [
-            "W/\"138-f6d0ae46\""
           ]
         },
         "body": {
           "encoding": "UTF-8",
-          "string": "{\n  \"id\": \"__PARTICLE_DEVICE_ID_0__\",\n  \"name\": \"fried\",\n  \"connected\": true,\n  \"variables\": {\n    \"answer\": \"int32\"\n  },\n  \"functions\": [\n    \"toggle\"\n  ],\n  \"cc3000_patch_version\": \"wl0: Nov  7 2014 16:03:45 version 5.90.230.12 FWID 01-d4813443\",\n  \"product_id\": 6,\n  \"last_heard\": \"2015-07-15T13:46:53.473Z\"\n}"
+          "string": "{\"id\":\"__PARTICLE_DEVICE_ID_0__\",\"name\":\"mydevice\",\"last_app\":null,\"last_ip_address\":\"00.00.000.000\",\"last_heard\":\"2018-05-16T09:17:12.266Z\",\"product_id\":10,\"connected\":true,\"platform_id\":10,\"cellular\":true,\"notes\":null,\"status\":\"normal\",\"serial_number\":\"A123-123456-AB12-1\",\"iccid\":\"1111111111111111111\",\"last_iccid\":\"1111111111111111111\",\"imei\":\"111111111111111\",\"current_build_target\":\"0.6.4\",\"system_firmware_version\":\"0.6.4\",\"default_build_target\":\"0.6.4\",\"variables\":{},\"functions\":[\"reset\"],\"groups\":[],\"targeted_firmware_release_version\":null}"
         },
         "http_version": null
       },
-      "recorded_at": "Wed, 15 Jul 2015 13:46:54 GMT"
+      "recorded_at": "Sat, 19 May 2018 18:03:08 GMT"
     }
   ],
   "recorded_with": "VCR 2.9.3"
