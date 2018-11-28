@@ -486,6 +486,14 @@ Main product endpoints (list, get, invite team member, remove team member)
 
 All API endpoints are availble directly on the client object as method calls like `Particle.claim_device(id)` but the preferred usage is to call methods on domain objects like `Particle.device(id).claim`. See the various `Particle::Client` subclasses for more details.
 
+### Environment variables with .env
+
+If you are loading environment variables with the `dotenv` gem and use the `PARTICLE_ACCESS_TOKEN` environment variable, add this as the first gem in your `Gemfile` to ensure that the environment variables are loaded before the `particlerb` gem is required.
+
+```
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
+```
+
 ### Accessing HTTP responses
 
 While most methods return a domain object like `Device`, sometimes you may
