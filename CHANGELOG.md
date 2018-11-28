@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1 (November 28, 2018)
+
+- Update version of Faraday. Thanks @Talha5 [PR #8](https://github.com/monkbroc/particlerb/pull/8)
+
 ## 2.0.0 (June 3, 2018)
 
 - Add partial support for products. Thanks @TyGuy! [PR #7](https://github.com/monkbroc/particlerb/pull/7) 
