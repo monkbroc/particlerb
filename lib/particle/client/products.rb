@@ -35,6 +35,14 @@ module Particle
 
         response_body[:product].first
       end
+
+      # List all Particle product devices on the account
+      #
+      # @return [Array<Device>] List of Particle product devices to interact with
+      def get_devices(target)
+        response_body = get(product(target).devices_path)
+        (response_body[:devices]).map { |attributes| device(attributes) }
+      end
     end
   end
 end

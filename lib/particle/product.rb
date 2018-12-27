@@ -32,6 +32,10 @@ module Particle
       @attributes = @client.product_attributes(self)
     end
 
+    def devices
+      @devices = @client.get_devices(id_or_slug)
+    end
+
     def firmware(target)
       @client.product_firmware(self, target)
     end
@@ -61,6 +65,10 @@ module Particle
 
     def path
       "/v1/products/#{id_or_slug}"
+    end
+
+    def devices_path
+      "/v1/products/#{id_or_slug}/devices"
     end
 
     def firmware_path(version)

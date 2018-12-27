@@ -25,3 +25,4 @@ tmtags
 Session.vim
 .env
 .byebug_history
+.idea/

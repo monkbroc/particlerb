@@ -1,0 +1,64 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://api.particle.io/v1/products/__PARTICLE_PRODUCT_ID_0__/devices",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 1.4.0"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Wed, 09 May 2018 20:11:10 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Content-Length": [
+            "318"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "X-Request-Id": [
+            "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\n    \"devices\": [\n         {\n             \"id\":\"1d002a000547343232363230\",\n             \"product_id\":295,\n             \"last_ip_address\":\"199.230.10.194\",\n             \"firmware_version\":3,\n             \"last_handshake_at\":\"2016-06-10T14:56:27.100Z\",\n             \"user_id\":\"1230999caf8bad1916000456\",\n             \"online\":false,\n             \"firmware_product_id\":295,\n             \"quarantined\":true,\n             \"denied\":true,\n             \"owner\":\"jeff@particle.io\",\n             \"groups\":[\"asia\",\"europe\"],\n             \"system_firmware_version\": \"0.8.0\"\n         },\n         {\n             \"id\":\"32001e000747343337373738\",\n             \"product_id\":295,\n             \"last_ip_address\":\"199.21.86.18\",\n             \"firmware_version\":5,\n             \"last_handshake_at\":\"2017-03-09T00:26:46.246Z\",\n             \"customer_id\":\"1230999caf8bad1916000123\",\n             \"online\":false,\n             \"name\":\"jeff_test_device\",\n             \"firmware_product_id\":295,\n             \"quarantined\":true,\n             \"denied\":false,\n             \"owner\":\"customer@gmail.com\",\n             \"groups\":[\"america\"],\n             \"system_firmware_version\": \"0.8.0\"\n         }\n    ],\n    \"customers\": [\n      {\n        \"id\": \"123abc3456\",\n        \"username\": \"customer@gmail.com\"\n      }\n    ],\n    \"meta\": {\n      \"total_pages\": 1\n    }\n}"
+        },
+        "http_version": null
+      },
+      "recorded_at": "Wed, 09 May 2018 20:11:10 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}
