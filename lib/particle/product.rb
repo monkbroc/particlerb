@@ -36,6 +36,14 @@ module Particle
       @devices = @client.get_devices(id_or_slug)
     end
 
+    # Add a Particle device to product on the account
+    #
+    # @example Add a device to Product
+    #   product.add_device('12345')
+    def add_device(device_id:)
+      @client.add_device(product: self, device_id: device_id)
+    end
+
     def firmware(target)
       @client.product_firmware(self, target)
     end
@@ -61,6 +69,10 @@ module Particle
 
     def self.list_path
       "v1/products"
+    end
+
+    def add_device_path
+      "/v1/products/#{id_or_slug}/devices"
     end
 
     def path

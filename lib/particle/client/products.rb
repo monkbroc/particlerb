@@ -43,6 +43,15 @@ module Particle
         response_body = get(product(target).devices_path)
         (response_body[:devices]).map { |attributes| device(attributes) }
       end
+
+      # Add device to Particle product on the account
+      #
+      # @param product [Product] A product to interact with
+      # @param device_id [String] A device id
+      # @return [Hash] JSON response as a hash
+      def add_device(product:, device_id:)
+        post(product.add_device_path, id: device_id)
+      end
     end
   end
 end
