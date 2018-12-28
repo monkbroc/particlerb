@@ -44,6 +44,14 @@ module Particle
       @client.add_device(product: self, device_id: device_id)
     end
 
+    # Remove a Particle device from a product on the account
+    #
+    # @example Remove a device from Product
+    #   product.remove_device('12345')
+    def remove_device(device_id:)
+      @client.remove_product_device(product: self, device_id: device_id)
+    end
+
     def firmware(target)
       @client.product_firmware(self, target)
     end
@@ -73,6 +81,10 @@ module Particle
 
     def add_device_path
       "/v1/products/#{id_or_slug}/devices"
+    end
+
+    def remove_device_path(device_id)
+      "/v1/products/#{id_or_slug}/devices/#{device_id}"
     end
 
     def path

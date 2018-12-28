@@ -52,6 +52,15 @@ module Particle
       def add_device(product:, device_id:)
         post(product.add_device_path, id: device_id)
       end
+
+      # Remove device from a Particle product on the account
+      #
+      # @param product [Product] A product to interact with
+      # @param device_id [String] A device id
+      # @return [Hash] JSON response as a hash
+      def remove_product_device(product:, device_id:)
+        delete(product.remove_device_path(device_id), id: device_id)
+      end
     end
   end
 end
