@@ -83,8 +83,8 @@ module Particle
       "/v1/products/#{id_or_slug}/devices"
     end
 
-    def remove_device_path
-      "/v1/products/#{id_or_slug}/devices"
+    def remove_device_path(device_id)
+      "/v1/products/#{id_or_slug}/devices/#{device_id}"
     end
 
     def path

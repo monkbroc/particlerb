@@ -3,7 +3,7 @@
     {
       "request": {
         "method": "DELETE",
-        "uri": "https://api.particle.io/v1/products/__PARTICLE_PRODUCT_ID_0__/devices",
+        "uri": "https://api.particle.io/v1/products/__PARTICLE_PRODUCT_ID_0__/devices/12345",
         "body": {
           "encoding": "US-ASCII",
           "string": ""
