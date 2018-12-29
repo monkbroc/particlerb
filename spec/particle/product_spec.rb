@@ -3,8 +3,8 @@ require 'helper'
 describe Particle::Product do
   let(:product) { Particle.product(product_id) }
   let(:product_devices) { Particle.product(product_id).devices }
-  let(:add_product_device) { product.add_device(device_id: '12345') }
-  let(:remove_product_device) { product.remove_device(device_id: '12345') }
+  let(:add_product_device) { product.add_device('12345') }
+  let(:remove_product_device) { product.remove_device('12345') }
 
   describe "Particle.product" do
     it "creates a product" do

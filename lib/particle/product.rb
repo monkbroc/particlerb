@@ -40,7 +40,7 @@ module Particle
     #
     # @example Add a device to Product
     #   product.add_device('12345')
-    def add_device(device_id:)
+    def add_device(device_id)
       @client.add_device(product: self, device_id: device_id)
     end
 
@@ -48,7 +48,7 @@ module Particle
     #
     # @example Remove a device from Product
     #   product.remove_device('12345')
-    def remove_device(device_id:)
+    def remove_device(device_id)
       @client.remove_product_device(product: self, device_id: device_id)
     end
 
@@ -83,8 +83,8 @@ module Particle
       "/v1/products/#{id_or_slug}/devices"
     end
 
-    def remove_device_path(device_id)
-      "/v1/products/#{id_or_slug}/devices/#{device_id}"
+    def remove_device_path
+      "/v1/products/#{id_or_slug}/devices"
     end
 
     def path

@@ -59,7 +59,7 @@ module Particle
       # @param device_id [String] A device id
       # @return [Hash] JSON response as a hash
       def remove_product_device(product:, device_id:)
-        delete(product.remove_device_path(device_id), id: device_id)
+        delete(product.remove_device_path, id: device_id)
       end
     end
   end
