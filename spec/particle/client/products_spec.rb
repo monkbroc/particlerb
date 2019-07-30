@@ -27,5 +27,18 @@ describe Particle::Client::Products, :vcr do
           to raise_error(Particle::NotFound)
       end
     end
+
+    context 'when Particle updates API without version bump' do
+      it 'returns attributes' do
+        attr = Particle.product_attributes(product_id)
+
+        expect(attr.keys).to include(
+          :id, :platform_id, :name, :slug, :description,
+          :subscription_id, :mb_limit, :groups, :settings, :org,
+        )
+
+        expect(attr[:id]).to eq product_id.to_i
+      end
+    end
   end
 end

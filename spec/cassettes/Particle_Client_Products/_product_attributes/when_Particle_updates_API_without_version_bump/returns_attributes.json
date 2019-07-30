@@ -1,0 +1,70 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "get",
+        "uri": "https://api.particle.io/v1/products/__PARTICLE_PRODUCT_ID_0__",
+        "body": {
+          "encoding": "US-ASCII",
+          "string": ""
+        },
+        "headers": {
+          "User-Agent": [
+            "particlerb Ruby gem 2.0.1"
+          ],
+          "Authorization": [
+            "Bearer __PARTICLE_ACCESS_TOKEN__"
+          ],
+          "Accept-Encoding": [
+            "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+          ],
+          "Accept": [
+            "*/*"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Tue, 30 Jul 2019 03:56:47 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Server": [
+            "nginx/1.15.10"
+          ],
+          "Vary": [
+            "Accept-Encoding"
+          ],
+          "X-Request-Id": [
+            "babe352383de30feb5205f67a865f7cb"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "X-Requested-Scope": [
+            "product___PARTICLE_PRODUCT_ID_0__:product:get"
+          ]
+        },
+        "body": {
+          "encoding": "ASCII-8BIT",
+          "base64_string": "eyJwcm9kdWN0Ijp7ImlkIjpfX1BBUlRJQ0xFX1BST0RVQ1RfSURfMF9fLCJwbGF0Zm9ybV9pZCI6MTAsIm5hbWUiOiJwcm9kdWN0Iiwic2x1ZyI6Im15cHJvZHVjdCIsImRlc2NyaXB0aW9uIjoiR3JlYXQgcHJvZHVjdC4iLCJzdWJzY3JpcHRpb25faWQiOjExMTExLCJtYl9saW1pdCI6bnVsbCwiZ3JvdXBzIjpbXSwic2V0dGluZ3MiOnsicXVhcmFudGluZSI6dHJ1ZX0sIm9yZyI6Im15cHJvZHVjdCJ9fQ=="
+        },
+        "http_version": null
+      },
+      "recorded_at": "Tue, 30 Jul 2019 03:56:47 GMT"
+    }
+  ],
+  "recorded_with": "VCR 2.9.3"
+}
