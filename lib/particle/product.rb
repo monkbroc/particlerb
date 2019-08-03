@@ -34,6 +34,26 @@ module Particle
       @attributes = @client.product_attributes(self)
     end
 
+    def devices
+      @devices = @client.get_devices(id_or_slug)
+    end
+
+    # Add a Particle device to product on the account
+    #
+    # @example Add a device to Product
+    #   product.add_device('12345')
+    def add_device(device_id)
+      @client.add_device(product: self, device_id: device_id)
+    end
+
+    # Remove a Particle device from a product on the account
+    #
+    # @example Remove a device from Product
+    #   product.remove_device('12345')
+    def remove_device(device_id)
+      @client.remove_product_device(product: self, device_id: device_id)
+    end
+
     def firmware(target)
       @client.product_firmware(self, target)
     end
@@ -66,8 +86,20 @@ module Particle
       "v1/products"
     end
 
+    def add_device_path
+      "/v1/products/#{id_or_slug}/devices"
+    end
+
+    def remove_device_path(device_id)
+      "/v1/products/#{id_or_slug}/devices/#{device_id}"
+    end
+
     def path
       "/v1/products/#{id_or_slug}"
+    end
+
+    def devices_path
+      "/v1/products/#{id_or_slug}/devices"
     end
 
     def firmware_path(version)

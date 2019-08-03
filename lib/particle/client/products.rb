@@ -39,6 +39,32 @@ module Particle
         product = product.first if product.is_a?(Array)
         product
       end
+
+      # List all Particle product devices on the account
+      #
+      # @return [Array<Device>] List of Particle product devices to interact with
+      def get_devices(target)
+        response_body = get(product(target).devices_path)
+        (response_body[:devices]).map { |attributes| device(attributes) }
+      end
+
+      # Add device to Particle product on the account
+      #
+      # @param product [Product] A product to interact with
+      # @param device_id [String] A device id
+      # @return [Hash] JSON response as a hash
+      def add_device(product:, device_id:)
+        post(product.add_device_path, id: device_id)
+      end
+
+      # Remove device from a Particle product on the account
+      #
+      # @param product [Product] A product to interact with
+      # @param device_id [String] A device id
+      # @return [Hash] JSON response as a hash
+      def remove_product_device(product:, device_id:)
+        delete(product.remove_device_path(device_id))
+      end
     end
   end
 end

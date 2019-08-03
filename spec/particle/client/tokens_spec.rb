@@ -152,7 +152,7 @@ describe Particle::Client::Tokens, :vcr do
       # Let token expire
       sleep(10) if VCR.current_cassette.recording?
 
-      expect { Particle.devices}.
+      expect { Particle.devices }.
         to raise_error(Particle::Unauthorized)
 
       Particle.remove_token(username, password, token)
