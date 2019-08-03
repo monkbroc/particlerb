@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0 (August 3, 2019)
+
+- Add support for listing, adding and removing product devices. Thanks @Talha5 [PR #9](https://github.com/monkbroc/particlerb/pull/9)
+- Fix broken API response for product details. Thanks @TyGuy [PR #11](https://github.com/monkbroc/particlerb/pull/11)
+
 ## 2.0.1 (November 28, 2018)
 
 - Update version of Faraday. Thanks @Talha5 [PR #8](https://github.com/monkbroc/particlerb/pull/8)
