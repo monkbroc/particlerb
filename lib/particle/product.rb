@@ -25,7 +25,9 @@ module Particle
     end
 
     attribute_reader :name, :description, :platform_id, :type, :hardware_version,
-      :config_id, :organization
+      :config_id,
+      # below here are new attributes that appeared with API change
+      :subscription_id, :mb_limit, :groups, :settings, :org
 
     def get_attributes
       @loaded = @fully_loaded = true
@@ -49,6 +51,11 @@ module Particle
     def slug
       get_attributes unless @attributes[:slug]
       @attributes[:slug]
+    end
+
+    def organization
+      get_attributes unless @attributes[:organization] || @attributes[:org]
+      @attributes[:organization] || @attributes[:org]
     end
 
     def id_or_slug

@@ -33,7 +33,11 @@ module Particle
       def product_attributes(target)
         response_body = get(product(target).path)
 
-        response_body[:product].first
+        # originally returned as an array, now seems to just return the 1 product as a hash;
+        # this will handle both cases
+        product = response_body[:product]
+        product = product.first if product.is_a?(Array)
+        product
       end
     end
   end
